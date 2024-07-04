@@ -1,0 +1,97 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    background-color: #2b2b2b;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-section img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.faq-section {
+    padding: 40px;
+    flex: 1;
+    background-color: #333333;
+}
+
+.faq-section h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.sample-text {
+    font-size: 0.9em;
+    margin-bottom: 30px;
+    color: #bbbbbb;
+}
+
+.sample-text a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+}
+
+.faq-item h2 {
+    font-size: 1.2em;
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #555555;
+    cursor: pointer;
+    position: relative;
+}
+
+.faq-item h2::after {
+    content: '\25BC';
+    font-size: 0.8em;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.answer {
+    display: none;
+    padding: 10px 0;
+    font-size: 0.9em;
+    color: #aaaaaa;
+}
+
+.faq-item.open .answer {
+    display: block;
+}
+
+.faq-item.open h2::after {
+    content: '\25B2';
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .image-section {
+        width: 100%;
+    }
+
+    .faq-section {
+        width: 100%;
+        padding: 20px;
+    }
+}
