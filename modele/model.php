@@ -20,8 +20,14 @@ function getcompte() {
     catch(Exception $e) {
         die('Erreur : '.$e->getMessage());
     }
-    $db = null;
-    header('Location: ../vue/success.php');
+    $db = null; ?>
+    <popup id="fenetre005" style="colorBar3" bords="carrés">
+    <titre>
+        <titre2>Ouverture d'un popup</titre2>
+    </titre>
+    <p>Mise en page <code>style="colorBar3"</code>, bords carrés et utilisation d'un titre.</p>
+    </popup> <?php
+    header('Location: ../vue/creer_compte.php');
     exit; 
    
 }
