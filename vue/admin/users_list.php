@@ -57,12 +57,12 @@
           <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/logo_dl.png" alt=""/><img class="img-fluid for-dark" src="../assets/images/logo/logo_dl.png" alt=""/></a></div>
         </div>
         <div class="col-4 col-xl-4 page-title">
-          <h4 class="f-w-700">Gestion des fichiers</h4>
+          <h4 class="f-w-700">Gestion des utilisateurs</h4>
           <nav>
             <ol class="breadcrumb justify-content-sm-start align-items-center mb-0">
               <li class="breadcrumb-item"><a href="index.html"> <i data-feather="home"> </i></a></li>
               <li class="breadcrumb-item f-w-400">Apps</li>
-              <li class="breadcrumb-item f-w-400 active">Gestion des fichiers</li>
+              <li class="breadcrumb-item f-w-400 active">Gestion des utilisateurs</li>
             </ol>
           </nav>
         </div>
@@ -119,11 +119,10 @@
             <script class="empty-template" type="text/x-handlebars-template"><div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div></script>
           </div>
         </div>
-        <!-- Page Header Ends                              -->
+        <!-- Page Header Ends -->
       </div>
       <!-- Page Body Start-->
       <div class="page-body-wrapper default-menu default-menu">
-        <!-- Page Sidebar Start-->
         <div class="sidebar-wrapper" data-layout="stroke-svg">
           <div>
             <div class="logo-wrapper"><a href="index.html"><img class="img-fluid" src="../assets/images/logo/logo_dl.png" alt=""></a>
@@ -176,60 +175,43 @@
         <div class="page-body">
           <!-- Container-fluid starts-->
           <div class="container-fluid">
-            <div class="col-sm-12">
-              <div class="card">
-                <div class="card-header pb-0 card-no-border">
-                  <h4 class="mb-3">Liste des fichiers</h4><span>Liste complète de tous les fichiers.</span>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive theme-scrollbar">
-                    <table class="display" id="data-source-1" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th>Titre</th>
-                          <th>Auteur(s)</th>
-                          <th>Langue</th>
-                          <th>Type</th>
-                          <th>Proposé par</th>
-                          <th>Validé par</th>
-                          <th>Note</th>
-                          <th>Statut</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>System Architect</td>
-                          <td>Tiger Nixon</td>
-                          <td>Edinburgh</td>
-                          <td class="action"><a class="pdf" href="sample.pdf" target="_blank"><i class="icofont icofont-file-pdf"></i></a></td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>Edinburgh</td>
-                          <td>Edinburgh</td>
-                          <td> <span class="badge rounded-pill badge-success">hired</span></td>
-                          <td> 
-                            <ul class="action">
-                              <!-- <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter1">Vertically centered</button> -->
-                              <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#exampleModalCenter1"><i class="icon-pencil-alt"></i></a></li>
-                              <li class="delete"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter2"><i class="icon-trash"></i></a></li>
+            <div class="row">
+              <div class="col-sm-12 col-xl-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Liste des utilisateurs</h4>
+                    <p class="mt-1 f-m-light">Classification des types d'utilisateurs.</p>
+                  </div>
+                  <div class="card-body">
+                    <ul class="simple-wrapper nav nav-tabs" id="myTab" role="tablist">
+                      <li class="nav-item"><a class="nav-link txt-primary" id="students-tab" data-bs-toggle="tab" href="#students" role="tab" aria-controls="students" aria-selected="true">Etudiants</a></li>
+                      <li class="nav-item"><a class="nav-link active txt-primary" id="lecturers-tabs" data-bs-toggle="tab" href="#lecturers" role="tab" aria-controls="lecturers" aria-selected="false">Enseignants</a></li>
+                      <li class="nav-item"><a class="nav-link txt-primary" id="admins-tab" data-bs-toggle="tab" href="#admins" role="tab" aria-controls="admins" aria-selected="false">Administrateurs</a></li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade" id="students" role="tabpanel" aria-labelledby="students-tab">
+                        <p class="pt-3">Tabs have long been used to show alternative views of the same group of information tabs in software. Known as<em class="txt-danger"> “module tabs”</em>, these are still used today in web sites. For instance, airline companies such as Ryanair, easyJet and AirMalta use module tabs to enable the user to switch between bookings for flights, hotels and car hire.</p>
+                      </div>
+                      <div class="tab-pane fade show active" id="lecturers" role="tabpanel" aria-labelledby="lecturers-tabs">
+                        <div class="pt-3 mb-0">
+                          <div class="flex-space flex-wrap align-items-center"><img class="tab-img" src="../assets/images/avtar/3.jpg" alt="profile">
+                            <ul class="d-flex flex-column gap-1">
+                              <li> <strong>Visit Us:</strong> 2600 Hollywood Blvd,Florida, United States-33020</li>
+                              <li> <strong>Mail Us:</strong> contact@us@gmail.com</li>
+                              <li><strong>Contact Number: </strong> (954) 357-7760</li>
                             </ul>
-                          </td>
-                        </tr>
-                      </tbody>
-                      <tfoot>
-                        <tr>
-                          <th>Titre</th>
-                          <th>Auteur(s)</th>
-                          <th>Langue</th>
-                          <th>Type</th>
-                          <th>Proposé par</th>
-                          <th>Validé par</th>
-                          <th>Note</th>
-                          <th>Statut</th>
-                          <th>Actions</th>
-                        </tr>
-                      </tfoot>
-                    </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane fade" id="admins" role="tabpanel" aria-labelledby="admins-tab">
+                        <ul class="pt-3 d-flex flex-column gap-1">
+                          <li>Us Technology offers web & mobile development solutions for all industry verticals.Include a short form using fields that'll help your business understand who's contacting them.</li>
+                          <li> <strong>Visit Us: </strong> 2600 Hollywood Blvd,Florida, United States-	33020</li>
+                          <li> <strong>Mail Us:</strong> contact@us@gmail.com</li>
+                          <li> <strong>Contact Number: </strong> (954) 357-7760</li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

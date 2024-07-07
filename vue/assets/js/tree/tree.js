@@ -6,7 +6,7 @@
   let data = [
     {
       id: "0",
-      text: "Applications",
+      text: "Fichiers",
       children: [
         {
           id: "0-0",
@@ -121,7 +121,7 @@
   let data1 = [
     {
       id: "0",
-      text: "Applications",
+      text: "Fichiers",
       children: [
         {
           id: "0-0",

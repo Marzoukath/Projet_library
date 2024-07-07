@@ -337,10 +337,10 @@
       ae: "ÙˆØªØ®Ø·ÙŠØ· Ø§Ù„ØµÙØ­Ø©",
     },
     {
-      en: "Applications",
+      en: "Fichiers",
       pt: "FormulÃ¡rios",
       es: "Aplikoj",
-      fr: "Applications",
+      fr: "Fichiers",
       de: "Toepassingen",
       cn: "æ‡‰ç”¨é ˜åŸŸ",
       ae: "ÙˆØ§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª",

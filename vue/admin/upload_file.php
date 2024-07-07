@@ -9,7 +9,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="../assets/images/logo/icon_dl.png" type="image/x-icon">
     <link rel="shortcut icon" href="../assets/images/logo/icon_dl.png" type="image/x-icon">
-    <title>Dashboard Administrateur</title>
+    <title>Dashboard - Ajout de fichier</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -145,19 +145,31 @@
                   </li>
                   <li class="sidebar-main-title">
                     <div>
-                      <h6 class="lan-8">Fichiers</h6>
+                      <h6 class="">Dashboard</h6>
                     </div>
                   </li>
-                  <li class="sidebar-list"><i class="fa fa-thumb-tack">    </i><a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                  <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title" href="javascript:void(0)">
                       <svg class="stroke-icon">
-                        <use href="../assets/svg/icon-sprite.svg#stroke-project"></use>
+                        <use href="../assets/svg/icon-sprite.svg#stroke-file"></use>
                       </svg>
                       <svg class="fill-icon">
-                        <use href="../assets/svg/icon-sprite.svg#fill-project"></use>
-                      </svg><span style="color: black;">Gestion des fichiers</span></a>
+                        <use href="../assets/svg/icon-sprite.svg#fill-file"></use>
+                      </svg><span>Gestion des fichiers</span></a>
                     <ul class="sidebar-submenu">
-                      <li><a href="files_list.php" style="color: black;">Liste</a></li>
+                      <li><a href="files_list.php" style="color: black;">Lister</a></li>
                       <li><a href="upload_file.php" style="color: black;">Ajouter</a></li>
+                    </ul>
+                  </li>
+                  <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                      <svg class="stroke-icon">
+                        <use href="../assets/svg/icon-sprite.svg#stroke-form"></use>
+                      </svg>
+                      <svg class="fill-icon">
+                        <use href="../assets/svg/icon-sprite.svg#fill-form"> </use>
+                      </svg><span>Gestion des utilisateurs</span></a>
+                    <ul class="sidebar-submenu">
+                      <li><a href="users_list.php" style="color: black;">Lister</a></li>
+                      <li><a href="create_users.php" style="color: black;">Ajouter</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -179,7 +191,7 @@
                         <div class="col">
                           <div class="mb-3">
                             <label>Titre</label>
-                            <input class="form-control" type="text" name="title" placeholder="Nom du fichier">
+                            <input class="form-control" type="text" name="title" placeholder="Audit de sécurité de système d’information d’Entreprise" required>
                           </div>
                         </div>
                       </div>
@@ -187,7 +199,7 @@
                         <div class="col">
                           <div class="mb-3">
                             <label>Auteur(s)</label>
-                            <input class="form-control" type="text" name="author" placeholder="Name client or company name">
+                            <input class="form-control" type="text" name="author" placeholder="AB ERIC">
                           </div>
                         </div>
                       </div>
@@ -195,9 +207,9 @@
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label>Type</label>
-                            <select class="form-select" name="type">
+                            <select class="form-select" name="type" required>
                               <option value="audio">Audio</option>
-                              <option value="ebook">eBook</option>
+                              <option value="ebook" selected>eBook</option>
                               <option value="image">Image</option>
                               <option value="video">Vidéo</option>
                               <option value="memoire">Mémoire</option>
@@ -211,13 +223,17 @@
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label>URL</label>
-                            <input class="form-control" name="url" type="text" placeholder="Enter project Rate">
+                            <input class="form-control" name="url" type="text" placeholder="https://www.monrespro.cd/produit/audit-de-securite-de-systeme-dinformation-d-entreprise-securite-informatique-securite-informatique-ethical-hackingsecurite-informatique-et-ultime-du-debutant-pour-apprendre-les-bases/">
                           </div>
                         </div>
                         <div class="col-sm-4">
                           <div class="mb-3">
-                            <label>DOI / ISBN</label>
-                            <input class="form-control" name="doi_isbn" type="text" placeholder="Enter project Rate">
+                            <label>Langue</label>
+                            <select class="form-select" aria-label="select example" name="language" required>
+                              <option value="english">Anglais</option>
+                              <option value="french" selected>Français</option>
+                              <option value="others">Autres</option>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -319,7 +335,7 @@
                         <div class="col">
                           <div class="mb-3">
                             <label>Description</label>
-                            <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                            <textarea class="form-control" name="description" id="description" rows="3" placeholder="Audit de sécurité de système d’information d’ Entreprise: sécurité informatique: sécurité informatique ethical hacking:sécurité informatique et … ultime du débutant pour apprendre les bases d Broché – 21 mars 2020"></textarea>
                           </div>
                         </div>
                       </div>
