@@ -140,7 +140,7 @@
     <?php
     // require_once('./controller/get_compte.php')
     ?>
-    <form id="signup-form" action="./controller/get_compte.php" method="post">
+    <form id="signup-form" action="../controller/get_compte.php" method="post">
         <div class="logo">
             <img src="image/logo_white-removebg-preview.png" alt="">
         </div> 
