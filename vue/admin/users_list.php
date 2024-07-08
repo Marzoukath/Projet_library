@@ -1,3 +1,7 @@
+<?php
+  include('../../controller/admin/fetch_data.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -94,33 +98,188 @@
                   </div>
                   <div class="card-body">
                     <ul class="simple-wrapper nav nav-tabs" id="myTab" role="tablist">
-                      <li class="nav-item"><a class="nav-link txt-primary" id="students-tab" data-bs-toggle="tab" href="#students" role="tab" aria-controls="students" aria-selected="true">Etudiants</a></li>
+                      <li class="nav-item"><a class="nav-link txt-primary" id="students-tab" data-bs-toggle="tab" href="#students" role="tab" aria-controls="students" aria-selected="false">Etudiants</a></li>
                       <li class="nav-item"><a class="nav-link active txt-primary" id="lecturers-tabs" data-bs-toggle="tab" href="#lecturers" role="tab" aria-controls="lecturers" aria-selected="false">Enseignants</a></li>
-                      <li class="nav-item"><a class="nav-link txt-primary" id="admins-tab" data-bs-toggle="tab" href="#admins" role="tab" aria-controls="admins" aria-selected="false">Administrateurs</a></li>
+                      <li class="nav-item"><a class="nav-link txt-primary" id="admins-tab" data-bs-toggle="tab" href="#admins" role="tab" aria-controls="admins" aria-selected="true">Administrateurs</a></li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                      <div class="tab-pane fade" id="students" role="tabpanel" aria-labelledby="students-tab">
-                        <p class="pt-3">Tabs have long been used to show alternative views of the same group.</p>
-                      </div>
-                      <div class="tab-pane fade show active" id="lecturers" role="tabpanel" aria-labelledby="lecturers-tabs">
-                        <div class="pt-3 mb-0">
-                          <div class="flex-space flex-wrap align-items-center"><img class="tab-img" src="../assets/images/avtar/3.jpg" alt="profile">
-                            <ul class="d-flex flex-column gap-1">
-                              <li> <strong>Visit Us:</strong> 2600 Hollywood Blvd,Florida, United States-33020</li>
-                              <li> <strong>Mail Us:</strong> contact@us@gmail.com</li>
-                              <li><strong>Contact Number: </strong> (954) 357-7760</li>
-                            </ul>
-                          </div>
+                        <div class="tab-pane fade" id="students" role="tabpanel" aria-labelledby="students-tab">
+                            <div class="pt-3">
+                                <div class="table-responsive theme-scrollbar">
+                                    <table class="display" id="data-source-students" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                            <th>Nom complet</th>
+                                            <th>Email</th>
+                                            <th>Numéro</th>
+                                            <th>Matricule</th>
+                                            <th>Filière</th>
+                                            <th>Newsletter</th>
+                                            <th>Créer le</th>
+                                            <th>Mise à jour le</th>
+                                            <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($students)): ?>
+                                            <?php foreach ($students as $donnees): ?>
+                                                <tr>
+                                                <td><?php echo htmlspecialchars($donnees['fullname']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['email']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['mobile']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['matricule']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['filiere']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['newsletter']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['cree']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['mise']); ?></td>
+                                                <td>
+                                                    <ul class="action">
+                                                        <li class="edit"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter1"><i class="icon-pencil-alt"></i></a></li>
+                                                        <li class="delete"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter2"><i class="icon-trash"></i></a></li>
+                                                    </ul>
+                                                </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                            <?php else: ?>
+                                            <tr>
+                                                <td colspan="8">No data found</td>
+                                            </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                            <th>Nom complet</th>
+                                            <th>Email</th>
+                                            <th>Numéro</th>
+                                            <th>Matricule</th>
+                                            <th>Filière</th>
+                                            <th>Newsletter</th>
+                                            <th>Créer le</th>
+                                            <th>Mise à jour le</th>
+                                            <th>Actions</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <div class="tab-pane fade" id="admins" role="tabpanel" aria-labelledby="admins-tab">
-                        <ul class="pt-3 d-flex flex-column gap-1">
-                          <li>Us Technology offers web & mobile development solutions for all industry verticals.Include a short form using fields that'll help your business understand who's contacting them.</li>
-                          <li> <strong>Visit Us: </strong> 2600 Hollywood Blvd,Florida, United States-	33020</li>
-                          <li> <strong>Mail Us:</strong> contact@us@gmail.com</li>
-                          <li> <strong>Contact Number: </strong> (954) 357-7760</li>
-                        </ul>
-                      </div>
+                        <div class="tab-pane fade show active" id="lecturers" role="tabpanel" aria-labelledby="lecturers-tabs">
+                            <div class="pt-3 mb-0">
+                                <div class="table-responsive theme-scrollbar">
+                                    <table class="display" id="data-source-lecturers" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                            <th>Nom complet</th>
+                                            <th>Email</th>
+                                            <th>Numéro</th>
+                                            <th>Matricule</th>
+                                            <th>Spécialité</th>
+                                            <th>Grade</th>
+                                            <th>Newsletter</th>
+                                            <th>Créer le</th>
+                                            <th>Mise à jour le</th>
+                                            <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($teachers)): ?>
+                                            <?php foreach ($teachers as $donnees): ?>
+                                                <tr>
+                                                <td><?php echo htmlspecialchars($donnees['fullname']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['email']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['mobile']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['matricule']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['specialite']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['grade']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['newsletter']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['cree']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['mise']); ?></td>
+                                                <td>
+                                                    <ul class="action">
+                                                        <li class="edit"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter1"><i class="icon-pencil-alt"></i></a></li>
+                                                        <li class="delete"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter2"><i class="icon-trash"></i></a></li>
+                                                    </ul>
+                                                </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                            <?php else: ?>
+                                            <tr>
+                                                <td colspan="8">No data found</td>
+                                            </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                            <th>Nom complet</th>
+                                            <th>Email</th>
+                                            <th>Numéro</th>
+                                            <th>Matricule</th>
+                                            <th>Spécialité</th>
+                                            <th>Grade</th>
+                                            <th>Newsletter</th>
+                                            <th>Créer le</th>
+                                            <th>Mise à jour le</th>
+                                            <th>Actions</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="admins" role="tabpanel" aria-labelledby="admins-tab">
+                            <div class="pt-3">
+                                <div class="table-responsive theme-scrollbar">
+                                    <table class="display" id="data-source-admins" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                            <th>Nom complet</th>
+                                            <th>Email</th>
+                                            <th>Numéro</th>
+                                            <th>Matricule</th>
+                                            <th>Créer le</th>
+                                            <th>Mise à jour le</th>
+                                            <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($admins)): ?>
+                                            <?php foreach ($admins as $donnees): ?>
+                                                <tr>
+                                                <td><?php echo htmlspecialchars($donnees['fullname']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['email']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['mobile']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['matricule']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['cree']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['mise']); ?></td>
+                                                <td>
+                                                    <ul class="action">
+                                                        <li class="edit"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter1"><i class="icon-pencil-alt"></i></a></li>
+                                                        <li class="delete"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter2"><i class="icon-trash"></i></a></li>
+                                                    </ul>
+                                                </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                            <?php else: ?>
+                                            <tr>
+                                                <td colspan="8">No data found</td>
+                                            </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                            <th>Nom complet</th>
+                                            <th>Email</th>
+                                            <th>Numéro</th>
+                                            <th>Matricule</th>
+                                            <th>Créer le</th>
+                                            <th>Mise à jour le</th>
+                                            <th>Actions</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -281,6 +440,13 @@
     <script src="../assets/js/modalpage/validation-modal.js"></script>
     <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
     <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#data-source-students').DataTable();
+            $('#data-source-lecturers').DataTable();
+            $('#data-source-admins').DataTable();
+        });
+    </script>
     <!-- Theme js-->
     <script src="../assets/js/script.js"></script>
     <script src="../assets/js/theme-customizer/customizer.js"></script>
