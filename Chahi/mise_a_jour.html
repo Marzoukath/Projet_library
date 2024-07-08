@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mettre à jour vos informations personnelles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #58bdf7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 7px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-container input[type="text"], .form-container input[type="email"], .form-container input[type="tel"], .form-container input[type="password"], .form-container select, .form-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #a3c7e7;
+            border-radius: 3px;
+        }
+        .form-container input[type="submit"] {
+            background-color: #0de93d;
+            color: rgb(1, 2, 10);
+            border: none;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #b2f5b5;
+        }
+        .form-container .message {
+            text-align: center;
+            margin-top: 20px;
+            color: rgb(22, 223, 52);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Mettre à jour les informations</h2>
+        <form id="updateForm" action="informations.bphp" method="post">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Entrez votre email" required>
+
+            <label for="fullname">Nom complet:</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Entrez votre nom complet" required>
+
+            <label for="phone">Numéro de téléphone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Entrez votre numéro de téléphone" required>
+
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+
+            <label for="filiere">Filière:</label>
+            <input type="text" id="filiere" name="filiere" placeholder="Entrez votre filiere" required>
+            
+               
+
+            <button type="submit" value="Modifier">
+        </form>
+        <div class="message" id="message"></div>
+    </div>
+</body>
+</html>
