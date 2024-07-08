@@ -16,7 +16,7 @@
             number_of_likes INT(11) DEFAULT 0,
             proposed_by VARCHAR(255) NOT NULL,
             validated_by VARCHAR(255),
-            status ENUM('available', 'unavailable') NOT NULL,
+            status ENUM('disponible', 'non disponible') NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
