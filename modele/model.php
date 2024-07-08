@@ -1,12 +1,11 @@
 <?php
 function getcompte() {
-    try 
-    {
+    try {
         require_once('connect.php');
-        print_r($_POST);
         $db = dbConnect();
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sth = $db->prepare("INSERT INTO Admin (fullname, email, mobile, password, matricule, created_at) VALUES(:nm, :email, :phone, :mdp, :mat,:created_at)");
+        
+        $sth = $db->prepare("INSERT INTO Admin (fullname, email, mobile, password, matricule, created_at) VALUES(:nm, :email, :phone, :mdp, :mat, :created_at)");
         $sth->bindParam(':nm', $_POST['fullname']);
         $sth->bindParam(':email', $_POST['email']);
         $sth->bindParam(':phone', $_POST['mobile']);
@@ -16,18 +15,11 @@ function getcompte() {
         $sth->bindParam(':created_at', $currentDateTime);
         
         $sth->execute();
+
+        echo json_encode(['success' => true, 'message' => 'Enregistrement réussi']);
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => 'Erreur : '.$e->getMessage()]);
     }
-    catch(Exception $e) {
-        die('Erreur : '.$e->getMessage());
-    }
-    $db = null; ?>
-    <popup id="fenetre005" style="colorBar3" bords="carrés">
-    <titre>
-        <titre2>Ouverture d'un popup</titre2>
-    </titre>
-    <p>Mise en page <code>style="colorBar3"</code>, bords carrés et utilisation d'un titre.</p>
-    </popup> <?php
-    header('Location: ../vue/creer_compte.php');
-    exit; 
-   
+    exit;
 }
+?>
