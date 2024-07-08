@@ -46,14 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                 }
                 else
                 {
-                    echo "Sorry, there was an error uploading your file.";
-                    $uploadOk = 0;
+                    echo "move_uploaded_file error: " . $_FILES["file"]["error"];
                 }
             }
             else
             {
                 echo "Sorry, only JPG, JPEG, PNG, GIF, TXT, PDF, DOC, DOCX, MP3, MP4, and AVI files are allowed.";
-                $uploadOk = 0;
             }
         }
         else
