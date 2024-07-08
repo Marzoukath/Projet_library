@@ -34,8 +34,8 @@ function compte()
             // if {
             if(1)
             {
-                require '../modele/connec_student.php';
-                getcompte();
+                require '../modele/create_student.php';
+                create_account();
             }
             // }
             // require_once './vue/creer_compte.php';

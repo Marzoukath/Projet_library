@@ -214,7 +214,7 @@
                         <div class="tab-pane fade form-signup" id="students" role="tabpanel" aria-labelledby="students-tab">
                             <div class="pt-3">
                                 <div class="table-responsive theme-scrollbar">
-                                    <form action="../../controller/get_studentcompte.php" method="post">
+                                    <form action="../../controller/student_account.php" method="post">
                                         <div class="main-container">
                                             <!-- Start Main Forms -->
                                             <div class="signup-form">
@@ -270,63 +270,63 @@
                         <div class="tab-pane fade show active" id="lecturers" role="tabpanel" aria-labelledby="lecturers-tabs">
                             <div class="pt-3 mb-0">
                                 <div class="table-responsive theme-scrollbar">
-                                    <table class="display" id="data-source-lecturers" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                            <th>Nom complet</th>
-                                            <th>Email</th>
-                                            <th>Numéro</th>
-                                            <th>Matricule</th>
-                                            <th>Spécialité</th>
-                                            <th>Grade</th>
-                                            <th>Newsletter</th>
-                                            <th>Créer le</th>
-                                            <th>Mise à jour le</th>
-                                            <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php if (!empty($teachers)): ?>
-                                            <?php foreach ($teachers as $donnees): ?>
-                                                <tr>
-                                                <td><?php echo htmlspecialchars($donnees['fullname']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['email']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['mobile']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['matricule']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['specialite']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['grade']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['newsletter']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['cree']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['mise']); ?></td>
-                                                <td>
-                                                    <ul class="action">
-                                                        <li class="edit"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter1"><i class="icon-pencil-alt"></i></a></li>
-                                                        <li class="delete"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter2"><i class="icon-trash"></i></a></li>
-                                                    </ul>
-                                                </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                            <?php else: ?>
-                                            <tr>
-                                                <td colspan="8">No data found</td>
-                                            </tr>
-                                            <?php endif; ?>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                            <th>Nom complet</th>
-                                            <th>Email</th>
-                                            <th>Numéro</th>
-                                            <th>Matricule</th>
-                                            <th>Spécialité</th>
-                                            <th>Grade</th>
-                                            <th>Newsletter</th>
-                                            <th>Créer le</th>
-                                            <th>Mise à jour le</th>
-                                            <th>Actions</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                                    <form id="signup-form" action="../../controller/teacher_account.php" method="post">
+                                        <div class="logo">
+                                            <img src="image/logo_white-removebg-preview.png" alt="">
+                                        </div> 
+
+                                        <div class="main-container">
+                                            <!-- Start Main Forms -->
+                                            <div class="signup-form">
+                                                <div class="sign-back">
+                                                    <div class="signup-row">
+                                                        <i class="fa fa-user"></i>
+                                                        <input type="text" name="fullname" placeholder="NOM COMPLET" required pattern ="^[A-Za-z '-]+$" maxlength = "20">
+                                                    </div>
+                                                    <div class="signup-row">
+                                                        <i class="fa fa-envelope-o"></i>
+                                                        <input type="email" name="email" placeholder="EMAIL"  required >
+                                                    </div>
+                                                    <div class="signup-row">
+                                                        <i class="fa fa-phone"></i>
+                                                        <input type="text" name="mobile" placeholder="MOBILE" required >
+                                                        
+                                                    </div>
+                                                    <div class="signup-row">
+                                                        <i class="fa fa-key"></i>
+                                                        <input type="password" name="password" placeholder="MOT DE PASSE" required>
+                                                    </div>
+                                                    <div class="signup-row">
+                                                        <i class="fa fa-user"></i>
+                                                        <input type="text" name="matricule" placeholder="MATRICULE" required>
+                                                    </div>
+                                                    <div class="signup-row">
+                                                        <i class="fa fa-user"></i>
+                                                        <input type="text" name="specialite" placeholder="SPECIALITE" required>
+                                                    </div>
+                                                    <div class="signup-row">
+                                                        <i class="fa fa-user"></i>
+                                                        <input type="text" name="grade" placeholder="GRADE" required>
+                                                    </div>
+                                                    <div class="signup-row" >
+                                                        <button type='submit'>
+                                                            <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="form-bottom">
+                                                        <div class="remember">
+                                                            <input type="checkbox" name="remember">
+                                                            <span>Se rappeler</span>
+                                                        </div>
+                                                        <div class="remember">
+                                                            <a href="vue/log_in.php">Vous avez déjà un compte?</a>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="submit" value="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

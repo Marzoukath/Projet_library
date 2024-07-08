@@ -2,7 +2,7 @@
 function getfich($uploadfile) {
     try 
     {
-        require_once('connect.php');
+        require_once('db_connection.php');
         $db = dbConnect();
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sth = $db->prepare("INSERT INTO FIchiers (filiere, annee, semestre , matiere, fichier) VALUES(:fil, :an, :semest, :mati, :fich)");

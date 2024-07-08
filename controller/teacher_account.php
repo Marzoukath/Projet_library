@@ -3,6 +3,7 @@
 
 function compte() 
 {
+    
     try
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST')
@@ -19,6 +20,8 @@ function compte()
             $mobile = valid_donnees($_POST['mobile']); 
             $password = valid_donnees($_POST['password']); 
             $matricule = valid_donnees($_POST['matricule']);
+            $specialite = valid_donnees($_POST['specialite']);
+            $grade = valid_donnees($_POST['grade']);
             
             // if (empty($fullname) || !strlen($fullname) <= 20 ){
             //     echo "Pas de caracteres numeriques, pas plus de 20 caracteres";
@@ -30,7 +33,9 @@ function compte()
             // if {
             if(1)
             {
-                require '../modele/model.php';
+                echo 'xx';
+                require '../modele/create_teacher.php';
+                echo 'ok';
                 create_account();
             }
             // }
