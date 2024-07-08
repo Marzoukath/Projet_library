@@ -36,4 +36,17 @@
         while($row = $result->fetch_assoc()) { $admins[] = $row; }
     }
     else { $admins = []; }
+
+    // Files
+
+    $sql = "SELECT * FROM Files";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0)
+    {
+        $files = [];
+        while($row = $result->fetch_assoc()) { $files[] = $row; }
+    }
+    else { $files = []; }
+
     $conn->close();
+

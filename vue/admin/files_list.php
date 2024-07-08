@@ -1,3 +1,7 @@
+<?php
+  include('../../controller/admin/fetch_data.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -106,23 +110,31 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <?php if (!empty($files)): ?>
+                        <?php foreach ($files as $file): ?>
+                          <tr>
+                            <td><?php echo $file['title']; ?></td>
+                            <td><?php echo $file['authors']; ?></td>
+                            <td><?php echo $file['language']; ?></td>
+                            <td><?php echo $file['type']; ?></td>
+                            <td><?php echo $file['proposed_by']; ?></td>
+                            <td><?php echo $file['validated_by']; ?></td>
+                            <td><?php echo "17" ?></td>
+                            <td> <span class="badge rounded-pill badge-success"><?php echo $file['status']; ?></span></td>
+                            <td> 
+                              <ul class="action">
+                                <!-- <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#edit_modal">Vertically centered</button> -->
+                                <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $file['id']?>"><i class="icon-pencil-alt"></i></a></li>
+                                <li class="delete"><a data-bs-toggle="modal" data-bs-target="#delete_modal<?php echo $file['id']?>"><i class="icon-trash"></i></a></li>
+                              </ul>
+                            </td>
+                          </tr>
+                        <?php endforeach; ?>
+                        <?php else: ?>
                         <tr>
-                          <td>System Architect</td>
-                          <td>Tiger Nixon</td>
-                          <td>Edinburgh</td>
-                          <td class="action"><a class="pdf" href="sample.pdf" target="_blank"><i class="icofont icofont-file-pdf"></i></a></td>
-                          <td>t.nixon@datatables.net</td>
-                          <td>Edinburgh</td>
-                          <td>Edinburgh</td>
-                          <td> <span class="badge rounded-pill badge-success">hired</span></td>
-                          <td> 
-                            <ul class="action">
-                              <!-- <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter1">Vertically centered</button> -->
-                              <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#exampleModalCenter1"><i class="icon-pencil-alt"></i></a></li>
-                              <li class="delete"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter2"><i class="icon-trash"></i></a></li>
-                            </ul>
-                          </td>
+                            <td colspan="8">No data found</td>
                         </tr>
+                        <?php endif; ?>
                       </tbody>
                       <tfoot>
                         <tr>
@@ -146,121 +158,128 @@
           <!-- Container-fluid Ends-->
         </div>
 
-        <div class="card-body">
-          <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-body"> 
-                  <div class="modal-toggle-wrapper">
-                    <h4 class="text-center pb-2">Êtes vous sûr(e) de vouloir continuer cette action?</h4>
-                    <div class="row gallery my-gallery" id="aniimated-thumbnials2" style="display:flex; justify-content:center; align-items:center; margin:10px;">
-                      <figure class="col-md-3 col-6 img-hover hover-3"><a href="../assets/images/logo/icon_dl.png" itemprop="contentUrl" data-size="1600x950">
-                          <div><img src="../assets/images/logo/icon_dl.png" itemprop="thumbnail" alt="Image description"></div></a>
-                        <figcaption itemprop="caption description"></figcaption>
-                      </figure>
-                      <a href="http://localhost/Projects/Projet_library/vue/assets/pdf/sample.pdf" target="_blank" style="text-align:center; margin:0px;">Télécharger</a>
+        
+        <?php 
+          if (!empty($files)):
+            foreach ($files as $file): ?>
+              <div class="card-body">
+                <div class="modal fade" id="edit_modal<?php echo $file['id']?>" tabindex="-1" role="dialog" aria-labelledby="edit_modal<?php echo $file['id']?>" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body"> 
+                        <div class="modal-toggle-wrapper">
+                          <h4 class="text-center pb-2">Êtes vous sûr(e) de vouloir continuer cette action?</h4>
+                          <div class="row gallery my-gallery" id="aniimated-thumbnials2" style="display:flex; justify-content:center; align-items:center; margin:10px;">
+                            <figure class="col-md-3 col-6 img-hover hover-3"><a href="../assets/images/logo/icon_dl.png" itemprop="contentUrl" data-size="1600x950">
+                                <div><img src="../assets/images/logo/icon_dl.png" itemprop="thumbnail" alt="Image description"></div></a>
+                              <figcaption itemprop="caption description"></figcaption>
+                            </figure>
+                            <a href="http://localhost/Projects/Projet_library/vue/assets/pdf/sample.pdf" target="_blank" style="text-align:center; margin:0px;">Télécharger</a>
+                          </div>
+                          <div>
+                            <table style="text-align:center; width:100%;">
+                              <thead>
+                                <tr><th><?php echo $file['number_of_download']?></th><th><?php echo $file['number_of_likes']?></th><th>897</th></tr>
+                              </thead>
+                              <tbody>
+                                <tr><th style="width:30%;">Téléchargement(s)</th><th style="width:40%;"><svg class="footer-icon">
+                                    <use href="../assets/svg/icon-sprite.svg#footer-heart"> </use>
+                                  </svg></th><th style="width:30%;">Note</th></tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <hr>
+                          <div>
+                            <table style="text-align:center; width:100%;">
+                              <tr><th>Proposé par:</th><th>Statut</th><th>Validé par:</th></tr>
+                              <tr>
+                                <th style="width:30%; text-decoration: unset;"><?php echo $file['proposed_by']?></th>
+                                <th style="width:40%;"><span class="badge rounded-pill badge-success"><?php echo $file['status']?></span></th>
+                                <th style="width:30%;"><?php echo $file['validated_by']?></th>
+                              </tr>
+                            </table>
+                          </div>
+                          <hr>
+                          <form class="row g-3" action="test_admin.php" method="post">
+                            <div class="col-md-12">
+                              <label class="form-label" for="updated_title">Titre</label>
+                              <input class="form-control" id="updated_title" name="title" type="text" value=<?php echo $file['title']?> required>
+                            </div>
+                            <div class="col-md-12">
+                              <label class="form-label" for="updated_author">Auteur(s)</label>
+                              <input class="form-control" id="updated_author" name="author" type="text" value="<?php echo $file['authors']?>">
+                            </div>
+                            <div class="col-md-12">
+                              <label>Type</label>
+                              <select class="form-select" name="type" required>
+                                <option value="audio">Audio</option>
+                                <option value="ebook" selected>eBook</option>
+                                <option value="image">Image</option>
+                                <option value="video">Vidéo</option>
+                                <option value="memoire">Mémoire</option>
+                                <option value="handbook">Manuel</option>
+                                <option value="periodic">Périodique</option>
+                                <option value="monograph">Monographie (Livre)</option>
+                                <option value="scientific_article">Article scientifique</option>
+                              </select>
+                            </div>
+                            <div class="col-md-12">
+                              <label>Statut</label>
+                              <select class="form-select" name="status" required>
+                                <option value="avalaible" selected>Disponible</option>
+                                <option value="unavailable">Non disponible</option>
+                              </select>
+                            </div>
+                            <div class="col-md-12">
+                              <label class="form-label" for="updated_description">Description</label>
+                              <input class="form-control" id="updated_description" name="description" type="text" value="<?php echo $file['description']?>">
+                            </div>
+                            <div class="col-md-12">
+                              <label class="form-label" for="updated_url">URL</label>
+                              <input class="form-control" id="updated_url" name="url" type="text" value="<?php echo $file['url']?>">
+                            </div>
+                            <div style="display:flex;">
+                              <button class="btn btn-primary d-flex m-auto" type="submit" data-bs-dismiss="modal">Modifier</button>
+                              <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <table style="text-align:center; width:100%;">
-                        <thead>
-                          <tr><th>1,908</th><th>34.0k</th><th>897</th></tr>
-                        </thead>
-                        <tbody>
-                          <tr><th style="width:30%;">Téléchargement(s)</th><th style="width:40%;"><svg class="footer-icon">
-                              <use href="../assets/svg/icon-sprite.svg#footer-heart"> </use>
-                            </svg></th><th style="width:30%;">Note</th></tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <hr>
-                    <div>
-                      <table style="text-align:center; width:100%;">
-                        <tr><th>Proposé par:</th><th>Statut</th><th>Validé par:</th></tr>
-                        <tr>
-                          <th style="width:30%; text-decoration: unset;">Utilisateur</th>
-                          <th style="width:40%;"><span class="badge rounded-pill badge-success">disponible</span></th>
-                          <th style="width:30%;">Admin</th>
-                        </tr>
-                      </table>
-                    </div>
-                    <hr>
-                    <form class="row g-3" action="test_admin.php" method="post">
-                      <div class="col-md-12">
-                        <label class="form-label" for="updated_title">Titre</label>
-                        <input class="form-control" id="updated_title" name="title" type="text" value="Titre du livre" required>
-                      </div>
-                      <div class="col-md-12">
-                        <label class="form-label" for="updated_author">Auteur(s)</label>
-                        <input class="form-control" id="updated_author" name="author" type="text" value="Nom de l'auteur">
-                      </div>
-                      <div class="col-md-12">
-                        <label>Type</label>
-                        <select class="form-select" name="type" required>
-                          <option value="audio">Audio</option>
-                          <option value="ebook" selected>eBook</option>
-                          <option value="image">Image</option>
-                          <option value="video">Vidéo</option>
-                          <option value="memoire">Mémoire</option>
-                          <option value="handbook">Manuel</option>
-                          <option value="periodic">Périodique</option>
-                          <option value="monograph">Monographie (Livre)</option>
-                          <option value="scientific_article">Article scientifique</option>
-                        </select>
-                      </div>
-                      <div class="col-md-12">
-                        <label>Statut</label>
-                        <select class="form-select" name="status" required>
-                          <option value="avalaible" selected>Disponible</option>
-                          <option value="unavailable">Non disponible</option>
-                        </select>
-                      </div>
-                      <div class="col-md-12">
-                        <label class="form-label" for="updated_description">Description</label>
-                        <input class="form-control" id="updated_description" name="description" type="text" value="no mind.">
-                      </div>
-                      <div class="col-md-12">
-                        <label class="form-label" for="updated_url">URL</label>
-                        <input class="form-control" id="updated_url" name="url" type="text" value="https://url.com">
-                      </div>
-                      <div style="display:flex;">
-                        <button class="btn btn-primary d-flex m-auto" type="submit" data-bs-dismiss="modal">Modifier</button>
-                        <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Fermer</button>
-                      </div>
-                    </form>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="card-body">
-          <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-body"> 
-                  <div class="modal-toggle-wrapper">  
-                    <ul class="modal-img">
-                      <li> <img src="../assets/images/gif/danger.gif" alt="error"></li>
-                    </ul>
-                    <h4 class="text-center pb-2">Êtes vous sûr(e) de vouloir supprimer ce fichier ?</h4>
-                    <form class="row g-3" action="test_admin.php" method="post">
-                      <div class="col-md-12">
-                        <input class="form-control" id="modal_ttile" type="text" value="Titre du livre" style="margin-bottom:15px;" disabled>
-                        <input class="form-control" id="modal_author" type="text" value="Auteur du livre" disabled>
-                        <input class="form-control" id="modal_file_id" name="file_id" type="text" value="17" style="display:none;">
+              <div class="card-body">
+                <div class="modal fade" id="delete_modal<?php echo $file['id']?>" tabindex="-1" role="dialog" aria-labelledby="delete_modal<?php echo $file['id']?>" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body"> 
+                        <div class="modal-toggle-wrapper">  
+                          <ul class="modal-img">
+                            <li> <img src="../assets/images/gif/danger.gif" alt="error"></li>
+                          </ul>
+                          <h4 class="text-center pb-2">Êtes vous sûr(e) de vouloir supprimer ce fichier ?</h4>
+                          <form class="row g-3" action="../../controller/admin/delete_file.php" method="post">
+                            <div class="col-md-12">
+                              <input class="form-control" id="modal_title<?php echo $file['id']?>" type="text" value="<?php echo $file['title']?>" style="margin-bottom:15px;" disabled>
+                              <input class="form-control" id="modal_author<?php echo $file['id']?>" type="text" value="<?php echo $file['authors']?>" disabled>
+                              <input class="form-control" id="modal_file_id<?php echo $file['id']?>" name="file_id" type="text" value="<?php echo $file['id']?>" style="display:none;">
+                            </div>
+                            <div style="display:flex;">
+                              <button class="btn btn-danger d-flex m-auto" type="submit" data-bs-dismiss="modal">Supprimer</button>
+                              <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Annuler</button>
+                            </div>
+                          </form>
+                        </div>
                       </div>
-                      <div style="display:flex;">
-                        <button class="btn btn-danger d-flex m-auto" type="submit" data-bs-dismiss="modal">Supprimer</button>
-                        <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Annuler</button>
-                      </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+        <?php 
+            endforeach;
+          endif ?>
 
         <!-- footer start-->
         <?php include('footer.html');?>
