@@ -87,6 +87,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
 
             $file_id = $db->lastInsertId();
 
+            if (isset($_POST['categories'])) {
+                $categories = $_POST['categories'];
+                foreach ($categories as $category) {
+                    $request = $db->prepare("INSERT INTO Categories (file_id, associated_category) VALUES (?, ?)");
+                    $request->execute([$file_id, $category]);
+                }
+            }
+
             if (isset($_POST['sectors'])) {
                 $sectors = $_POST['sectors'];
                 foreach ($sectors as $sector) {
@@ -95,11 +103,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                 }
             }
 
-            if (isset($_POST['categories'])) {
-                $categories = $_POST['categories'];
-                foreach ($categories as $category) {
-                    $request = $db->prepare("INSERT INTO Categories (file_id, associated_category) VALUES (?, ?)");
-                    $request->execute([$file_id, $category]);
+            if (isset($_POST['years'])) {
+                $years = $_POST['years'];
+                foreach ($years as $year) {
+                    $request = $db->prepare("INSERT INTO Years (file_id, associated_year) VALUES (?, ?)");
+                    $request->execute([$file_id, $year]);
+                }
+            }
+
+            if (isset($_POST['semesters'])) {
+                $semesters = $_POST['semesters'];
+                foreach ($semesters as $semester) {
+                    $request = $db->prepare("INSERT INTO Semesters (file_id, associated_semester) VALUES (?, ?)");
+                    $request->execute([$file_id, $semester]);
                 }
             }
             

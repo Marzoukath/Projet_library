@@ -135,7 +135,7 @@
                             <select class="form-select" aria-label="select example" name="language" required>
                               <option value="english">Anglais</option>
                               <option value="french" selected>Français</option>
-                              <option value="others">Autres</option>
+                              <!-- <option value="others">Autres</option> -->
                             </select>
                           </div>
                         </div>
@@ -234,6 +234,85 @@
                           </div>
                         </div>
                       </div>
+                      <div class="col-xl-12 col-sm-12" style="display:flex;">
+                        <div class="col-xl-6 col-sm-6">
+                          <div class="card-wrapper border rounded-3 checkbox-checked" style="height:119px; margin-right:15px; margin-top:15px;">
+                            <h6 class="sub-title">Années de formation</h6>
+                            <div style="display:flex;">
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="first_year" name="years[]" type="checkbox" value=1>
+                                <label class="form-check-label" for="first_year">1re année</label>
+                              </div>
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="second_year" name="years[]" type="checkbox" value=2>
+                                <label class="form-check-label" for="second_year">2e année</label>
+                              </div>
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="third_year" name="years[]" type="checkbox" value=3>
+                                <label class="form-check-label" for="third_year">3e année</label>
+                              </div>
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="fourth_year" name="years[]" type="checkbox" value=4>
+                                <label class="form-check-label" for="fourth_year">4e année</label>
+                              </div>
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="fifth_year" name="years[]" type="checkbox" value=5>
+                                <label class="form-check-label" for="fifth_year">5e année</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xl-6 col-sm-6">
+                          <div class="card-wrapper border rounded-3 checkbox-checked" style="height:119px; margin-bottom:15px; margin-top:15px;">
+                            <h6 class="sub-title">Semestres</h6>
+                            <div style="display:flex;">
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="first_semester" name="semesters[]" type="checkbox" value=1>
+                                <label class="form-check-label" for="first_semester">Semestre 1</label>
+                              </div>
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="third_semester" name="semesters[]" type="checkbox" value=3>
+                                <label class="form-check-label" for="third_semester">Semestre 3</label>
+                              </div>
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="fifth_semester" name="semesters[]" type="checkbox" value=5>
+                                <label class="form-check-label" for="fifth_semester">Semestre 5</label>
+                              </div>
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="seventh_semester" name="semesters[]" type="checkbox" value=7>
+                                <label class="form-check-label" for="seventh_semester">Semestre 7</label>
+                              </div>
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="nineth_semester" name="semesters[]" type="checkbox" value=9>
+                                <label class="form-check-label" for="nineth_semester">Semestre 9</label>
+                              </div>
+                            </div>
+                            <div style="display:flex;">
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="second_semester" name="semesters[]" type="checkbox" value=2>
+                                <label class="form-check-label" for="second_semester">Semestre 2</label>
+                              </div>
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="fourth_semester" name="semesters[]" type="checkbox" value=4>
+                                <label class="form-check-label" for="fourth_semester">Semestre 4</label>
+                              </div>
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="sixth_semester" name="semesters[]" type="checkbox" value=6>
+                                <label class="form-check-label" for="sixth_semester">Semestre 6</label>
+                              </div>
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="eighth_semester" name="semesters[]" type="checkbox" value=8>
+                                <label class="form-check-label" for="eighth_semester">Semestre 8</label>
+                              </div>
+                              <div class="form-check" style="margin-right:15px">
+                                <input class="form-check-input" id="tenth_semester" name="semesters[]" type="checkbox" value=10>
+                                <label class="form-check-label" for="tenth_semester">Semestre 10</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                       <div class="row">
                         <div class="col">
                           <div class="mb-3">
