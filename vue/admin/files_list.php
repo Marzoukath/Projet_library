@@ -228,7 +228,7 @@
                               <label>Statut</label>
                               <select class="form-select" name="status" required>
                                 <option value="avalaible" <?= $file['status'] == 'disponible' ? 'selected' : ''; ?>>Disponible</option>
-                                <option value="unavailable" <?= $file['type'] == 'non disponible' ? 'selected' : ''; ?>>Non disponible</option>
+                                <option value="unavailable" <?= $file['status'] == 'non disponible' ? 'selected' : ''; ?>>Non disponible</option>
                               </select>
                             </div>
                             <div class="col-md-12">

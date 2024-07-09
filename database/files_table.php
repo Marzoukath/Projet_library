@@ -9,7 +9,7 @@
             authors VARCHAR(255),
             type ENUM('ebook', 'audio', 'image', 'video', 'memoire', 'handbook', 'periodic', 'monograph', 'scientific_article') NOT NULL,
             url VARCHAR(255) NOT NULL,
-            language ENUM('french', 'english') NOT NULL,
+            language ENUM('français', 'anglais', 'autres') NOT NULL,
             miniature VARCHAR(255) UNIQUE,
             path VARCHAR(255) NOT NULL UNIQUE,
             number_of_downloads INT(11) DEFAULT 0,

@@ -4,6 +4,7 @@
     require 'years_table.php';
     require 'semesters_table.php';
     require 'categories_table.php';
+    require 'requests_table.php';
 
     require('connection.php');
     $db = DB_Connection();
@@ -13,5 +14,6 @@
     years_table($db);
     semesters_table($db);
     categories_table($db);
+    requests_table($db);
 
     $db->close();

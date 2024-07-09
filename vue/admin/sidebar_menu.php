@@ -31,6 +31,7 @@
             <ul class="sidebar-submenu">
                 <li><a href="files_list.php" style="color: black;">Lister</a></li>
                 <li><a href="upload_file.php" style="color: black;">Ajouter</a></li>
+                <li><a href="requests_management.php" style="color: black;">Traiter les Requêtes</a></li>
             </ul>
             </li>
             <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title" href="javascript:void(0)">

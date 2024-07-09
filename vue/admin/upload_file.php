@@ -133,9 +133,9 @@
                           <div class="mb-3">
                             <label>Langue</label>
                             <select class="form-select" aria-label="select example" name="language" required>
-                              <option value="english">Anglais</option>
-                              <option value="french" selected>Français</option>
-                              <!-- <option value="others">Autres</option> -->
+                              <option value="anglais">Anglais</option>
+                              <option value="français" selected>Français</option>
+                              <option value="autres">Autres</option>
                             </select>
                           </div>
                         </div>

@@ -38,7 +38,6 @@
     else { $admins = []; }
 
     // Files
-
     $sql = "SELECT * FROM Files";
     $result = $conn->query($sql);
     if ($result->num_rows > 0)
@@ -47,6 +46,16 @@
         while($row = $result->fetch_assoc()) { $files[] = $row; }
     }
     else { $files = []; }
+
+    // Requests
+    $sql = "SELECT * FROM Requests";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0)
+    {
+        $requests = [];
+        while($row = $result->fetch_assoc()) { $requests[] = $row; }
+    }
+    else { $requests = []; }
 
     $conn->close();
 

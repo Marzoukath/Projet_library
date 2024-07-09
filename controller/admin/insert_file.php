@@ -89,7 +89,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
 
             if (isset($_POST['categories'])) {
                 $categories = $_POST['categories'];
-                foreach ($categories as $category) {
+                foreach ($categories as $category)
+                {
                     $request = $db->prepare("INSERT INTO Categories (file_id, associated_category) VALUES (?, ?)");
                     $request->execute([$file_id, $category]);
                 }
@@ -97,7 +98,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
 
             if (isset($_POST['sectors'])) {
                 $sectors = $_POST['sectors'];
-                foreach ($sectors as $sector) {
+                foreach ($sectors as $sector)
+                {
                     $request = $db->prepare("INSERT INTO Sectors (file_id, associated_sector) VALUES (?, ?)");
                     $request->execute([$file_id, $sector]);
                 }
