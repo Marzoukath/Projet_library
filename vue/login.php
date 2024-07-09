@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Library Login</title>
+    <title>Login - Digital Library</title>
+    <link rel="shortcut icon" href="assets/images/logo/icon_dl.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -13,7 +14,7 @@
 
         body {
             font-family: 'Ubuntu', sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./image/library-5641389_1280.jpg") no-repeat center center fixed;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("assets/images/library-5641389_1280.jpg") no-repeat center center fixed;
             background-size: cover;
             display: flex;
             flex-direction: column;
@@ -143,7 +144,7 @@
 </head>
 <body>
     <div class="logo">
-        <img src="image/logo_white-removebg-preview.png" alt="Logo">
+        <img src="../image/logo_white-removebg-preview.png" alt="Logo">
     </div>
     <!-- Start Main Container -->
     <div class="main-container">

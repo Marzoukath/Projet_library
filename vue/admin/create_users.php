@@ -156,13 +156,13 @@
     <div class="page-wrapper default-wrapper" id="pageWrapper">
       <div class="page-header row">
         <div class="header-logo-wrapper col-auto">
-          <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/logo_dl.png" alt=""/><img class="img-fluid for-dark" src="../assets/images/logo/logo_dl.png" alt=""/></a></div>
+          <div class="logo-wrapper"><a href="../page_accueil.html"><img class="img-fluid for-light" src="../assets/images/logo/logo_dl.png" alt=""/><img class="img-fluid for-dark" src="../assets/images/logo/logo_dl.png" alt=""/></a></div>
         </div>
         <div class="col-4 col-xl-4 page-title">
           <h4 class="f-w-700">Gestion des utilisateurs</h4>
           <nav>
             <ol class="breadcrumb justify-content-sm-start align-items-center mb-0">
-              <li class="breadcrumb-item"><a href="index.html"> <i data-feather="home"> </i></a></li>
+              <li class="breadcrumb-item"><a href="../page_accueil.html"> <i data-feather="home"> </i></a></li>
               <li class="breadcrumb-item f-w-400">Dashboard</li>
               <li class="breadcrumb-item f-w-400 active">Gestion des utilisateurs</li>
             </ol>
@@ -179,7 +179,7 @@
               </div>
             </form>
             <div class="header-logo-wrapper col-auto p-0">
-              <div class="logo-wrapper"><a href="index.html"><img class="img-fluid" src="../assets/images/logo/logo_dl.png" alt=""></a></div>
+              <div class="logo-wrapper"><a href="../page_accueil.html"><img class="img-fluid" src="../assets/images/logo/logo_dl.png" alt=""></a></div>
             </div>
 
             <?php include('profile.php');?>
@@ -267,7 +267,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade show active" id="lecturers" role="tabpanel" aria-labelledby="lecturers-tabs">
+                        <div class="tab-pane fade show active form-signup" id="lecturers" role="tabpanel" aria-labelledby="lecturers-tabs">
                             <div class="pt-3 mb-0">
                                 <div class="table-responsive theme-scrollbar">
                                     <form id="signup-form" action="../../controller/teacher_account.php" method="post">
@@ -333,54 +333,7 @@
                         <div class="tab-pane fade" id="admins" role="tabpanel" aria-labelledby="admins-tab">
                             <div class="pt-3">
                                 <div class="table-responsive theme-scrollbar">
-                                    <table class="display" id="data-source-admins" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                            <th>Nom complet</th>
-                                            <th>Email</th>
-                                            <th>Numéro</th>
-                                            <th>Matricule</th>
-                                            <th>Créer le</th>
-                                            <th>Mise à jour le</th>
-                                            <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php if (!empty($admins)): ?>
-                                            <?php foreach ($admins as $donnees): ?>
-                                                <tr>
-                                                <td><?php echo htmlspecialchars($donnees['fullname']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['email']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['mobile']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['matricule']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['cree']); ?></td>
-                                                <td><?php echo htmlspecialchars($donnees['mise']); ?></td>
-                                                <td>
-                                                    <ul class="action">
-                                                        <li class="edit"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter1"><i class="icon-pencil-alt"></i></a></li>
-                                                        <li class="delete"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter2"><i class="icon-trash"></i></a></li>
-                                                    </ul>
-                                                </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                            <?php else: ?>
-                                            <tr>
-                                                <td colspan="8">No data found</td>
-                                            </tr>
-                                            <?php endif; ?>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                            <th>Nom complet</th>
-                                            <th>Email</th>
-                                            <th>Numéro</th>
-                                            <th>Matricule</th>
-                                            <th>Créer le</th>
-                                            <th>Mise à jour le</th>
-                                            <th>Actions</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                                    
                                 </div>
                             </div>
                         </div>

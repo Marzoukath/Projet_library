@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 
 <div class="nav-right col-xxl-8 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
     <ul class="nav-menus">

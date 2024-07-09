@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
+    <title>Accueil - Digital Library</title>
+    <link rel="shortcut icon" href="assets/images/logo/icon_dl.png" type="image/x-icon">
     <link rel="stylesheet" href="page_accueil.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+</head>
 <body>
     <header>
         
             <div style="display:flex;">
                 <div class="header-container">
-                    <img src="./image/logo_black.png" alt="Logo" class="logo">
+                    <img src="../image/logo_black.png" alt="Logo" class="logo">
                     <!-- <i class="fa fa-phone" aria-hidden="true"></i>
                     <h1>Library</h1> -->
                 </div>
                 <ul>
-                    <li>Accueil</li>
+                    <li><a href="page_accueil.html"><i class="fa fa-home fa-10x" aria-hidden="true"></i> Accueil</a></li>
                     <li>Ajouter un fichier</li>
                     <li>Consulter un fichier</li>
                     <li>Sign up</li>
-                    <li><i class="fa fa-key fa-10x" aria-hidden="true"></i> Log in</li>
+                    <li><a href="log_in.php"><i class="fa fa-key fa-10x" aria-hidden="true"></i> Log in</a></li>
                 </ul>
             </div>
     </header>
@@ -61,13 +62,22 @@
                 <h1>Inscrivez vous à ma newsletter</h1>
                 <form>
                     <input type="email" placeholder="Entrer Email..." />
-                    <button type="submit" >M'inscrire</button>
+                    <button type="submit" style="margin-left: 5px;">M'inscrire</button>
                 </form>
 
             </section>
       
     </main>
-    <footer><p>Un texte personnalisé</p></footer>
+    <footer class="footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 footer-copyright d-flex flex-wrap align-items-center justify-content-between">
+              <p class="mb-0 f-w-600">Copyright 2024 © <b>Digital Library</b></p>
+              <p class="mb-0 f-w-600">AGBODJA Marzoukath <b>&</b> BATOKO Chahidath</p>
+            </div>
+          </div>
+        </div>
+      </footer>
 
     <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
