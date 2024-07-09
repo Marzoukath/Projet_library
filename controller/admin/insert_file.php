@@ -45,7 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
             {
                 if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file_path))
                 {
-                    $miniature = $path = $target_file_path;
+                    $miniature = $target_file_path;
+                    $path = basename($target_file_path);
                 }
                 else
                 {

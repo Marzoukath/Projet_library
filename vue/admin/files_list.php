@@ -119,7 +119,7 @@
                             <td><?php echo $file['type']; ?></td>
                             <td><?php echo $file['proposed_by']; ?></td>
                             <td><?php echo $file['validated_by']; ?></td>
-                            <td><?php echo "17" ?></td>
+                            <td><?php echo $file['number_of_likes']*100/$file['number_of_downloads']?></td>
                             <td> <span class="badge rounded-pill badge-success"><?php echo $file['status']; ?></span></td>
                             <td> 
                               <ul class="action">
@@ -179,7 +179,7 @@
                           <div>
                             <table style="text-align:center; width:100%;">
                               <thead>
-                                <tr><th><?php echo $file['number_of_download']?></th><th><?php echo $file['number_of_likes']?></th><th>897</th></tr>
+                                <tr><th><?php echo $file['number_of_downloads']?></th><th><?php echo $file['number_of_likes']?></th><th><?php echo $file['number_of_likes']*100/$file['number_of_downloads']?></th></tr>
                               </thead>
                               <tbody>
                                 <tr><th style="width:30%;">Téléchargement(s)</th><th style="width:40%;"><svg class="footer-icon">
@@ -203,7 +203,7 @@
                           <form class="row g-3" action="test_admin.php" method="post">
                             <div class="col-md-12">
                               <label class="form-label" for="updated_title">Titre</label>
-                              <input class="form-control" id="updated_title" name="title" type="text" value=<?php echo $file['title']?> required>
+                              <input class="form-control" id="updated_title" name="title" type="text" value="<?php echo $file['title']?>" required>
                             </div>
                             <div class="col-md-12">
                               <label class="form-label" for="updated_author">Auteur(s)</label>

@@ -25,7 +25,7 @@ if (isset($_GET['file_id'])) {
                 // Set headers to initiate file download
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename=' . basename($file_path));
+                header('Content-Disposition: attachment; filename="' . rawurlencode(basename($file_path)) . '"');
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate');
                 header('Pragma: public');
