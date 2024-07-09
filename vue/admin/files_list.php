@@ -200,7 +200,8 @@
                             </table>
                           </div>
                           <hr>
-                          <form class="row g-3" action="test_admin.php" method="post">
+                          <form class="row g-3" action="../../controller/admin/update_file.php" method="post">
+                            <input type="hidden" name="file_id" value="<?php echo $file['id'] ?>">
                             <div class="col-md-12">
                               <label class="form-label" for="updated_title">Titre</label>
                               <input class="form-control" id="updated_title" name="title" type="text" value="<?php echo $file['title']?>" required>
@@ -212,22 +213,22 @@
                             <div class="col-md-12">
                               <label>Type</label>
                               <select class="form-select" name="type" required>
-                                <option value="audio">Audio</option>
-                                <option value="ebook" selected>eBook</option>
-                                <option value="image">Image</option>
-                                <option value="video">Vidéo</option>
-                                <option value="memoire">Mémoire</option>
-                                <option value="handbook">Manuel</option>
-                                <option value="periodic">Périodique</option>
-                                <option value="monograph">Monographie (Livre)</option>
-                                <option value="scientific_article">Article scientifique</option>
+                                <option value="audio" <?= $file['type'] == 'audio' ? 'selected' : ''; ?>>Audio</option>
+                                <option value="ebook" <?= $file['type'] == 'ebook' ? 'selected' : ''; ?>>eBook</option>
+                                <option value="image" <?= $file['type'] == 'image' ? 'selected' : ''; ?>>Image</option>
+                                <option value="video" <?= $file['type'] == 'video' ? 'selected' : ''; ?>>Vidéo</option>
+                                <option value="memoire" <?= $file['type'] == 'memoire' ? 'selected' : ''; ?>>Mémoire</option>
+                                <option value="handbook" <?= $file['type'] == 'handbook' ? 'selected' : ''; ?>>Manuel</option>
+                                <option value="periodic" <?= $file['type'] == 'periodic' ? 'selected' : ''; ?>>Périodique</option>
+                                <option value="monograph" <?= $file['type'] == 'monograph' ? 'selected' : ''; ?>>Monographie (Livre)</option>
+                                <option value="scientific_article" <?= $file['type'] == 'scientific_article' ? 'selected' : ''; ?>>Article scientifique</option>
                               </select>
                             </div>
                             <div class="col-md-12">
                               <label>Statut</label>
                               <select class="form-select" name="status" required>
-                                <option value="avalaible" selected>Disponible</option>
-                                <option value="unavailable">Non disponible</option>
+                                <option value="avalaible" <?= $file['status'] == 'disponible' ? 'selected' : ''; ?>>Disponible</option>
+                                <option value="unavailable" <?= $file['type'] == 'non disponible' ? 'selected' : ''; ?>>Non disponible</option>
                               </select>
                             </div>
                             <div class="col-md-12">
