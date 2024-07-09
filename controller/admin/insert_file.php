@@ -3,6 +3,9 @@ require_once '../../modele/db_connection.php';
 $db = dbConnect();
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+global $db;
+$db->beginTransaction();
+
 function sanitize_data($data)
 {
     $data = trim($data);
@@ -98,11 +101,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                     $request->execute([$file_id, $category]);
                 }
             }
+            
+            $db->commit();
             echo "New file uploaded successfully";
         }
     }
     catch(Exception $e)
     {
+        $db->rollBack();
         die('Erreur : '.$e->getMessage());
     }
 }

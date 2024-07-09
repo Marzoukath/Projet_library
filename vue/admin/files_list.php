@@ -174,7 +174,7 @@
                                 <div><img src="../assets/images/logo/icon_dl.png" itemprop="thumbnail" alt="Image description"></div></a>
                               <figcaption itemprop="caption description"></figcaption>
                             </figure>
-                            <a href="http://localhost/Projects/Projet_library/vue/assets/pdf/sample.pdf" target="_blank" style="text-align:center; margin:0px;">Télécharger</a>
+                            <a href="../../controller/admin/download_file.php?file_id=<?php echo $file['id']?>" target="_blank" style="text-align:center; margin:0px;">Télécharger</a>
                           </div>
                           <div>
                             <table style="text-align:center; width:100%;">
