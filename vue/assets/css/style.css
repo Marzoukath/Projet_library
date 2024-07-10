@@ -43510,7 +43510,11 @@ table.table-bordered thead tr th p {
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a span {
   letter-spacing: 0.7px;
   text-transform: capitalize;
+<<<<<<< HEAD
   color: #fff;
+=======
+  color: #000;
+>>>>>>> 15df83840343c9bd717a0fd2fc8ad592c5a8a129
 }
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a.link-nav .according-menu {
   display: none;
