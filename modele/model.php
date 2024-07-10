@@ -1,10 +1,12 @@
 <?php
+session_start();
+
 function getcompte() {
-    try {
+    try 
+    {
         require_once('connect.php');
         $db = dbConnect();
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
         $sth = $db->prepare("INSERT INTO Admin (fullname, email, mobile, password, matricule, created_at) VALUES(:nm, :email, :phone, :mdp, :mat, :created_at)");
         $sth->bindParam(':nm', $_POST['fullname']);
         $sth->bindParam(':email', $_POST['email']);
@@ -15,11 +17,14 @@ function getcompte() {
         $sth->bindParam(':created_at', $currentDateTime);
         
         $sth->execute();
-
-        echo json_encode(['success' => true, 'message' => 'Enregistrement réussi']);
-    } catch (Exception $e) {
-        echo json_encode(['success' => false, 'message' => 'Erreur : '.$e->getMessage()]);
+        
+        $_SESSION['success_message'] = "Compte créé avec succès";
     }
-    exit;
+    catch(Exception $e) {
+        $_SESSION['error_message'] = 'Erreur : ' . $e->getMessage();
+    }
+    $db = null;
+    header('Location: ../vue/creer_compte.php');
+    exit; 
 }
 ?>

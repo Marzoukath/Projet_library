@@ -1,4 +1,4 @@
-
+<?php session_start()?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,12 +134,35 @@
             top: 1px;
             transition: all 500ms;
         }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .popup.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <?php
     // require_once('./controller/get_compte.php')
     ?>
+    <?php if (isset($_SESSION['success_message'])) {
+    echo "<div class='popup show' id='successPopup'>{$_SESSION['success_message']}</div>";
+    unset($_SESSION['success_message']);
+} elseif (isset($_SESSION['error_message'])) {
+    echo "<div class='popup show' id='errorPopup'>{$_SESSION['error_message']}</div>";
+    unset($_SESSION['error_message']);
+}
+?>
+    
     <form id="signup-form" action="../controller/get_compte.php" method="post">
         <div class="logo">
             <img src="image/logo_white-removebg-preview.png" alt="">
@@ -149,7 +172,7 @@
             <!-- Start Main Forms -->
             <div class="signup-form">
                 <div class="sign-back">
-                    <h1>Sign UP</h1>
+                    <h1>Incrivez-vous</h1>
                     <div class="signup-row">
                         <i class="fa fa-user"></i>
                         <input type="text" name="fullname" placeholder="FULL NAME" required pattern ="^[A-Za-z '-]+$" maxlength = "20">
@@ -185,7 +208,7 @@
                             <span>Remember</span>
                         </div>
                         <div class="remember">
-                            <a href="vue/log_in.php">Already Have Account ?</a>
+                            <a href="log_in.php">Avez vous déjà un compte ?</a>
                         </div>
                     </div>
                     <input type="hidden" name="submit" value="true">
@@ -195,6 +218,19 @@
         </div>
         <!-- End Main Container -->
     </form>
+    <script>
+    setTimeout(function() {
+        var popup = document.getElementById('successPopup');
+        if (popup) {
+            popup.classList.remove('show');
+        }
+        var errorPopup = document.getElementById('errorPopup');
+        if (errorPopup) {
+            errorPopup.classList.remove('show');
+        }
+    }, 3000);
+   </script>
+    
     
     <!-- Start Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

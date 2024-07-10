@@ -20,9 +20,9 @@ function compte()
             $password = valid_donnees($_POST['password']); 
             $matricule = valid_donnees($_POST['matricule']);
             $filiere = valid_donnees($_POST['fiiere']);
-            $newsletter= valid_donnees($_POST['0']);
-            $created_at = valid_donnees($_POST['2024-01-01 10:00:00']);
-            $updated_at = valid_donnees($_POST['2024-01-01 10:00:00']);
+            // $newsletter= valid_donnees($_POST['0']);
+            // $created_at = valid_donnees($_POST['2024-01-01 10:00:00']);
+            // $updated_at = valid_donnees($_POST['2024-01-01 10:00:00']);
             
             // if (empty($fullname) || !strlen($fullname) <= 20 ){
             //     echo "Pas de caracteres numeriques, pas plus de 20 caracteres";

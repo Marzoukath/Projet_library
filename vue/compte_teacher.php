@@ -149,7 +149,7 @@
             <!-- Start Main Forms -->
             <div class="signup-form">
                 <div class="sign-back">
-                    <h1>Créer un compte</h1>
+                    <h1>Incrivez-vous</h1>
                     <div class="signup-row">
                         <i class="fa fa-user"></i>
                         <input type="text" name="fullname" placeholder="NOM COMPLET" required pattern ="^[A-Za-z '-]+$" maxlength = "20">
@@ -193,7 +193,7 @@
                             <span>Se rappeler</span>
                         </div>
                         <div class="remember">
-                            <a href="vue/log_in.php">Vous avez déjà un compte?</a>
+                            <a href="./log_in_teacher.php">Vous avez déjà un compte?</a>
                         </div>
                     </div>
                     <input type="hidden" name="submit" value="true">

@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: url('../image/front-view-hardback-books-library.jpg') no-repeat center center fixed; 
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(1, 19, 14, 0.9);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(235, 17, 187, 0.4);
+    max-width: 500px;
+    width: 100%;
+    margin: 20px;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+}
+
+.content {
+    text-align: center;
+    color: #fff;
+}
+
+h2 {
+    margin-bottom: 30px;
+    color: #eee;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.user-types {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.user-type {
+    display: block;
+    padding: 15px 20px;
+    background: #f1f1f1;
+    text-align: center;
+    text-decoration: none;
+    color: #444;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.3s ease;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.user-type:hover {
+    background: #575454;
+    color: #fff;
+    transform: translateY(-5px);
+}

@@ -5,7 +5,7 @@ function getfich($uploadfile) {
         require_once('connect.php');
         $db = dbConnect();
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sth = $db->prepare("INSERT INTO FIchiers (filiere, annee, semestre , matiere, fichier) VALUES(:fil, :an, :semest, :mati, :fich)");
+        $sth = $db->prepare("INSERT INTO Files (filiere, annee, semestre , matiere, fichier) VALUES(:fil, :an, :semest, :mati, :fich)");
         $sth->bindParam(':fil', $_POST['filiere']);
         $sth->bindParam(':an', $_POST['year']);
         $sth->bindParam(':semest', $_POST['semestre']);
