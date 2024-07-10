@@ -13,7 +13,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="../assets/images/logo/icon_dl.png" type="image/x-icon">
     <link rel="shortcut icon" href="../assets/images/logo/icon_dl.png" type="image/x-icon">
-    <title>Dashboard - Liste des fichiers</title>
+    <title>Dashboard - Liste des utilisateurs</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
@@ -73,83 +73,104 @@
             <div class="header-logo-wrapper col-auto p-0">
               <div class="logo-wrapper"><a href="../page_accueil.html"><img class="img-fluid" src="../assets/images/logo/logo_dl.png" alt=""></a></div>
             </div>
-            
+
             <?php include('profile.php');?>
 
-          </div>
         </div>
-        <!-- Page Header Ends                              -->
+        </div>
+        <!-- Page Header Ends -->
       </div>
       <!-- Page Body Start-->
       <div class="page-body-wrapper default-menu default-menu">
-        <!-- Page Sidebar Start-->
+        
         <?php include('sidebar_menu.php');?>
+
         <!-- Page Sidebar Ends-->
         <div class="page-body">
           <!-- Container-fluid starts-->
           <div class="container-fluid">
-            <div class="col-sm-12">
-              <div class="card">
-                <div class="card-header pb-0 card-no-border">
-                  <h4 class="mb-3">Liste des fichiers</h4><span>Liste complète de tous les fichiers.</span>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive theme-scrollbar">
-                    <table class="display" id="data-source-1">
-                      <thead>
-                        <tr>
-                          <th>Titre</th>
-                          <th>Auteur(s)</th>
-                          <th>Langue</th>
-                          <th>Type</th>
-                          <th>Proposé par</th>
-                          <th>Validé par</th>
-                          <th>Note</th>
-                          <th>Statut</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php if (!empty($files)): ?>
-                        <?php foreach ($files as $file): ?>
-                          <tr>
-                            <td><?php echo $file['title']; ?></td>
-                            <td><?php echo $file['authors']; ?></td>
-                            <td><?php echo $file['language']; ?></td>
-                            <td><?php echo $file['type']; ?></td>
-                            <td><?php echo $file['proposed_by']; ?></td>
-                            <td><?php echo $file['validated_by']; ?></td>
-                            <td><?php echo $file['number_of_downloads'] == 0 ? '0' : $file['number_of_likes']*100/$file['number_of_downloads']?></td>
-                            <td> <span class="badge rounded-pill badge-success"><?php echo $file['status']; ?></span></td>
-                            <td> 
-                              <ul class="action">
-                                <!-- <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#edit_modal">Vertically centered</button> -->
-                                <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $file['id']?>"><i class="icon-pencil-alt"></i></a></li>
-                                <li class="delete"><a data-bs-toggle="modal" data-bs-target="#delete_modal<?php echo $file['id']?>"><i class="icon-trash"></i></a></li>
-                              </ul>
-                            </td>
-                          </tr>
-                        <?php endforeach; ?>
-                        <?php else: ?>
-                        <tr>
-                            <td colspan="8">No data found</td>
-                        </tr>
-                        <?php endif; ?>
-                      </tbody>
-                      <tfoot>
-                        <tr>
-                          <th>Titre</th>
-                          <th>Auteur(s)</th>
-                          <th>Langue</th>
-                          <th>Type</th>
-                          <th>Proposé par</th>
-                          <th>Validé par</th>
-                          <th>Note</th>
-                          <th>Statut</th>
-                          <th>Actions</th>
-                        </tr>
-                      </tfoot>
-                    </table>
+            <div class="row">
+              <div class="col-sm-12 col-xl-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Liste des fichiers</h4>
+                    <p class="mt-1 f-m-light">Liste des fichiers.</p>
+                  </div>
+                  <div class="card-body">
+                    <ul class="simple-wrapper nav nav-tabs" id="myTab" role="tablist">
+                      <li class="nav-item"><a class="nav-link txt-primary" id="files-tab" data-bs-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="false">Tous les fichiers</a></li>
+                      <li class="nav-item"><a class="nav-link active txt-primary" id="favoris-tabs" data-bs-toggle="tab" href="#favoris" role="tab" aria-controls="favoris" aria-selected="false">Favoris</a></li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade" id="files" role="tabpanel" aria-labelledby="files-tab">
+                            <div class="pt-3">
+                                <div class="table-responsive theme-scrollbar">
+                                    <table class="display" id="data-source-files" style="width:100%">
+                                        <thead>
+                                          <tr>
+                                            <th>Titre</th>
+                                            <th>Auteur(s)</th>
+                                            <th>Langue</th>
+                                            <th>Type</th>
+                                            <th>Proposé par</th>
+                                            <th>Validé par</th>
+                                            <th>Note</th>
+                                            <th>Statut</th>
+                                            <th>Actions</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($files)): ?>
+                                            <?php foreach ($files as $donnees): ?>
+                                                <tr>
+                                                <td><?php echo htmlspecialchars($donnees['title']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['authors']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['language']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['type']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['proposed_by']); ?></td>
+                                                <td><?php echo htmlspecialchars($donnees['validated_by']); ?></td>
+                                                <td><?php echo $donnees['number_of_downloads']== 0 ? 0 : $donnees['number_of_likes']*100/$donnees['number_of_downloads']?></td>
+                                                <td> <span class="badge rounded-pill badge-success"><?php echo $donnees['status']; ?></span></td>
+                                                <td>
+                                                    <ul class="action">
+                                                    <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $donnees['id']?>"><i class="icon-pencil-alt"></i></a></li>
+                                                        <li><a href="../../controller/admin/download_file.php?file_id=<?php echo $donnees['id']?>" target="_blank" style="text-align:center; margin:0px;"><i class="icon-download"></i></a></li>
+                                                    </ul>
+                                                </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                            <?php else: ?>
+                                            <tr>
+                                                <td colspan="8">No data found</td>
+                                            </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                        <tfoot>
+                                          <tr>
+                                            <th>Titre</th>
+                                            <th>Auteur(s)</th>
+                                            <th>Langue</th>
+                                            <th>Type</th>
+                                            <th>Proposé par</th>
+                                            <th>Validé par</th>
+                                            <th>Note</th>
+                                            <th>Statut</th>
+                                            <th>Actions</th>
+                                          </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show active" id="favoris" role="tabpanel" aria-labelledby="favoris-tabs">
+                            <div class="pt-3 mb-0">
+                                <div class="table-responsive theme-scrollbar">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -158,7 +179,6 @@
           <!-- Container-fluid Ends-->
         </div>
 
-        
         <?php 
           if (!empty($files)):
             foreach ($files as $file): ?>
@@ -168,7 +188,7 @@
                     <div class="modal-content">
                       <div class="modal-body"> 
                         <div class="modal-toggle-wrapper">
-                          <h4 class="text-center pb-2">Êtes vous sûr(e) de vouloir continuer cette action?</h4>
+                          <h4 class="text-center pb-2">Détails du fichier</h4>
                           <div class="row gallery my-gallery" id="aniimated-thumbnials2" style="display:flex; justify-content:center; align-items:center; margin:10px;">
                             <figure class="col-md-3 col-6 img-hover hover-3"><a href="../assets/images/logo/icon_dl.png" itemprop="contentUrl" data-size="1600x950">
                                 <div><img src="../assets/images/logo/icon_dl.png" itemprop="thumbnail" alt="Image description"></div></a>
@@ -200,15 +220,15 @@
                             </table>
                           </div>
                           <hr>
-                          <form class="row g-3" action="../../controller/admin/update_file.php" method="post">
+                          <!-- <form class="row g-3" action="../../controller/admin/update_file.php" method="post"> -->
                             <input type="hidden" name="file_id" value="<?php echo $file['id'] ?>">
                             <div class="col-md-12">
                               <label class="form-label" for="updated_title">Titre</label>
-                              <input class="form-control" id="updated_title" name="title" type="text" value="<?php echo $file['title']?>" required>
+                              <input class="form-control" id="updated_title" name="title" type="text" value="<?php echo $file['title']?>" disabled>
                             </div>
                             <div class="col-md-12">
                               <label class="form-label" for="updated_author">Auteur(s)</label>
-                              <input class="form-control" id="updated_author" name="author" type="text" value="<?php echo $file['authors']?>">
+                              <input class="form-control" id="updated_author" name="author" type="text" value="<?php echo $file['authors']?>" disabled>
                             </div>
                             <div class="col-md-12">
                               <label>Type</label>
@@ -239,39 +259,11 @@
                               <label class="form-label" for="updated_url">URL</label>
                               <input class="form-control" id="updated_url" name="url" type="text" value="<?php echo $file['url']?>">
                             </div>
-                            <div style="display:flex;">
+                            <!-- <div style="display:flex;">
                               <button class="btn btn-primary d-flex m-auto" type="submit" data-bs-dismiss="modal">Modifier</button>
                               <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Fermer</button>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card-body">
-                <div class="modal fade" id="delete_modal<?php echo $file['id']?>" tabindex="-1" role="dialog" aria-labelledby="delete_modal<?php echo $file['id']?>" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-body"> 
-                        <div class="modal-toggle-wrapper">  
-                          <ul class="modal-img">
-                            <li> <img src="../assets/images/gif/danger.gif" alt="error"></li>
-                          </ul>
-                          <h4 class="text-center pb-2">Êtes vous sûr(e) de vouloir supprimer ce fichier ?</h4>
-                          <form class="row g-3" action="../../controller/admin/delete_file.php" method="post">
-                            <div class="col-md-12">
-                              <input class="form-control" id="modal_title<?php echo $file['id']?>" type="text" value="<?php echo $file['title']?>" style="margin-bottom:15px;" disabled>
-                              <input class="form-control" id="modal_author<?php echo $file['id']?>" type="text" value="<?php echo $file['authors']?>" disabled>
-                              <input class="form-control" id="modal_file_id<?php echo $file['id']?>" name="file_id" type="text" value="<?php echo $file['id']?>" style="display:none;">
-                            </div>
-                            <div style="display:flex;">
-                              <button class="btn btn-danger d-flex m-auto" type="submit" data-bs-dismiss="modal">Supprimer</button>
-                              <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Annuler</button>
-                            </div>
-                          </form>
+                            </div> -->
+                          <!-- </form> -->
                         </div>
                       </div>
                     </div>
@@ -283,7 +275,8 @@
           endif ?>
 
         <!-- footer start-->
-        <?php include('footer.html');?>
+         <?php include('footer.html');?>
+
       </div>
     </div>
     <!-- latest jquery-->
@@ -316,6 +309,13 @@
     <script src="../assets/js/modalpage/validation-modal.js"></script>
     <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
     <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#data-source-files').DataTable();
+            $('#data-source-favoris').DataTable();
+            $('#data-source-admins').DataTable();
+        });
+    </script>
     <!-- Theme js-->
     <script src="../assets/js/script.js"></script>
     <script src="../assets/js/theme-customizer/customizer.js"></script>
