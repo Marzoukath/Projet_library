@@ -141,12 +141,22 @@
             left: 50%;
             transform: translate(-50%, -50%);
             padding: 20px;
-            background: #fff;
+            background: #f8f8f8;
             border: 1px solid #ccc;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 1000;
         }
         .popup.show {
             display: block;
+        }
+        .popup.success {
+            border-color: #4caf50;
+            color: #4caf50;
+        }
+        .popup.error {
+            border-color: #f44336;
+            color: #f44336;
         }
     </style>
 </head>
