@@ -120,11 +120,15 @@
                             <td><?php echo $file['proposed_by']; ?></td>
                             <td><?php echo $file['validated_by']; ?></td>
                             <td><?php echo $file['number_of_downloads'] == 0 ? '0' : $file['number_of_likes']*100/$file['number_of_downloads']?></td>
-                            <td> <span class="badge rounded-pill badge-success"><?php echo $file['status']; ?></span></td>
+                            <?php if ($file['status'] == 'disponible'): ?>
+                              <td> <span class="badge rounded-pill badge-primary" style="color:white"><?php echo $file['status']; ?></span></td>
+                            <?php else: ?>
+                              <td> <span class="badge rounded-pill badge-light" style="color:black"><?php echo $file['status']; ?></span></td>
+                            <?php endif ?>
                             <td> 
                               <ul class="action">
                                 <!-- <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#edit_modal">Vertically centered</button> -->
-                                <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $file['id']?>"><i class="icon-pencil-alt"></i></a></li>
+                                <li class="edit"><a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $file['id']?>"><i class="icon-pencil-alt"></i></a></li>
                                 <li class="delete"><a data-bs-toggle="modal" data-bs-target="#delete_modal<?php echo $file['id']?>"><i class="icon-trash"></i></a></li>
                               </ul>
                             </td>
@@ -193,9 +197,13 @@
                             <table style="text-align:center; width:100%;">
                               <tr><th>Proposé par:</th><th>Statut</th><th>Validé par:</th></tr>
                               <tr>
-                                <th style="width:30%; text-decoration: unset;"><?php echo $file['proposed_by']?></th>
-                                <th style="width:40%;"><span class="badge rounded-pill badge-success"><?php echo $file['status']?></span></th>
-                                <th style="width:30%;"><?php echo $file['validated_by']?></th>
+                                <td style="width:30%; text-decoration: unset;"><?php echo $file['proposed_by']?></td>
+                                  <?php if ($file['status'] == 'disponible'): ?>
+                                    <td> <span class="badge rounded-pill badge-primary" style="color:white"><?php echo $file['status']; ?></span></td>
+                                  <?php else: ?>
+                                    <td> <span class="badge rounded-pill badge-light" style="color:black"><?php echo $file['status']; ?></span></td>
+                                  <?php endif ?>
+                                <td style="width:30%;"><?php echo $file['validated_by']?></td>
                               </tr>
                             </table>
                           </div>

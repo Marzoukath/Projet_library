@@ -75,7 +75,7 @@
 </head>
 <body>
     <div class="page-wrapper">
-      <img src="image/logo_black.png" alt="Your Logo" class="logo">
+      <img src="assets/image/logo_black.png" alt="Your Logo" class="logo">
         <form id="" action="" method="post" class="card">
             <div class="card-title mb-4">
                 <h4>Mon profil</h4>

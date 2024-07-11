@@ -117,12 +117,18 @@
                             <td><?php echo $request['description']; ?></td>
                             <td><?php echo $request['asked_by']; ?></td>
                             <td><?php echo $request['processed_by']; ?></td>
-                            <td> <span class="badge rounded-pill badge-success"><?php echo $request['status']; ?></span></td>
+                            <?php if ($request['status'] == 'enregistrée'): ?>
+                              <td> <span class="badge rounded-pill badge-primary" style="color:white"><?php echo $request['status']; ?></span></td>
+                            <?php elseif ($request['status'] == 'en cours'): ?>
+                              <td> <span class="badge rounded-pill badge-warning" style="color:white"><?php echo $request['status']; ?></span></td>
+                              <?php else: ?>
+                                <td> <span class="badge rounded-pill badge-success" style="color:white"><?php echo $request['status']; ?></span></td>
+                            <?php endif ?>
                             <td><?php echo $request['observation']; ?></td>
                             <td>
                               <ul class="action">
                                 <!-- <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#edit_modal">Vertically centered</button> -->
-                                <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $request['id']?>"><i class="icon-pencil-alt"></i></a></li>
+                                <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $request['id']?>"><i class="icon-eye"></i></a></li>
                               </ul>
                             </td>
                           </tr>
@@ -189,21 +195,21 @@
                                             <hr>
                                             <div class="col-md-12">
                                                 <label class="form-label" for="observation">Observation de l'administrateur</label>
-                                                <input class="form-control" id="observation" name="observation" type="text" value="<?php echo $request['observation'] ?>" required>
+                                                <input class="form-control" id="observation" name="observation" type="text" value="<?php echo $request['observation'] ?>" disabled>
                                             </div>
                                             <div class="col-md-12">
                                                 <label>Status</label>
-                                                <select class="form-select" name="status" required>
+                                                <select class="form-select" name="status" disabled>
                                                     <option value="enregistrée" <?= $request['status'] == 'enregistrée' ? 'selected' : ''; ?>>Enregistrée</option>
                                                     <option value="en cours" <?= $request['status'] == 'en cours' ? 'selected' : ''; ?>>En cours</option>
                                                     <option value="traitée" <?= $request['status'] == 'traitée' ? 'selected' : ''; ?>>Traitée</option>
                                                 </select>
                                             </div>
                                             <hr>
-                                            <div style="display:flex;">
+                                            <!-- <div style="display:flex;">
                                                 <button class="btn btn-primary d-flex m-auto" type="submit" data-bs-dismiss="modal">Enregistrer</button>
                                                 <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Fermer</button>
-                                            </div>
+                                            </div> -->
                                         </form>
                                     </div>
                                 </div>

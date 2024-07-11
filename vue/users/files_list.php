@@ -217,9 +217,13 @@
                             <table style="text-align:center; width:100%;">
                               <tr><th>Proposé par:</th><th>Statut</th><th>Validé par:</th></tr>
                               <tr>
-                                <th style="width:30%; text-decoration: unset;"><?php echo $file['proposed_by']?></th>
-                                <th style="width:40%;"><span class="badge rounded-pill badge-success"><?php echo $file['status']?></span></th>
-                                <th style="width:30%;"><?php echo $file['validated_by']?></th>
+                                <td style="width:30%; text-decoration: unset;"><?php echo $file['proposed_by']?></td>
+                                  <?php if ($donnees['status'] == 'disponible'): ?>
+                                    <td> <span class="badge rounded-pill badge-primary" style="color:white"><?php echo $donnees['status']; ?></span></td>
+                                  <?php else: ?>
+                                    <td> <span class="badge rounded-pill badge-light" style="color:black"><?php echo $donnees['status']; ?></span></td>
+                                  <?php endif ?>
+                                <td style="width:30%;"><?php echo $file['validated_by']?></td>
                               </tr>
                             </table>
                           </div>
