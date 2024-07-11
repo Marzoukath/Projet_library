@@ -123,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
             
             $db->commit();
             echo "New file uploaded successfully";
-            header("Location: ../../vue/admin/files_list.php");
+            header("Location: ../../vue/users/files_list.php");
         }
     }
     catch(Exception $e)
