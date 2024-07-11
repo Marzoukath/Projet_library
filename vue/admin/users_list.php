@@ -85,9 +85,7 @@
         
         <?php include('sidebar_menu.php');?>
 
-        <!-- Page Sidebar Ends-->
         <div class="page-body">
-          <!-- Container-fluid starts-->
           <div class="container-fluid">
             <div class="row">
               <div class="col-sm-12 col-xl-12">
@@ -103,6 +101,7 @@
                       <li class="nav-item"><a class="nav-link txt-primary" id="admins-tab" data-bs-toggle="tab" href="#admins" role="tab" aria-controls="admins" aria-selected="true">Administrateurs</a></li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
+                        <!-- Students datatable -->
                         <div class="tab-pane fade" id="students" role="tabpanel" aria-labelledby="students-tab">
                             <div class="pt-3">
                                 <div class="table-responsive theme-scrollbar">
@@ -134,7 +133,7 @@
                                                 <td><?php echo htmlspecialchars($student['mise']); ?></td>
                                                 <td>
                                                     <ul class="action">
-                                                        <li class="edit"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter1"><i class="icon-pencil-alt"></i></a></li>
+                                                        <li class="edit"><a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $student['id']?>"><i class="icon-pencil-alt"></i></a></li>
                                                         <li class="delete"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter2"><i class="icon-trash"></i></a></li>
                                                     </ul>
                                                 </td>
@@ -163,6 +162,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Teachers datatable -->
                         <div class="tab-pane fade show active" id="lecturers" role="tabpanel" aria-labelledby="lecturers-tabs">
                             <div class="pt-3 mb-0">
                                 <div class="table-responsive theme-scrollbar">
@@ -226,6 +226,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Admin datatable -->
                         <div class="tab-pane fade" id="admins" role="tabpanel" aria-labelledby="admins-tab">
                             <div class="pt-3">
                                 <div class="table-responsive theme-scrollbar">
@@ -286,15 +287,14 @@
               </div>
             </div>
           </div>
-          <!-- Container-fluid Ends-->
         </div>
 
-
         <?php 
-          if (!empty($files)):
-            foreach ($files as $file): ?>
+          // Students profile form
+          if (!empty($students)):
+            foreach ($students as $student): ?>
               <div class="card-body">
-                <div class="modal fade" id="edit_modal<?php echo $file['id']?>" tabindex="-1" role="dialog" aria-labelledby="edit_modal<?php echo $file['id']?>" aria-hidden="true">
+                <div class="modal fade" id="edit_modal<?php echo $student['id']?>" tabindex="-1" role="dialog" aria-labelledby="edit_modal<?php echo $student['id']?>" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-body"> 
@@ -305,74 +305,48 @@
                                 <div><img src="../assets/images/logo/icon_dl.png" itemprop="thumbnail" alt="Image description"></div></a>
                               <figcaption itemprop="caption description"></figcaption>
                             </figure>
-                            <a href="../../controller/admin/download_file.php?file_id=<?php echo $file['id']?>" target="_blank" style="text-align:center; margin:0px;">Télécharger</a>
-                          </div>
-                          <div>
-                            <table style="text-align:center; width:100%;">
-                              <thead>
-                                <tr><th><?php echo $file['number_of_downloads']?></th><th><?php $file['number_of_downloads']== 0 ? 0 : $file['number_of_likes']*100/$file['number_of_downloads']?></th></tr>
-                              </thead>
-                              <tbody>
-                                <tr><th style="width:30%;">Téléchargement(s)</th><th style="width:40%;"><svg class="footer-icon">
-                                    <use href="../assets/svg/icon-sprite.svg#footer-heart"> </use>
-                                  </svg></th><th style="width:30%;">Note</th></tr>
-                              </tbody>
-                            </table>
                           </div>
                           <hr>
-                          <div>
-                            <table style="text-align:center; width:100%;">
-                              <tr><th>Proposé par:</th><th>Statut</th><th>Validé par:</th></tr>
-                              <tr>
-                                <td style="width:30%; text-decoration: unset;"><?php echo $file['proposed_by']?></td>
-                                  <?php if ($file['status'] == 'disponible'): ?>
-                                    <td> <span class="badge rounded-pill badge-primary" style="color:white"><?php echo $file['status']; ?></span></td>
-                                  <?php else: ?>
-                                    <td> <span class="badge rounded-pill badge-light" style="color:black"><?php echo $file['status']; ?></span></td>
-                                  <?php endif ?>
-                                <td style="width:30%;"><?php echo $file['validated_by']?></td>
-                              </tr>
-                            </table>
-                          </div>
-                          <hr>
-                          <form class="row g-3" action="../../controller/admin/update_file.php" method="post">
-                            <input type="hidden" name="file_id" value="<?php echo $file['id'] ?>">
-                            <div class="col-md-12">
-                              <label class="form-label" for="updated_title">Titre</label>
-                              <input class="form-control" id="updated_title" name="title" type="text" value="<?php echo $file['title']?>" required>
+                          <form class="row g-3" action="../../controller/admin/update_student_account.php" method="post">
+                            <input type="hidden" name="file_id" value="<?php echo $student['id'] ?>">
+                            <div class="mb-3">
+                                <label class="form-label">Nom complet</label>
+                                <input class="form-control" name= "fullname" type="text" value="<?php echo $student['fullname'];?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Matricule</label>
+                                <input class="form-control"  name="matricule" type="text" value="<?php echo $student['matricule'];?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Adresse e-mail</label>
+                                <input class="form-control" name="email" type="email" value="<?php echo $student['email'];?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Numéro de téléphone</label>
+                                <input class="form-control" name="mobile" type="number" value="<?php echo $student['mobile'];?>" required>
                             </div>
                             <div class="col-md-12">
-                              <label class="form-label" for="updated_author">Auteur(s)</label>
-                              <input class="form-control" id="updated_author" name="author" type="text" value="<?php echo $file['authors']?>">
-                            </div>
-                            <div class="col-md-12">
-                              <label>Type</label>
-                              <select class="form-select" name="type" required>
-                                <option value="audio" <?= $file['type'] == 'audio' ? 'selected' : ''; ?>>Audio</option>
-                                <option value="ebook" <?= $file['type'] == 'ebook' ? 'selected' : ''; ?>>eBook</option>
-                                <option value="image" <?= $file['type'] == 'image' ? 'selected' : ''; ?>>Image</option>
-                                <option value="video" <?= $file['type'] == 'video' ? 'selected' : ''; ?>>Vidéo</option>
-                                <option value="memoire" <?= $file['type'] == 'memoire' ? 'selected' : ''; ?>>Mémoire</option>
-                                <option value="handbook" <?= $file['type'] == 'handbook' ? 'selected' : ''; ?>>Manuel</option>
-                                <option value="periodic" <?= $file['type'] == 'periodic' ? 'selected' : ''; ?>>Périodique</option>
-                                <option value="monograph" <?= $file['type'] == 'monograph' ? 'selected' : ''; ?>>Monographie (Livre)</option>
-                                <option value="scientific_article" <?= $file['type'] == 'scientific_article' ? 'selected' : ''; ?>>Article scientifique</option>
+                              <label>Filière</label>
+                              <select class="form-select" name="sector" required>
+                                <option value="GC" <?= $student['filiere'] == 'GC' ? 'selected' : ''; ?>>Génie Civil</option>
+                                <option value="GCP" <?= $student['filiere'] == 'GCP' ? 'selected' : ''; ?>>Génie Chimique et Procédés</option>
+                                <option value="GE" <?= $student['filiere'] == 'GE' ? 'selected' : ''; ?>>Génie Electrique</option>
+                                <option value="GIT" <?= $student['filiere'] == 'GIT' ? 'selected' : ''; ?>>Génie Informatique et Télécommunications</option>
+                                <option value="GME" <?= $student['filiere'] == 'GME' ? 'selected' : ''; ?>>Génie Mécanique et Energétique</option>
+                                <option value="GBH" <?= $student['filiere'] == 'GBH' ? 'selected' : ''; ?>>Génie de Biologie Humaine</option>
+                                <option value="GEn" <?= $student['filiere'] == 'GEn' ? 'selected' : ''; ?>>Génie de l'Environnement</option>
+                                <option value="GIMR" <?= $student['filiere'] == 'GIMR' ? 'selected' : ''; ?>>Génie d'Imagerie Médicale et Radiologie</option>
+                                <option value="PSA" <?= $student['filiere'] == 'PSA' ? 'selected' : ''; ?>>Production et Santé Animale</option>
+                                <option value="MA" <?= $student['filiere'] == 'MA' ? 'selected' : ''; ?>>Machinisme Agricole</option>
+                                <option value="MBH" <?= $student['filiere'] == 'MBH' ? 'selected' : ''; ?>>Maintenance Biomédicale et Hospitalière</option>
                               </select>
                             </div>
                             <div class="col-md-12">
-                              <label>Statut</label>
+                              <label>Statut du compte</label>
                               <select class="form-select" name="status" required>
-                                <option value="avalaible" <?= $file['status'] == 'disponible' ? 'selected' : ''; ?>>Disponible</option>
-                                <option value="unavailable" <?= $file['status'] == 'non disponible' ? 'selected' : ''; ?>>Non disponible</option>
+                                <option value="active" <?= $student['status'] == 'actif' ? 'selected' : ''; ?>>Actif</option>
+                                <option value="inactive" <?= $student['status'] == 'inactif' ? 'selected' : ''; ?>>Inactif</option>
                               </select>
-                            </div>
-                            <div class="col-md-12">
-                              <label class="form-label" for="updated_description">Description</label>
-                              <input class="form-control" id="updated_description" name="description" type="text" value="<?php echo $file['description']?>">
-                            </div>
-                            <div class="col-md-12">
-                              <label class="form-label" for="updated_url">URL</label>
-                              <input class="form-control" id="updated_url" name="url" type="text" value="<?php echo $file['url']?>">
                             </div>
                             <div style="display:flex;">
                               <button class="btn btn-primary d-flex m-auto" type="submit" data-bs-dismiss="modal">Modifier</button>
@@ -385,36 +359,39 @@
                   </div>
                 </div>
               </div>
-        <?php 
-            endforeach;
-          endif ?>
-        <div class="card-body">
-          <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-body"> 
-                  <div class="modal-toggle-wrapper">  
-                    <ul class="modal-img">
-                      <li> <img src="../assets/images/gif/danger.gif" alt="error"></li>
-                    </ul>
-                    <h4 class="text-center pb-2">Êtes vous sûr(e) de vouloir supprimer ce fichier ?</h4>
-                    <form class="row g-3" action="test_admin.php" method="post">
-                      <div class="col-md-12">
-                        <input class="form-control" id="modal_ttile" type="text" value="Titre du livre" style="margin-bottom:15px;" disabled>
-                        <input class="form-control" id="modal_author" type="text" value="Auteur du livre" disabled>
-                        <input class="form-control" id="modal_file_id" name="file_id" type="text" value="17" style="display:none;">
+
+
+              <div class="card-body">
+                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body"> 
+                        <div class="modal-toggle-wrapper">  
+                          <ul class="modal-img">
+                            <li> <img src="../assets/images/gif/danger.gif" alt="error"></li>
+                          </ul>
+                          <h4 class="text-center pb-2">Êtes vous sûr(e) de vouloir supprimer ce compte ?</h4>
+                          <form class="row g-3" action="../../controller/admin/delete_student_account.php" method="post">
+                            <div class="col-md-12">
+                              <input class="form-control" id="modal_fulllname" type="text" value="<?php echo $student['fullname']?>" style="margin-bottom:15px;" disabled>
+                              <input class="form-control" id="modal_student_matricule" type="text" value="<?php echo $student['matricule']?>" disabled>
+                              <input class="form-control" id="modal_student_id" name="student_id" type="text" value="<?php echo $student['id']?>" style="display:none;">
+                            </div>
+                            <div style="display:flex;">
+                              <button class="btn btn-danger d-flex m-auto" type="submit" data-bs-dismiss="modal">Supprimer</button>
+                              <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Annuler</button>
+                            </div>
+                          </form>
+                        </div>
                       </div>
-                      <div style="display:flex;">
-                        <button class="btn btn-danger d-flex m-auto" type="submit" data-bs-dismiss="modal">Supprimer</button>
-                        <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Annuler</button>
-                      </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+
+        <?php 
+            endforeach;
+          endif ?>
 
         <!-- footer start-->
          <?php include('footer.html');?>
