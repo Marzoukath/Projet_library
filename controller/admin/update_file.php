@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
         $stmt->execute([$title, $authors, $type, $url, $description, $file_id]);
 
         echo "File data updated successfully.";
+        header("Location: ../../vue/admin/files_list.php");
     }
     catch (Exception $e)
     {

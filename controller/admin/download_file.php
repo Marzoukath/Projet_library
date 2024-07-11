@@ -13,7 +13,7 @@ if (isset($_GET['file_id'])) {
         $file = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($file) {
-            $file_path = '../../storage/uploads/' . basename($file['path']);
+            $file_path = '../../storage_list/uploads/' . basename($file['path']);
 
             // Check if the file exists
             if (file_exists($file_path)) {

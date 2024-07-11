@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
         $stmt->execute([$status, $observation, $processed_by, $request_id]);
 
         echo "Request successfully updated.";
+        header("Location: ../../vue/admin/requests_management.php");
     }
     catch (Exception $e)
     {

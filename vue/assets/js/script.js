@@ -337,10 +337,17 @@
       ae: "ÙˆØªØ®Ø·ÙŠØ· Ø§Ù„ØµÙØ­Ø©",
     },
     {
+<<<<<<< HEAD
+      en: "Applications",
+      pt: "FormulÃ¡rios",
+      es: "Aplikoj",
+      fr: "Applications",
+=======
       en: "Fichiers",
       pt: "FormulÃ¡rios",
       es: "Aplikoj",
       fr: "Fichiers",
+>>>>>>> 15df83840343c9bd717a0fd2fc8ad592c5a8a129
       de: "Toepassingen",
       cn: "æ‡‰ç”¨é ˜åŸŸ",
       ae: "ÙˆØ§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª",

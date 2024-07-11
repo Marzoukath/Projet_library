@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,15 +153,15 @@
     <div class="main-container">
         <!-- Start Main Forms -->
         <div class="signup-form">
-            <form class="sign-back" action="" method="post">
-                <h1>Log IN</h1>
+            <form class="sign-back" action="log_in.php" method="post">
+                <h1>Se connecter</h1>
                 <div class="signup-row">
                     <i class="fa fa-user"></i>
                     <input type="text" name="matricule" value="" placeholder="MATRICULE" required>
                 </div>
                 <div class="signup-row">
                     <i class="fa fa-key"></i>
-                    <input type="password" name="motdepasse" value="" placeholder="PASSWORD" required>
+                    <input type="password" name="password" value="" placeholder="MOT DE PASSE" required>
                 </div>
                 <div class="signup-row">
                     <button type="submit">
@@ -171,45 +174,57 @@
                         <span>Remember</span>
                     </div>
                     <div class="remember">
-                        <a href="../router.php?action=compte">Don't have an account ?</a>
+                        <a href="boxchoice.php">Vous n'avez pas un compte ?</a>
                     </div>
                 </div>
                 <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    // Connexion à la base de données
-                    $servername = "localhost";
+                    
+                    $servername = "127.0.0.1";
                     $username = "root"; // Changez en fonction de votre configuration
                     $password = ""; // Changez en fonction de votre configuration
-                    $dbname = "digit_lib";
+                    $dbname = "Digital_Library";
 
-                    // Crée une nouvelle connexion
                     $conn = new mysqli($servername, $username, $password, $dbname);
-
-                    // Vérifie la connexion
+                   
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     }
+    
 
-                    // Récupère les données du formulaire et sécurise les entrées
                     $matricule = mysqli_real_escape_string($conn, $_POST['matricule']);
-                    $motdepasse = mysqli_real_escape_string($conn, $_POST['motdepasse']);
-
-                    // Prépare la requête SQL pour vérifier les informations de connexion
-                    $sql = "SELECT * FROM Utilisateurs WHERE matricule = ? AND motdepasse = ?";
+                    $password = mysqli_real_escape_string($conn, $_POST['password']);
+                   
+                    $sql = "SELECT * FROM Students  WHERE matricule = ? AND password = ?";
+                
                     $stmt = $conn->prepare($sql);
+                   
                     if ($stmt) {
-                        $stmt->bind_param("ss", $matricule, $motdepasse);
+                        $stmt->bind_param("ss", $matricule, $password);
                         $stmt->execute();
+                        
                         $result = $stmt->get_result();
-
+                       
                         if ($result->num_rows > 0) {
+
+                           
+                            $row = $result->fetch_assoc();
+                            $_SESSION['fullname'] = $row['fullname']; 
+                            $_SESSION['email'] = $row['email'];
+                            $_SESSION['matricule'] = $matricule;
+                            $_SESSION['mobile'] = $row['mobile'];
+                            $_SESSION['filiere'] = $row['filiere'];
+                            $_SESSION['newsletter'] = $row['newsletter'];
+                            $_SESSION['created_at'] = $row['created_at'];
+                            $_SESSION['id'] = $row['id'];
+                         
                             header("Location: success.php");
+                            
                             exit();
                         } else{
                             echo '<div class="error-message">Créer un compte, le compte n\'existe pas</div>';
                         }
 
-            
                         $stmt->close();
                     } else {
                         echo "Erreur de préparation de la requête SQL : " . $conn->error;

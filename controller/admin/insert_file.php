@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                 mkdir($target_directory, 777, true);
             }
             $file_name = basename($_FILES["file"]["name"]);
-            $target_directory = "../../storage/uploads/";
+            $target_directory = "../../storage_list/uploads/";
             $target_file_path = $target_directory . $file_name;
             $file_type = pathinfo($target_file_path, PATHINFO_EXTENSION);
             $allow_types = array('jpg','png','jpeg','gif','pdf','doc','docx','txt','mp3','mp4','avi');
@@ -123,6 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
             
             $db->commit();
             echo "New file uploaded successfully";
+            header("Location: ../../vue/admin/files_list.php");
         }
     }
     catch(Exception $e)

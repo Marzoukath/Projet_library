@@ -6,7 +6,11 @@
   let data = [
     {
       id: "0",
+<<<<<<< HEAD
+      text: "Applications",
+=======
       text: "Fichiers",
+>>>>>>> 15df83840343c9bd717a0fd2fc8ad592c5a8a129
       children: [
         {
           id: "0-0",
@@ -121,7 +125,11 @@
   let data1 = [
     {
       id: "0",
+<<<<<<< HEAD
+      text: "Applications",
+=======
       text: "Fichiers",
+>>>>>>> 15df83840343c9bd717a0fd2fc8ad592c5a8a129
       children: [
         {
           id: "0-0",

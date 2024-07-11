@@ -31,7 +31,7 @@ function compte()
             if(1)
             {
                 require '../modele/model.php';
-                create_account();
+                get_compte();
             }
             // }
             // require_once './vue/creer_compte.php';
