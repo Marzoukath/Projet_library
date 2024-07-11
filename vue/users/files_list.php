@@ -98,8 +98,8 @@
                   </div>
                   <div class="card-body">
                     <ul class="simple-wrapper nav nav-tabs" id="myTab" role="tablist">
-                      <li class="nav-item"><a class="nav-link txt-primary" id="files-tab" data-bs-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="false">Tous les fichiers</a></li>
-                      <li class="nav-item"><a class="nav-link active txt-primary" id="favoris-tabs" data-bs-toggle="tab" href="#favoris" role="tab" aria-controls="favoris" aria-selected="false">Favoris</a></li>
+                      <li class="nav-item"><a class="nav-link txt-primary" id="files-tab" data-bs-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="true">Tous les fichiers</a></li>
+                      <li class="nav-item"><a class="nav-link active txt-primary" id="favoris-tabs" data-bs-toggle="tab" href="#favoris" role="tab" aria-controls="favoris" >Favoris</a></li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade" id="files" role="tabpanel" aria-labelledby="files-tab">
@@ -130,7 +130,11 @@
                                                 <td><?php echo htmlspecialchars($donnees['proposed_by']); ?></td>
                                                 <td><?php echo htmlspecialchars($donnees['validated_by']); ?></td>
                                                 <td><?php echo $donnees['number_of_downloads']== 0 ? 0 : $donnees['number_of_likes']*100/$donnees['number_of_downloads']?></td>
-                                                <td> <span class="badge rounded-pill badge-success"><?php echo $donnees['status']; ?></span></td>
+                                                <?php if ($donnees['status'] == 'disponible'): ?>
+                                                  <td> <span class="badge rounded-pill badge-primary" style="color:white"><?php echo $donnees['status']; ?></span></td>
+                                                <?php else: ?>
+                                                  <td> <span class="badge rounded-pill badge-light" style="color:black"><?php echo $donnees['status']; ?></span></td>
+                                                <?php endif ?>
                                                 <td>
                                                     <ul class="action">
                                                     <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $donnees['id']?>"><i class="icon-pencil-alt"></i></a></li>
@@ -232,7 +236,7 @@
                             </div>
                             <div class="col-md-12">
                               <label>Type</label>
-                              <select class="form-select" name="type" required>
+                              <select class="form-select" name="type" disabled>
                                 <option value="audio" <?= $file['type'] == 'audio' ? 'selected' : ''; ?>>Audio</option>
                                 <option value="ebook" <?= $file['type'] == 'ebook' ? 'selected' : ''; ?>>eBook</option>
                                 <option value="image" <?= $file['type'] == 'image' ? 'selected' : ''; ?>>Image</option>
@@ -246,18 +250,18 @@
                             </div>
                             <div class="col-md-12">
                               <label>Statut</label>
-                              <select class="form-select" name="status" required>
+                              <select class="form-select" name="status" disabled>
                                 <option value="avalaible" <?= $file['status'] == 'disponible' ? 'selected' : ''; ?>>Disponible</option>
                                 <option value="unavailable" <?= $file['status'] == 'non disponible' ? 'selected' : ''; ?>>Non disponible</option>
                               </select>
                             </div>
                             <div class="col-md-12">
                               <label class="form-label" for="updated_description">Description</label>
-                              <input class="form-control" id="updated_description" name="description" type="text" value="<?php echo $file['description']?>">
+                              <input class="form-control" id="updated_description" name="description" type="text" value="<?php echo $file['description']?>" disabled>
                             </div>
                             <div class="col-md-12">
                               <label class="form-label" for="updated_url">URL</label>
-                              <input class="form-control" id="updated_url" name="url" type="text" value="<?php echo $file['url']?>">
+                              <input class="form-control" id="updated_url" name="url" type="text" value="<?php echo $file['url']?>" disabled>
                             </div>
                             <!-- <div style="display:flex;">
                               <button class="btn btn-primary d-flex m-auto" type="submit" data-bs-dismiss="modal">Modifier</button>
