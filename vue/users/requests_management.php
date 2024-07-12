@@ -31,6 +31,44 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
     <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+    <style>
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 7px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-container input[type="text"], .form-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #a3c7e7;
+            border-radius: 3px;
+        }
+        .form-container input[type="submit"] {
+            background-color: #0de93d;
+            color: rgb(1, 2, 10);
+            border: none;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #b2f5b5;
+        }
+        .form-container .message {
+            text-align: center;
+            margin-top: 20px;
+            color: rgb(22, 223, 52);
+        }
+    </style>
   </head>
   <body>
     <div class="loader-wrapper"> 
@@ -93,6 +131,12 @@
                 <div class="card-header pb-0 card-no-border">
                   <h4 class="mb-3">Liste des requêtes</h4><span>Liste complète de toutes les requêtes de mise à disposition de fichiers.</span>
                 </div>
+                <div style="display:flex;">
+                      <button class="btn btn-secondary" style="margin-top:15px; margin-left:15px; color:black;" >
+                        <a data-bs-toggle="modal" data-bs-target="#request">Faire une requete</a>
+                      </button>
+                    </div>
+                    <hr>
                 <div class="card-body">
                   <div class="table-responsive theme-scrollbar">
                     <table class="display" id="data-source-1">
@@ -105,7 +149,6 @@
                             <th>Traitée par</th>
                             <th>Statut</th>
                             <th>Observation</th>
-                            <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -220,6 +263,24 @@
         <?php 
             endforeach;
           endif ?>
+
+          <div class="card-body">
+            <div class="modal fade" id="request" tabindex="-1" role="dialog" aria-labelledby="request" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <form class="form-container" id="requestForm" action="../../controller/ask_for_file.php" method="post">
+                    <h2>Mise à disposition d'un fichier</h2>
+                    <label for="matricule">Matricule:</label>
+                    <input type="text" id="matricule" name="matricule" value="<?php echo $_SESSION['matricule']?>" disabled>
+
+                    <label for="book">Description :</label>
+                    <input type="text" id="book" name="description" placeholder="Entrez le nom du fichier" required>
+                    <button class="btn btn-secondary" type="submit">Envoyer la demande</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 
         <!-- footer start-->
         <?php include('footer.html');?>

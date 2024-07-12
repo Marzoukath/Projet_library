@@ -6,7 +6,7 @@ function create_account() {
         print_r($_POST);
         $db = dbConnect();
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sth = $db->prepare("INSERT INTO Students (fullname, email, mobile, password, matricule, filiere, created_at) VALUES(:nm, :email, :phone, :mdp, :mat, :fil, :created_at)");
+        $sth = $db->prepare("INSERT INTO Students (fullname, email, mobile, password, matricule, sector, created_at) VALUES(:nm, :email, :phone, :mdp, :mat, :fil, :created_at)");
         $sth->bindParam(':nm', $_POST['fullname']);
         $sth->bindParam(':email', $_POST['email']);
         $sth->bindParam(':phone', $_POST['mobile']);

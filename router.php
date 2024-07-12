@@ -2,7 +2,7 @@
 
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'compte') {
-        require './controller/get_compte.php';
+        require './controller/admin_account.php';
         compte();
     }
     elseif ($_GET['action'] == 'ajout') {

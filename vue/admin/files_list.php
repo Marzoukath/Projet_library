@@ -1,4 +1,5 @@
-<?php
+<?php 
+  session_start();
   include('../../controller/admin/fetch_data.php');
 ?>
 
@@ -216,7 +217,7 @@
                             </div>
                             <div class="col-md-12">
                               <label class="form-label" for="updated_author">Auteur(s)</label>
-                              <input class="form-control" id="updated_author" name="author" type="text" value="<?php echo $file['authors']?>">
+                              <input class="form-control" id="updated_author" name="authors" type="text" value="<?php echo $file['authors']?>">
                             </div>
                             <div class="col-md-12">
                               <label>Type</label>

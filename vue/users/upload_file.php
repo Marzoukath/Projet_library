@@ -89,7 +89,7 @@
               <div class="col-sm-12">
                 <div class="card">
                   <div class="card-body">
-                    <form class="form theme-form" id="uploadForm" action="../../controller/admin/insert_file.php" method="post" enctype="multipart/form-data">
+                    <form class="form theme-form" id="uploadForm" action="../../controller/users/insert_file.php" method="post" enctype="multipart/form-data">
                       <div class="row">
                         <div class="col">
                           <div class="mb-3">
