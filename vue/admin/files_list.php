@@ -1,4 +1,5 @@
-<?php
+<?php 
+  session_start();
   include('../../controller/admin/fetch_data.php');
 ?>
 
@@ -119,7 +120,7 @@
                             <td><?php echo $file['type']; ?></td>
                             <td><?php echo $file['proposed_by']; ?></td>
                             <td><?php echo $file['validated_by']; ?></td>
-                            <td><?php echo $file['number_of_likes']*100/$file['number_of_downloads']?></td>
+                            <td><?php echo $file['number_of_downloads'] == 0 ? '0' : $file['number_of_likes']*100/$file['number_of_downloads']?></td>
                             <td> <span class="badge rounded-pill badge-success"><?php echo $file['status']; ?></span></td>
                             <td> 
                               <ul class="action">
@@ -179,7 +180,7 @@
                           <div>
                             <table style="text-align:center; width:100%;">
                               <thead>
-                                <tr><th><?php echo $file['number_of_downloads']?></th><th><?php echo $file['number_of_likes']?></th><th><?php echo $file['number_of_likes']*100/$file['number_of_downloads']?></th></tr>
+                                <tr><th><?php echo $file['number_of_downloads']?></th><th><?php $file['number_of_downloads']== 0 ? 0 : $file['number_of_likes']*100/$file['number_of_downloads']?></th></tr>
                               </thead>
                               <tbody>
                                 <tr><th style="width:30%;">Téléchargement(s)</th><th style="width:40%;"><svg class="footer-icon">
@@ -208,7 +209,7 @@
                             </div>
                             <div class="col-md-12">
                               <label class="form-label" for="updated_author">Auteur(s)</label>
-                              <input class="form-control" id="updated_author" name="author" type="text" value="<?php echo $file['authors']?>">
+                              <input class="form-control" id="updated_author" name="authors" type="text" value="<?php echo $file['authors']?>">
                             </div>
                             <div class="col-md-12">
                               <label>Type</label>

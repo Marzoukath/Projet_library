@@ -21,6 +21,7 @@ function compte()
             $password = valid_donnees($_POST['password']); 
             $matricule = valid_donnees($_POST['matricule']);
             $specialite = valid_donnees($_POST['specialite']);
+            $domain = valid_donnees($_POST['domain']);
             $grade = valid_donnees($_POST['grade']);
             
             // if (empty($fullname) || !strlen($fullname) <= 20 ){
@@ -39,9 +40,9 @@ function compte()
                 create_account();
             }
             // }
-            // require_once './vue/creer_compte.php';
+            // require_once './vue/sig.php';
         }
-        require_once './vue/creer_compte.php';  
+        require_once './vue/signup_admin.php';  
     }
     catch(Exception $e) {
         die('Erreur : '.$e->getMessage());
