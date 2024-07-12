@@ -123,7 +123,6 @@
                               <ul class="action">
                                 <!-- <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#edit_modal">Vertically centered</button> -->
                                 <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $request['id']?>"><i class="icon-pencil-alt"></i></a></li>
-                                <!-- <li class="delete"><a data-bs-toggle="modal" data-bs-target="#delete_modal<?php echo $request['id']?>"><i class="icon-trash"></i></a></li> -->
                               </ul>
                             </td>
                           </tr>

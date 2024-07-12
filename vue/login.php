@@ -1,12 +1,110 @@
 <?php
-session_start();
+    session_start();
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $servername = "127.0.0.1";
+        $username = "root";
+        $password = "";
+        $dbname = "Digital_Library";
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $matricule = mysqli_real_escape_string($conn, $_POST['matricule']);
+        $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+
+        $sql = "SELECT * FROM Teachers WHERE matricule = ? AND password = ?";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt) {
+            $stmt->bind_param("ss", $matricule, $password);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $_SESSION['fullname'] = $row['fullname'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['matricule'] = $matricule;
+                $_SESSION['mobile'] = $row['mobile'];
+                $_SESSION['specialite'] = $row['specialite'];
+                $_SESSION['grade'] = $row['grade'];
+                $_SESSION['newsletter'] = $row['newsletter'];
+                $_SESSION['created_at'] = $row['created_at'];
+                $_SESSION['id'] = $row['id'];
+                print_r($_SESSION);
+                header("Location: ./users/files_list.php");
+                exit();
+            } else {
+                $sql = "SELECT * FROM Students WHERE matricule = ? AND password = ?";
+                $stmt = $conn->prepare($sql);
+
+                if ($stmt) {
+                    $stmt->bind_param("ss", $matricule, $password);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        $_SESSION['fullname'] = $row['fullname'];
+                        $_SESSION['email'] = $row['email'];
+                        $_SESSION['matricule'] = $matricule;
+                        $_SESSION['mobile'] = $row['mobile'];
+                        $_SESSION['filiere'] = $row['filiere'];
+                        $_SESSION['id'] = $row['id'];
+
+                        header("Location: ./users/files_list.php");
+                        exit();
+                    }
+                        else {
+                        echo '<div class="error-message">Créer un compte, le compte n\'existe pas</div>';
+                    }
+                } else {
+                    echo "Erreur de préparation de la requête SQL : " . $conn->error;
+                }
+            }
+
+            $sql = "SELECT * FROM Admins WHERE matricule = ? AND password = ?";
+            $stmt = $conn->prepare($sql);
+
+            if ($stmt) {
+                $stmt->bind_param("ss", $matricule, $password);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $_SESSION['fullname'] = $row['fullname'];
+                    $_SESSION['email'] = $row['email'];
+                    $_SESSION['matricule'] = $matricule;
+                    $_SESSION['mobile'] = $row['mobile'];
+                    $_SESSION['id'] = $row['id'];
+
+                    header("Location: ./admin/files_list.php");
+                    exit();
+                }
+                    else {
+                    echo '<div class="error-message">Créer un compte, le compte n\'existe pas</div>';
+                }
+            } else {
+                echo "Erreur de préparation de la requête SQL : " . $conn->error;
+            }
+
+            $stmt->close();
+        } else {
+            echo "Erreur de préparation de la requête SQL : " . $conn->error;
+        }
+        $conn->close();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login - Digital Library</title>
-    <link rel="shortcut icon" href="assets/images/logo/icon_dl.png" type="image/x-icon">
+    <title>Library Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -17,7 +115,7 @@ session_start();
 
         body {
             font-family: 'Ubuntu', sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("assets/images/library-5641389_1280.jpg") no-repeat center center fixed;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./image/library-5641389_1280.jpg") no-repeat center center fixed;
             background-size: cover;
             display: flex;
             flex-direction: column;
@@ -147,13 +245,11 @@ session_start();
 </head>
 <body>
     <div class="logo">
-        <img src="../image/logo_white-removebg-preview.png" alt="Logo">
+        <img src="image/logo_white-removebg-preview.png" alt="Logo">
     </div>
-    <!-- Start Main Container -->
     <div class="main-container">
-        <!-- Start Main Forms -->
         <div class="signup-form">
-            <form class="sign-back" action="log_in.php" method="post">
+            <form class="sign-back" action="" method="post">
                 <h1>Se connecter</h1>
                 <div class="signup-row">
                     <i class="fa fa-user"></i>
@@ -174,73 +270,12 @@ session_start();
                         <span>Remember</span>
                     </div>
                     <div class="remember">
-                        <a href="boxchoice.php">Vous n'avez pas un compte ?</a>
+                        <a href="boxselect_typeuserschoice.php">Vous n'avez pas un compte ?</a>
                     </div>
                 </div>
-                <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    
-                    $servername = "127.0.0.1";
-                    $username = "root"; // Changez en fonction de votre configuration
-                    $password = ""; // Changez en fonction de votre configuration
-                    $dbname = "Digital_Library";
-
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-                   
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-    
-
-                    $matricule = mysqli_real_escape_string($conn, $_POST['matricule']);
-                    $password = mysqli_real_escape_string($conn, $_POST['password']);
-                   
-                    $sql = "SELECT * FROM Students  WHERE matricule = ? AND password = ?";
-                
-                    $stmt = $conn->prepare($sql);
-                   
-                    if ($stmt) {
-                        $stmt->bind_param("ss", $matricule, $password);
-                        $stmt->execute();
-                        
-                        $result = $stmt->get_result();
-                       
-                        if ($result->num_rows > 0) {
-
-                           
-                            $row = $result->fetch_assoc();
-                            $_SESSION['fullname'] = $row['fullname']; 
-                            $_SESSION['email'] = $row['email'];
-                            $_SESSION['matricule'] = $matricule;
-                            $_SESSION['mobile'] = $row['mobile'];
-                            $_SESSION['filiere'] = $row['filiere'];
-                            $_SESSION['newsletter'] = $row['newsletter'];
-                            $_SESSION['created_at'] = $row['created_at'];
-                            $_SESSION['id'] = $row['id'];
-                         
-                            header("Location: success.php");
-                            
-                            exit();
-                        } else{
-                            echo '<div class="error-message">Créer un compte, le compte n\'existe pas</div>';
-                        }
-
-                        $stmt->close();
-                    } else {
-                        echo "Erreur de préparation de la requête SQL : " . $conn->error;
-                    }
-                    $conn->close();
-                }
-                ?>
             </form>
         </div>
-        <!-- End Main Forms -->
     </div>
-    <!-- End Main Container -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://use.fontawesome.com/7dddae9ad9.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
-</body>
-</html>
-                
+    <script src="https://use.fontawesome

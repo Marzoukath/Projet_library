@@ -11,7 +11,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$sql = "SELECT fullname, email, mobile, matricule, specialite, grade, newsletter, `created_at` AS cree, `updated_at` AS mise FROM Teacher";
+$sql = "SELECT fullname, email, mobile, matricule, specialite, grade, newsletter, `created_at` AS cree, `updated_at` AS mise FROM Teachers";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
