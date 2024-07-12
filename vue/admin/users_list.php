@@ -133,8 +133,8 @@
                                                 <td><?php echo htmlspecialchars($student['mise']); ?></td>
                                                 <td>
                                                     <ul class="action">
-                                                        <li class="edit"><a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $student['id']?>"><i class="icon-pencil-alt"></i></a></li>
-                                                        <li class="delete"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter2"><i class="icon-trash"></i></a></li>
+                                                        <li class="edit"><a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $student['matricule']?>"><i class="icon-pencil-alt"></i></a></li>
+                                                        <li class="delete"><a data-bs-toggle="modal" data-bs-target="#delete_modal<?php echo $student['matricule']?>"><i class="icon-trash"></i></a></li>
                                                     </ul>
                                                 </td>
                                                 </tr>
@@ -294,7 +294,7 @@
           if (!empty($students)):
             foreach ($students as $student): ?>
               <div class="card-body">
-                <div class="modal fade" id="edit_modal<?php echo $student['id']?>" tabindex="-1" role="dialog" aria-labelledby="edit_modal<?php echo $student['id']?>" aria-hidden="true">
+                <div class="modal fade" id="edit_modal<?php echo $student['matricule']?>" tabindex="-1" role="dialog" aria-labelledby="edit_modal<?php echo $student['matricule']?>" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-body"> 
@@ -308,7 +308,7 @@
                           </div>
                           <hr>
                           <form class="row g-3" action="../../controller/admin/update_student_account.php" method="post">
-                            <input type="hidden" name="file_id" value="<?php echo $student['id'] ?>">
+                            <input type="hidden" name="student_id" value="<?php echo $student['id'] ?>">
                             <div class="mb-3">
                                 <label class="form-label">Nom complet</label>
                                 <input class="form-control" name= "fullname" type="text" value="<?php echo $student['fullname'];?>" required>
@@ -360,9 +360,9 @@
                 </div>
               </div>
 
-
+              <!-- Student deletion form -->
               <div class="card-body">
-                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
+                <div class="modal fade" id="delete_modal<?php echo $student['matricule']?>" tabindex="-1" role="dialog" aria-labelledby="delete_modal<?php echo $student['matricule']?>" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-body"> 
@@ -375,7 +375,7 @@
                             <div class="col-md-12">
                               <input class="form-control" id="modal_fulllname" type="text" value="<?php echo $student['fullname']?>" style="margin-bottom:15px;" disabled>
                               <input class="form-control" id="modal_student_matricule" type="text" value="<?php echo $student['matricule']?>" disabled>
-                              <input class="form-control" id="modal_student_id" name="student_id" type="text" value="<?php echo $student['id']?>" style="display:none;">
+                              <input class="form-control" id="modal_student_id" name="student_matricule" type="text" value="<?php echo $student['matricule']?>" style="display:none;">
                             </div>
                             <div style="display:flex;">
                               <button class="btn btn-danger d-flex m-auto" type="submit" data-bs-dismiss="modal">Supprimer</button>
@@ -391,7 +391,7 @@
 
         <?php 
             endforeach;
-          endif ?>
+          endif; ?>
 
         <!-- footer start-->
          <?php include('footer.html');?>

@@ -21,9 +21,6 @@
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
     
-        if ($db->query($sql)) {
-            echo "Table Files created successfully";
-        } else {
-            echo "Error creating table: " . $db->error;
-        }
+        if ($db->query($sql)) { echo "Table Files created successfully"; } 
+        else { echo "Error creating table: " . $db->error; }
     }

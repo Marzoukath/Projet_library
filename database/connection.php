@@ -8,7 +8,4 @@ function DB_Connection() {
         die('Erreur : '.$e->getMessage());
     }
 }
-
-// associated_field ENUM('GC', 'GCP', 'GE', 'GIT', 'GME', 'GBH', 'GEn', 'PSA', 'MA', 'MBH'),
-//         categories ENUM('Sciences et Technologies', 'Art', 'Lettres et Langues', 'Sciences Humaines et Sociales', 'Droit et Sciences Politiques', 'Economie et Gestion', 'Santé', 'Sport'),
-        
+    
