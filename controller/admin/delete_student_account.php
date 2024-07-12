@@ -10,7 +10,7 @@ function delete_student($matricule) {
     {
         $db->beginTransaction();
         
-        $stmt = $db->prepare("SELECT * FROM Students WHERE id = ?");
+        $stmt = $db->prepare("SELECT * FROM Students WHERE matricule = ?");
         $stmt->execute([$matricule]);
         $student = $stmt->fetch(PDO::FETCH_ASSOC);
         

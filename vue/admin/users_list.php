@@ -127,7 +127,7 @@
                                                 <td><?php echo htmlspecialchars($student['email']); ?></td>
                                                 <td><?php echo htmlspecialchars($student['mobile']); ?></td>
                                                 <td><?php echo htmlspecialchars($student['matricule']); ?></td>
-                                                <td><?php echo htmlspecialchars($student['filiere']); ?></td>
+                                                <td><?php echo htmlspecialchars($student['sector']); ?></td>
                                                 <td><?php echo htmlspecialchars($student['newsletter']); ?></td>
                                                 <td><?php echo htmlspecialchars($student['cree']); ?></td>
                                                 <td><?php echo htmlspecialchars($student['mise']); ?></td>
@@ -328,17 +328,17 @@
                             <div class="col-md-12">
                               <label>Filière</label>
                               <select class="form-select" name="sector" required>
-                                <option value="GC" <?= $student['filiere'] == 'GC' ? 'selected' : ''; ?>>Génie Civil</option>
-                                <option value="GCP" <?= $student['filiere'] == 'GCP' ? 'selected' : ''; ?>>Génie Chimique et Procédés</option>
-                                <option value="GE" <?= $student['filiere'] == 'GE' ? 'selected' : ''; ?>>Génie Electrique</option>
-                                <option value="GIT" <?= $student['filiere'] == 'GIT' ? 'selected' : ''; ?>>Génie Informatique et Télécommunications</option>
-                                <option value="GME" <?= $student['filiere'] == 'GME' ? 'selected' : ''; ?>>Génie Mécanique et Energétique</option>
-                                <option value="GBH" <?= $student['filiere'] == 'GBH' ? 'selected' : ''; ?>>Génie de Biologie Humaine</option>
-                                <option value="GEn" <?= $student['filiere'] == 'GEn' ? 'selected' : ''; ?>>Génie de l'Environnement</option>
-                                <option value="GIMR" <?= $student['filiere'] == 'GIMR' ? 'selected' : ''; ?>>Génie d'Imagerie Médicale et Radiologie</option>
-                                <option value="PSA" <?= $student['filiere'] == 'PSA' ? 'selected' : ''; ?>>Production et Santé Animale</option>
-                                <option value="MA" <?= $student['filiere'] == 'MA' ? 'selected' : ''; ?>>Machinisme Agricole</option>
-                                <option value="MBH" <?= $student['filiere'] == 'MBH' ? 'selected' : ''; ?>>Maintenance Biomédicale et Hospitalière</option>
+                                <option value="GC" <?= $student['sector'] == 'GC' ? 'selected' : ''; ?>>Génie Civil</option>
+                                <option value="GCP" <?= $student['sector'] == 'GCP' ? 'selected' : ''; ?>>Génie Chimique et Procédés</option>
+                                <option value="GE" <?= $student['sector'] == 'GE' ? 'selected' : ''; ?>>Génie Electrique</option>
+                                <option value="GIT" <?= $student['sector'] == 'GIT' ? 'selected' : ''; ?>>Génie Informatique et Télécommunications</option>
+                                <option value="GME" <?= $student['sector'] == 'GME' ? 'selected' : ''; ?>>Génie Mécanique et Energétique</option>
+                                <option value="GBH" <?= $student['sector'] == 'GBH' ? 'selected' : ''; ?>>Génie de Biologie Humaine</option>
+                                <option value="GEn" <?= $student['sector'] == 'GEn' ? 'selected' : ''; ?>>Génie de l'Environnement</option>
+                                <option value="GIMR" <?= $student['sector'] == 'GIMR' ? 'selected' : ''; ?>>Génie d'Imagerie Médicale et Radiologie</option>
+                                <option value="PSA" <?= $student['sector'] == 'PSA' ? 'selected' : ''; ?>>Production et Santé Animale</option>
+                                <option value="MA" <?= $student['sector'] == 'MA' ? 'selected' : ''; ?>>Machinisme Agricole</option>
+                                <option value="MBH" <?= $student['sector'] == 'MBH' ? 'selected' : ''; ?>>Maintenance Biomédicale et Hospitalière</option>
                               </select>
                             </div>
                             <div class="col-md-12">
