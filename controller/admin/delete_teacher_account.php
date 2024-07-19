@@ -3,28 +3,28 @@ require_once '../../modele/db_connection.php';
 $db = dbConnect();
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-function delete_student($matricule) {
+function delete_teacher($matricule)
+{
     global $db;
-    
     try 
     {
         $db->beginTransaction();
         
-        $stmt = $db->prepare("SELECT * FROM Students WHERE matricule = ?");
+        $stmt = $db->prepare("SELECT * FROM Teachers WHERE matricule = ?");
         $stmt->execute([$matricule]);
-        $student = $stmt->fetch(PDO::FETCH_ASSOC);
+        $teacher = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        if ($student)
+        if ($teacher)
         {
             $stmt = $db->prepare("DELETE FROM Favorites WHERE user_matricule = ?");
             $stmt->execute([$matricule]);
 
-            $stmt = $db->prepare("DELETE FROM Students WHERE matricule = ?");
+            $stmt = $db->prepare("DELETE FROM Teachers WHERE matricule = ?");
             $stmt->execute([$matricule]);
 
             $db->commit();
             
-            echo "Student account and associated records deleted successfully.";
+            echo "Teacher account and associated records deleted successfully.";
             header("Location: ../../vue/admin/users_list.php");
         } 
         else { echo "User not found."; }
@@ -36,9 +36,10 @@ function delete_student($matricule) {
     }
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['student_matricule'])) 
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['teacher_matricule'])) 
 {
-    $matricule = $_POST['student_matricule'];
-    delete_student($matricule);
+    $matricule = $_POST['teacher_matricule'];
+    // print_r($_POST);
+    delete_teacher($matricule);
 }
 else { echo "Invalid request."; }

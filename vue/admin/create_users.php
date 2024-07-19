@@ -44,21 +44,37 @@
         }
         .main-container {
             width: 500px;
-            margin: auto;
+            margin: 0 auto;
             text-align: center;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: bold;
+            color: #F22613;
+            margin: 30px;
+            position: absolute; 
+            top: 0;
+            left: 0;
+            font-style: italic;
+            text-shadow: 2px 2px 4px #333;
+        }
+
+        .logo img {
+            width: 150px; /* Ajuste la taille du logo */
         }
 
         .signup-form {
             background: linear-gradient(rgba(0, 255, 242, 0.4), #647699 60%);
             border-radius: 10px;
-            padding: 40px 0;
-            margin:20px;
+            padding: 65px 0;
         }
 
         .sign-back h1 {
             text-transform: uppercase;
             text-align: center;
             color: #000;
+            margin-top: 0;,
             letter-spacing: 5px;
             text-shadow: 1px 1px 1px #333;
         }
@@ -69,7 +85,7 @@
             position: relative;
         }
 
-        .signup-row input {
+        .signup-row input, .signup-row select {
             padding: 5px 0;
             border: 0;
             border-bottom: 1px solid #000;
@@ -82,8 +98,8 @@
             font-weight: bold;
         }
 
-        .signup-row input::-webkit-input-placeholder {
-            color: #fff;
+        .signup-row input::-webkit-input-placeholder, .signup-row select {
+            color: #000;
             text-shadow: 1px 1px 1px rgba(51, 51, 51, 0.6);
         }
 
@@ -214,7 +230,7 @@
                         <div class="tab-pane fade form-signup" id="students" role="tabpanel" aria-labelledby="students-tab">
                             <div class="pt-3">
                                 <div class="table-responsive theme-scrollbar">
-                                    <form action="../../controller/student_account.php" method="post">
+                                    <form action="../../controller/admin/add_student.php" method="post">
                                         <div class="main-container">
                                             <!-- Start Main Forms -->
                                             <div class="signup-form">
@@ -231,31 +247,35 @@
                                                         <i class="fa fa-phone"></i>
                                                         <input type="text" name="mobile" placeholder="MOBILE" required >
                                                     </div>
-                                                    <div class="signup-row">
+                                                    <!-- <div class="signup-row">
                                                         <i class="fa fa-key"></i>
                                                         <input type="password" name="password" placeholder="MOT DE PASSE" required>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="signup-row">
-                                                        <i class="fa fa-user"></i>
+                                                        <i class="fa fa-id-card"></i>
                                                         <input type="text" name="matricule" placeholder="MATRICULE" required>
                                                     </div>
                                                     <div class="signup-row">
-                                                        <i class="fa fa-user"></i>
-                                                        <input type="text" name="filiere" placeholder="FILIERE" required>
-                                                    </div>
+                                                      <i class="fa fa-graduation-cap"></i>
+                                                      <select name="filiere" required>
+                                                          <option value="">Sélectionner une filière</option>
+                                                          <option value="GC">Génie Civil</option>
+                                                          <option value="GCP">Génie Chimique-Procédés</option>
+                                                          <option value="GE">Génie Electrique</option>
+                                                          <option value="GIT">Génie Informatique et Télécommunications</option>
+                                                          <option value="GME">Génie Mécanique et Energétique</option>
+                                                          <option value="GBH">Génie de Biologie Humaine</option>
+                                                          <option value="GEn">Génie de l'Environnement</option>
+                                                          <option value="GIMR">Génie d'Imagerie Médicale et de Radiologie</option>
+                                                          <option value="PSA">Production et Santé Animale</option>
+                                                          <option value="MA">Machinisme Agricole</option>
+                                                          <option value="MBH">Maintenance Biomédicale et Hospitalière</option>
+                                                      </select>
+                                                  </div>
                                                     <div class="signup-row" >
                                                         <button type='submit'>
                                                             <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
                                                         </button>
-                                                    </div>
-                                                    <div class="form-bottom">
-                                                        <div class="remember">
-                                                            <input type="checkbox" name="remember">
-                                                            <span>Se rappeler</span>
-                                                        </div>
-                                                        <div class="remember">
-                                                            <a href="../vue/log_in.php">Vous avez déjà un compte?</a>
-                                                        </div>
                                                     </div>
                                                     <input type="hidden" name="submit" value="true">
                                                 </div>
@@ -270,7 +290,7 @@
                         <div class="tab-pane fade show active form-signup" id="lecturers" role="tabpanel" aria-labelledby="lecturers-tabs">
                             <div class="pt-3 mb-0">
                                 <div class="table-responsive theme-scrollbar">
-                                    <form id="signup-form" action="../../controller/teacher_account.php" method="post">
+                                    <form id="signup-form" action="../../controller/admin/add_teacher.php" method="post">
                                         <div class="logo">
                                             <img src="image/logo_white-removebg-preview.png" alt="">
                                         </div> 
@@ -290,37 +310,41 @@
                                                     <div class="signup-row">
                                                         <i class="fa fa-phone"></i>
                                                         <input type="text" name="mobile" placeholder="MOBILE" required >
-                                                        
                                                     </div>
-                                                    <div class="signup-row">
+                                                    <!-- <div class="signup-row">
                                                         <i class="fa fa-key"></i>
                                                         <input type="password" name="password" placeholder="MOT DE PASSE" required>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="signup-row">
-                                                        <i class="fa fa-user"></i>
+                                                        <i class="fa fa-id-card"></i>
                                                         <input type="text" name="matricule" placeholder="MATRICULE" required>
                                                     </div>
                                                     <div class="signup-row">
-                                                        <i class="fa fa-user"></i>
-                                                        <input type="text" name="specialite" placeholder="SPECIALITE" required>
+                                                        <i class="fa fa-graduation-cap"></i>
+                                                        <input type="text" name="grade" placeholder="GRADE" required>
                                                     </div>
                                                     <div class="signup-row">
-                                                        <i class="fa fa-user"></i>
-                                                        <input type="text" name="grade" placeholder="GRADE" required>
+                                                      <i class="fa fa-cube"></i>
+                                                      <select name="domain" required>
+                                                          <option value="" disabled selected>DOMAINE</option>
+                                                          <option value="Sciences et Technologies">Sciences et Technologies</option>
+                                                          <option value="Art">Art</option>
+                                                          <option value="Lettres et Langues">Lettres et Langues</option>
+                                                          <option value="Sciences Humaines et Sociales">Sciences Humaines et Sociales</option>
+                                                          <option value="Droits et Sciences Politiques">Droits et Sciences Politiques</option>
+                                                          <option value="Economie et Gestion">Economie et Gestion</option>
+                                                          <option value="Santé">Santé</option>
+                                                          <option value="Sport">Sport</option>
+                                                      </select>
+                                                    </div>
+                                                    <div class="signup-row">
+                                                        <i class="fa fa-book"></i>
+                                                        <input type="text" name="specialite" placeholder="SPECIALITE" required>
                                                     </div>
                                                     <div class="signup-row" >
                                                         <button type='submit'>
                                                             <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
                                                         </button>
-                                                    </div>
-                                                    <div class="form-bottom">
-                                                        <div class="remember">
-                                                            <input type="checkbox" name="remember">
-                                                            <span>Se rappeler</span>
-                                                        </div>
-                                                        <div class="remember">
-                                                            <a href="vue/log_in.php">Vous avez déjà un compte?</a>
-                                                        </div>
                                                     </div>
                                                     <input type="hidden" name="submit" value="true">
                                                 </div>

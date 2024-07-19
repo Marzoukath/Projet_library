@@ -8,7 +8,7 @@
     if ($conn->connect_error){ die("Connection failed: " . $conn->connect_error); }
 
     // Students
-    $sql = "SELECT fullname, email, mobile, matricule, sector, newsletter, `created_at` AS cree, `updated_at` AS mise FROM Students";
+    $sql = "SELECT id, fullname, email, mobile, matricule, sector, newsletter, `created_at` AS cree, `updated_at` AS mise FROM Students";
     $result = $conn->query($sql);
     if ($result->num_rows > 0)
     {
@@ -18,7 +18,7 @@
     else { $students = []; }
 
     // Teachers
-    $sql = "SELECT fullname, email, mobile, matricule, speciality, grade, newsletter, `created_at` AS cree, `updated_at` AS mise FROM Teachers";
+    $sql = "SELECT id, fullname, email, mobile, matricule, speciality, grade, newsletter, `created_at` AS cree, `updated_at` AS mise FROM Teachers";
     $result = $conn->query($sql);
     if ($result->num_rows > 0)
     {
@@ -28,7 +28,7 @@
     else { $teachers = []; }
 
     // Admins
-    $sql = "SELECT fullname, email, mobile, matricule, `created_at` AS cree, `updated_at` AS mise FROM Admins";
+    $sql = "SELECT id, fullname, email, mobile, matricule, `created_at` AS cree, `updated_at` AS mise FROM Admins";
     $result = $conn->query($sql);
     if ($result->num_rows > 0)
     {

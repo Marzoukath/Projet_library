@@ -189,15 +189,15 @@
                                                 <td><?php echo htmlspecialchars($teacher['email']); ?></td>
                                                 <td><?php echo htmlspecialchars($teacher['mobile']); ?></td>
                                                 <td><?php echo htmlspecialchars($teacher['matricule']); ?></td>
-                                                <td><?php echo htmlspecialchars($teacher['specialite']); ?></td>
+                                                <td><?php echo htmlspecialchars($teacher['speciality']); ?></td>
                                                 <td><?php echo htmlspecialchars($teacher['grade']); ?></td>
                                                 <td><?php echo htmlspecialchars($teacher['newsletter']); ?></td>
                                                 <td><?php echo htmlspecialchars($teacher['cree']); ?></td>
                                                 <td><?php echo htmlspecialchars($teacher['mise']); ?></td>
                                                 <td>
                                                     <ul class="action">
-                                                        <li class="edit"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter1"><i class="icon-pencil-alt"></i></a></li>
-                                                        <li class="delete"><a data-bs-toggle="modal" data-bs-target="#exampleModalCenter2"><i class="icon-trash"></i></a></li>
+                                                        <li class="edit"><a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $teacher['matricule']?>"><i class="icon-pencil-alt"></i></a></li>
+                                                        <li class="delete"><a data-bs-toggle="modal" data-bs-target="#delete_modal<?php echo $teacher['matricule']?>"><i class="icon-trash"></i></a></li>
                                                     </ul>
                                                 </td>
                                                 </tr>
@@ -344,8 +344,8 @@
                             <div class="col-md-12">
                               <label>Statut du compte</label>
                               <select class="form-select" name="status" required>
-                                <option value="active" <?= $student['status'] == 'actif' ? 'selected' : ''; ?>>Actif</option>
-                                <option value="inactive" <?= $student['status'] == 'inactif' ? 'selected' : ''; ?>>Inactif</option>
+                                <option value="actif" <?= $student['status'] == 'actif' ? 'selected' : ''; ?>>Actif</option>
+                                <option value="inactif" <?= $student['status'] == 'inactif' ? 'selected' : ''; ?>>Inactif</option>
                               </select>
                             </div>
                             <div style="display:flex;">
@@ -376,6 +376,115 @@
                               <input class="form-control" id="modal_fulllname" type="text" value="<?php echo $student['fullname']?>" style="margin-bottom:15px;" disabled>
                               <input class="form-control" id="modal_student_matricule" type="text" value="<?php echo $student['matricule']?>" disabled>
                               <input class="form-control" id="modal_student_id" name="student_matricule" type="text" value="<?php echo $student['matricule']?>" style="display:none;">
+                            </div>
+                            <div style="display:flex;">
+                              <button class="btn btn-danger d-flex m-auto" type="submit" data-bs-dismiss="modal">Supprimer</button>
+                              <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Annuler</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+        <?php 
+            endforeach;
+          endif; ?>
+
+        <?php 
+          // Teachers profile form
+          if (!empty($teachers)):
+            foreach ($teachers as $teacher): ?>
+              <div class="card-body">
+                <div class="modal fade" id="edit_modal<?php echo $teacher['matricule']?>" tabindex="-1" role="dialog" aria-labelledby="edit_modal<?php echo $teacher['matricule']?>" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body"> 
+                        <div class="modal-toggle-wrapper">
+                          <h4 class="text-center pb-2">Êtes vous sûr(e) de vouloir continuer cette action?</h4>
+                          <div class="row gallery my-gallery" id="aniimated-thumbnials2" style="display:flex; justify-content:center; align-items:center; margin:10px;">
+                            <figure class="col-md-3 col-6 img-hover hover-3"><a href="../assets/images/logo/icon_dl.png" itemprop="contentUrl" data-size="1600x950">
+                                <div><img src="../assets/images/logo/icon_dl.png" itemprop="thumbnail" alt="Image description"></div></a>
+                              <figcaption itemprop="caption description"></figcaption>
+                            </figure>
+                          </div>
+                          <hr>
+                          <form class="row g-3" action="../../controller/admin/update_teacher_account.php" method="post">
+                            <input type="hidden" name="teacher_id" value="<?php echo $teacher['id'] ?>">
+                            <div class="mb-3">
+                                <label class="form-label">Nom complet</label>
+                                <input class="form-control" name= "fullname" type="text" value="<?php echo $teacher['fullname'];?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Matricule</label>
+                                <input class="form-control"  name="matricule" type="text" value="<?php echo $teacher['matricule'];?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Adresse e-mail</label>
+                                <input class="form-control" name="email" type="email" value="<?php echo $teacher['email'];?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Numéro de téléphone</label>
+                                <input class="form-control" name="mobile" type="number" value="<?php echo $teacher['mobile'];?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Grade</label>
+                                <input class="form-control" name="grade" type="text" value="<?php echo $teacher['grade'];?>" required>
+                            </div>
+                            <div class="col-md-12">
+                              <label>Domaine</label>
+                              <select class="form-select" name="domain" required>
+                                <option value="Sciences et Technologies" <?= $teacher['domain'] == 'Sciences et Technologies' ? 'selected' : ''; ?>>Sciences et Technologies</option>
+                                <option value="Art" <?= $teacher['domain'] == 'Art' ? 'selected' : ''; ?>>Art</option>
+                                <option value="Lettres et Langues" <?= $teacher['domain'] == 'Lettres et Langues' ? 'selected' : ''; ?>>Lettres et Langues</option>
+                                <option value="Sciences Humaines et Sociales" <?= $teacher['domain'] == 'Sciences Humaines et Sociales' ? 'selected' : ''; ?>>Sciences Humaines et Sociales</option>
+                                <option value="Droits et Sciences Politiques" <?= $teacher['domain'] == 'Droits et Sciences Politiques' ? 'selected' : ''; ?>>Droits et Sciences Politiques</option>
+                                <option value="Economie et Gestion" <?= $teacher['domain'] == 'Economie et Gestion' ? 'selected' : ''; ?>>Economie et Gestion</option>
+                                <option value="Santé" <?= $teacher['domain'] == 'Santé' ? 'selected' : ''; ?>>Santé</option>
+                                <option value="Sport" <?= $teacher['domain'] == 'Sport' ? 'selected' : ''; ?>>Sport</option>
+                              </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Spécialité</label>
+                                <input class="form-control"  name="speciality" type="text" value="<?php echo $teacher['speciality'];?>" required>
+                            </div>
+                            <div class="col-md-12">
+                              <label>Statut du compte</label>
+                              <select class="form-select" name="status" required>
+                                <option value="actif" <?= $teacher['status'] == 'actif' ? 'selected' : ''; ?>>Actif</option>
+                                <option value="inactif" <?= $teacher['status'] == 'inactif' ? 'selected' : ''; ?>>Inactif</option>
+                              </select>
+                            </div>
+                            <div style="display:flex;">
+                              <button class="btn btn-primary d-flex m-auto" type="submit" data-bs-dismiss="modal">Modifier</button>
+                              <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Teacher deletion form -->
+              <div class="card-body">
+                <div class="modal fade" id="delete_modal<?php echo $teacher['matricule']?>" tabindex="-1" role="dialog" aria-labelledby="delete_modal<?php echo $teacher['matricule']?>" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body"> 
+                        <div class="modal-toggle-wrapper">  
+                          <ul class="modal-img">
+                            <li> <img src="../assets/images/gif/danger.gif" alt="error"></li>
+                          </ul>
+                          <h4 class="text-center pb-2">Êtes vous sûr(e) de vouloir supprimer ce compte ?</h4>
+                          <form class="row g-3" action="../../controller/admin/delete_teacher_account.php" method="post">
+                            <div class="col-md-12">
+                              <input class="form-control" id="modal_fulllname" type="text" value="<?php echo $teacher['fullname']?>" style="margin-bottom:15px;" disabled>
+                              <input class="form-control" id="modal_teacher_matricule" type="text" value="<?php echo $teacher['matricule']?>" disabled>
+                              <input class="form-control" id="modal_teacher_id" name="teacher_matricule" type="text" value="<?php echo $teacher['matricule']?>" style="display:none;">
                             </div>
                             <div style="display:flex;">
                               <button class="btn btn-danger d-flex m-auto" type="submit" data-bs-dismiss="modal">Supprimer</button>

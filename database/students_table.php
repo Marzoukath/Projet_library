@@ -10,6 +10,7 @@
             password VARCHAR(255) NOT NULL,
             matricule VARCHAR(100) NOT NULL UNIQUE,
             sector ENUM('GC','GCP','GE','GIT','GME','GBH','GEn','GIMR','PSA','MA','MBH') NOT NULL,
+            status ENUM('actif','inactif') DEFAULT 'actif',
             newsletter TINYINT(1) NOT NULL DEFAULT 0,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
