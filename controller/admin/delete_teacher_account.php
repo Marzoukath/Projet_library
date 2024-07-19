@@ -39,7 +39,6 @@ function delete_teacher($matricule)
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['teacher_matricule'])) 
 {
     $matricule = $_POST['teacher_matricule'];
-    // print_r($_POST);
     delete_teacher($matricule);
 }
 else { echo "Invalid request."; }

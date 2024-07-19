@@ -27,9 +27,7 @@ function compte()
         }
         require_once './vue/signup_admin.php';  
     }
-    catch(Exception $e) {
-        die('Erreur : '.$e->getMessage());
-    }
+    catch(Exception $e) { die('Erreur : '.$e->getMessage()); }
 }
 
 compte();

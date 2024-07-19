@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
 {
     try
     {
-        print_r($_POST);
         $teacher_id = $_POST['teacher_id'];
         $fullname = sanitize_data($_POST['fullname']);
         $matricule = sanitize_data($_POST['matricule']);
@@ -31,11 +30,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
 
         echo "Teacher data updated successfully.";
         header("Location: ../../vue/admin/users_list.php");
-    }
-    catch (Exception $e)
-    {
-        die('Error: ' . $e->getMessage());
-    }
-} else {
-    echo "Invalid request.";
-}
+    } catch (Exception $e) { die('Error: ' . $e->getMessage()); }
+} else { echo "Invalid request."; }

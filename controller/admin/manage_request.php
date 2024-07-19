@@ -33,6 +33,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
     {
         die('Error: ' . $e->getMessage());
     }
-} else {
-    echo "Invalid request.";
-}
+} else { echo "Invalid request."; }

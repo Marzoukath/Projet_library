@@ -28,11 +28,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
 
         echo "File data updated successfully.";
         header("Location: ../../vue/admin/files_list.php");
-    }
-    catch (Exception $e)
-    {
-        die('Error: ' . $e->getMessage());
-    }
-} else {
-    echo "Invalid request.";
-}
+    } catch (Exception $e) { die('Error: ' . $e->getMessage()); }
+} else { echo "Invalid request."; }

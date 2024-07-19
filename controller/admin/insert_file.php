@@ -87,7 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
 
             $file_id = $db->lastInsertId();
 
-            if (isset($_POST['categories'])) {
+            if (isset($_POST['categories'])) 
+            {
                 $categories = $_POST['categories'];
                 foreach ($categories as $category)
                 {
@@ -96,7 +97,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                 }
             }
 
-            if (isset($_POST['sectors'])) {
+            if (isset($_POST['sectors'])) 
+            {
                 $sectors = $_POST['sectors'];
                 foreach ($sectors as $sector)
                 {
@@ -105,17 +107,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                 }
             }
 
-            if (isset($_POST['years'])) {
+            if (isset($_POST['years'])) 
+            {
                 $years = $_POST['years'];
-                foreach ($years as $year) {
+                foreach ($years as $year) 
+                {
                     $request = $db->prepare("INSERT INTO Years (file_id, associated_year) VALUES (?, ?)");
                     $request->execute([$file_id, $year]);
                 }
             }
 
-            if (isset($_POST['semesters'])) {
+            if (isset($_POST['semesters'])) 
+            {
                 $semesters = $_POST['semesters'];
-                foreach ($semesters as $semester) {
+                foreach ($semesters as $semester) 
+                {
                     $request = $db->prepare("INSERT INTO Semesters (file_id, associated_semester) VALUES (?, ?)");
                     $request->execute([$file_id, $semester]);
                 }
@@ -132,8 +138,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
         die('Erreur : '.$e->getMessage());
     }
 }
-else
-{
-    echo "Nothing to upload.";
-}
-?>
+else { echo "Nothing to upload."; }
+
