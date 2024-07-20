@@ -526,13 +526,14 @@
                 <div class="modal fade" id="favorite_<?php echo $file['id']?>" tabindex="-1" role="dialog" aria-labelledby="favorite_<?php echo $file['id']?>" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                      <form class="form-container" id="requestForm" action="../../controller/ask_for_file.php" method="post">
+                      <form class="form-container" id="favoriteForm" action="../../controller/mark_favorite.php" method="post">
                         <h2>Ajouter aux favoris</h2>
                         <label for="matricule">Titre:</label>
                         <input type="text" id="title_<?php echo $file['id']?>" name="title_<?php echo $file['id']?>" value="<?php echo $file['title']?>" disabled>
                         <label for="book">Auteur(s) :</label>
                         <input type="text" id="authors_<?php echo $file['id']?>" name="authors_<?php echo $file['id']?>" value="<?php echo $file['authors']?>" disabled>
-                        <a class="btn btn-tertiary" type="button" href="../../controller/mark_favorite.php?file_id=<?php echo $file['id']?>" target="_blank">Ajouter</a>
+                        <input type="text" id="file_id_<?php echo $file['id']?>" name="file_id" value="<?php echo $file['id']?>" style="display:none">
+                        <button class="btn btn-tertiary" type="submit">Ajouter</button>
                       </form>
                     </div>
                   </div>
