@@ -32,7 +32,7 @@ function delete_file($file_id) {
             $db->commit();
             
             echo "File and associated records deleted successfully.";
-            header("Location: ../../vue/admin/files_list.php");
+            header("Location: ../../vue/admin/files_search.php");
         } else { echo "File not found."; }
     } 
     catch (Exception $e) 

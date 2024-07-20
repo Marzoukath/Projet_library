@@ -29,7 +29,7 @@
                 <use href="../assets/svg/icon-sprite.svg#fill-file"></use>
                 </svg><span>Gestion des fichiers</span></a>
             <ul class="sidebar-submenu">
-                <li><a href="files_list.php" style="color: black;">Lister</a></li>
+                <li><a href="files_search.php" style="color: black;">Lister</a></li>
                 <li><a href="upload_file.php" style="color: black;">Ajouter</a></li>
                 <li><a href="requests_management.php" style="color: black;">Voir ses Requêtes</a></li>
             </ul>

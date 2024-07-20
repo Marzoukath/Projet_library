@@ -28,6 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
             ]);
 
         echo "Request successfully inserted.";
+        if (isset($_POST['from'])) { header("Location: ../vue/users/requests_management.php"); }
+        else{header("Location: ../vue/users/files_search.php"); }
     }
     catch (Exception $e)
     {

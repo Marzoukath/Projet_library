@@ -149,6 +149,7 @@
                             <th>Traitée par</th>
                             <th>Statut</th>
                             <th>Observation</th>
+                            <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -270,6 +271,7 @@
                 <div class="modal-content">
                   <form class="form-container" id="requestForm" action="../../controller/ask_for_file.php" method="post">
                     <h2>Mise à disposition d'un fichier</h2>
+                    <input type="text" id="from" name="from" value="requests?>" style="display:none;">
                     <label for="matricule">Matricule:</label>
                     <input type="text" id="matricule" name="matricule" value="<?php echo $_SESSION['matricule']?>" disabled>
 
