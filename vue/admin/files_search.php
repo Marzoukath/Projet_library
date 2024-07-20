@@ -34,44 +34,6 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
     <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
-    <style>
-      .form-container {
-          background-color: #ffffff;
-          padding: 20px;
-          border-radius: 7px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          width: 500px;
-      }
-      .form-container h2 {
-          text-align: center;
-          margin-bottom: 20px;
-      }
-      .form-container label {
-          display: block;
-          margin-bottom: 5px;
-      }
-      .form-container input[type="text"], .form-container input[type="submit"] {
-          width: 100%;
-          padding: 10px;
-          margin-bottom: 10px;
-          border: 1px solid #a3c7e7;
-          border-radius: 3px;
-      }
-      .form-container input[type="submit"] {
-          background-color: #0de93d;
-          color: rgb(1, 2, 10);
-          border: none;
-          cursor: pointer;
-      }
-      .form-container input[type="submit"]:hover {
-          background-color: #b2f5b5;
-      }
-      .form-container .message {
-          text-align: center;
-          margin-top: 20px;
-          color: rgb(22, 223, 52);
-      }
-    </style>
   </head>
   <body>
     <div class="loader-wrapper"> 
@@ -133,7 +95,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="card">
-                  <div class="card-header">
+                  <div class="card-header col-xl-12 col-sm-12">
                     <form class="theme-form" action="../../controller/files_filtering.php" method="post">
                       <div class="input-group m-0 flex-nowrap">
                       <select name="sector"class="form-control-plaintext">
@@ -165,9 +127,6 @@
                       </select>
                       <button style="margin-left:10px" type="submit" class="btn btn-primary input-group-text" key: >Rechercher</button>
                       <a type='button' style="margin-left:10px" class="btn btn-secondary input-group-text" href="?abort=1" >Tous les fichiers</a>
-                      <button class="btn btn-tertiary" style="margin-left:10px; color:white;" >
-                        <a data-bs-toggle="modal" data-bs-target="#request">Faire une requête</a>
-                      </button>
                       </div>
                     </form>
                   </div>
@@ -216,9 +175,9 @@
                                               <td> <span class="badge rounded-pill badge-success"><?php echo $file['status']; ?></span></td>
                                               <td>
                                                   <ul class="action">
-                                                  <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $file['id']?>"><i class="icon-pencil-alt"></i></a></li>
+                                                  <li class="edit"><a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $file['id']?>"><i class="icon-pencil-alt"></i></a></li>
                                                   <li><a href="../../controller/admin/download_file.php?file_id=<?php echo $file['id']?>" target="_blank" style="text-align:center; margin:0px;"><i class="icon-download"></i></a></li>
-                                                  <li><a data-bs-toggle="modal" data-bs-target="#favorite_<?php echo $file['id']?>" style="text-align:center; margin:0px; color:red;"><i class="fa fa-heart-o"></i></a></li>
+                                                  <li class="delete"><a data-bs-toggle="modal" data-bs-target="#delete_modal<?php echo $file['id']?>"><i class="icon-trash"></i></a></li>
                                                   </ul>
                                               </td>
                                               </tr>
@@ -521,19 +480,30 @@
                   </div>
                 </div>
               </div>
-              <!-- Favourite -->
+
               <div class="card-body">
-                <div class="modal fade" id="favorite_<?php echo $file['id']?>" tabindex="-1" role="dialog" aria-labelledby="favorite_<?php echo $file['id']?>" aria-hidden="true">
+                <div class="modal fade" id="delete_modal<?php echo $file['id']?>" tabindex="-1" role="dialog" aria-labelledby="delete_modal<?php echo $file['id']?>" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                      <form class="form-container" id="requestForm" action="../../controller/ask_for_file.php" method="post">
-                        <h2>Ajouter aux favoris</h2>
-                        <label for="matricule">Titre:</label>
-                        <input type="text" id="title_<?php echo $file['id']?>" name="title_<?php echo $file['id']?>" value="<?php echo $file['title']?>" disabled>
-                        <label for="book">Auteur(s) :</label>
-                        <input type="text" id="authors_<?php echo $file['id']?>" name="authors_<?php echo $file['id']?>" value="<?php echo $file['authors']?>" disabled>
-                        <a class="btn btn-tertiary" type="button" href="../../controller/mark_favorite.php?file_id=<?php echo $file['id']?>" target="_blank">Ajouter</a>
-                      </form>
+                      <div class="modal-body"> 
+                        <div class="modal-toggle-wrapper">  
+                          <ul class="modal-img">
+                            <li> <img src="../assets/images/gif/danger.gif" alt="error"></li>
+                          </ul>
+                          <h4 class="text-center pb-2">Êtes vous sûr(e) de vouloir supprimer ce fichier ?</h4>
+                          <form class="row g-3" action="../../controller/admin/delete_file.php" method="post">
+                            <div class="col-md-12">
+                              <input class="form-control" id="modal_title<?php echo $file['id']?>" type="text" value="<?php echo $file['title']?>" style="margin-bottom:15px;" disabled>
+                              <input class="form-control" id="modal_author<?php echo $file['id']?>" type="text" value="<?php echo $file['authors']?>" disabled>
+                              <input class="form-control" id="modal_file_id<?php echo $file['id']?>" name="file_id" type="text" value="<?php echo $file['id']?>" style="display:none;">
+                            </div>
+                            <div style="display:flex;">
+                              <button class="btn btn-danger d-flex m-auto" type="submit" data-bs-dismiss="modal">Supprimer</button>
+                              <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Annuler</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -541,23 +511,6 @@
         <?php 
             endforeach;
           endif ?>
-          <div class="card-body">
-            <div class="modal fade" id="request" tabindex="-1" role="dialog" aria-labelledby="request" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <form class="form-container" id="requestForm" action="../../controller/ask_for_file.php" method="post">
-                    <h2>Mise à disposition d'un fichier</h2>
-                    <label for="matricule">Matricule:</label>
-                    <input type="text" id="matricule" name="matricule" value="<?php echo $_SESSION['matricule']?>" disabled>
-
-                    <label for="book">Description :</label>
-                    <input type="text" id="book" name="description" placeholder="Entrez le nom du fichier" required>
-                    <button class="btn btn-secondary" type="submit">Envoyer la demande</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
 
         <!-- footer start-->
          <?php include('footer.html');?>
