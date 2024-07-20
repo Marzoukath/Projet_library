@@ -96,13 +96,13 @@
                   </div>
                   <div class="card-body">
                     <ul class="simple-wrapper nav nav-tabs" id="myTab" role="tablist">
-                      <li class="nav-item"><a class="nav-link txt-primary" id="students-tab" data-bs-toggle="tab" href="#students" role="tab" aria-controls="students" aria-selected="false">Etudiants</a></li>
-                      <li class="nav-item"><a class="nav-link active txt-primary" id="lecturers-tabs" data-bs-toggle="tab" href="#lecturers" role="tab" aria-controls="lecturers" aria-selected="false">Enseignants</a></li>
+                      <li class="nav-item"><a class="nav-link txt-primary active" id="students-tab" data-bs-toggle="tab" href="#students" role="tab" aria-controls="students" aria-selected="false">Etudiants</a></li>
+                      <li class="nav-item"><a class="nav-link txt-primary" id="lecturers-tabs" data-bs-toggle="tab" href="#lecturers" role="tab" aria-controls="lecturers" aria-selected="false">Enseignants</a></li>
                       <li class="nav-item"><a class="nav-link txt-primary" id="admins-tab" data-bs-toggle="tab" href="#admins" role="tab" aria-controls="admins" aria-selected="true">Administrateurs</a></li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <!-- Students datatable -->
-                        <div class="tab-pane fade" id="students" role="tabpanel" aria-labelledby="students-tab">
+                        <div class="tab-pane fade show active" id="students" role="tabpanel" aria-labelledby="students-tab">
                             <div class="pt-3">
                                 <div class="table-responsive theme-scrollbar">
                                     <table class="display" id="data-source-students" style="width:100%">
@@ -163,7 +163,7 @@
                             </div>
                         </div>
                         <!-- Teachers datatable -->
-                        <div class="tab-pane fade show active" id="lecturers" role="tabpanel" aria-labelledby="lecturers-tabs">
+                        <div class="tab-pane fade show" id="lecturers" role="tabpanel" aria-labelledby="lecturers-tabs">
                             <div class="pt-3 mb-0">
                                 <div class="table-responsive theme-scrollbar">
                                     <table class="display" id="data-source-lecturers" style="width:100%">

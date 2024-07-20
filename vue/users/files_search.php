@@ -1,5 +1,8 @@
 <?php
+  session_start();
   include('../../controller/admin/fetch_data.php');
+  if (isset($_GET['abort'])) { unset($_SESSION['filtered_files']); }
+  if (isset($_SESSION['filtered_files'])) { $files = $_SESSION['filtered_files']; }
 ?>
 
 <!DOCTYPE html>
@@ -93,328 +96,286 @@
               <div class="col-sm-12">
                 <div class="card">
                   <div class="card-header">
-                    <form class="theme-form">
+                    <form class="theme-form" action="../../controller/files_filtering.php" method="post">
                       <div class="input-group m-0 flex-nowrap">
-                        <input class="form-control-plaintext" type="search" placeholder="Pixelstrap .."><span class="btn btn-primary input-group-text">Search</span>
+                      <select name="sector"class="form-control-plaintext">
+                        <option value="">Sélectionner une filière</option>
+                        <option value="GC">Génie Civil</option>
+                        <option value="GCP">Génie Chimique-Procédés</option>
+                        <option value="GE">Génie Electrique</option>
+                        <option value="GIT">Génie Informatique et Télécommunications</option>
+                        <option value="GME">Génie Mécanique et Energétique</option>
+                        <option value="GBH">Génie de Biologie Humaine</option>
+                        <option value="GEn">Génie de l'Environnement</option>
+                        <option value="GIMR">Génie d'Imagerie Médicale et de Radiologie</option>
+                        <option value="PSA">Production et Santé Animale</option>
+                        <option value="MA">Machinisme Agricole</option>
+                        <option value="MBH">Maintenance Biomédicale et Hospitalière</option>
+                      </select>
+                      <select name="semester"class="form-control-plaintext">
+                        <option value="">Sélectionner un semestre</option>
+                        <option value="1">Semestre 1</option>
+                        <option value="2">Semestre 2</option>
+                        <option value="3">Semestre 3</option>
+                        <option value="4">Semestre 4</option>
+                        <option value="5">Semestre 5</option>
+                        <option value="6">Semestre 6</option>
+                        <option value="7">Semestre 7</option>
+                        <option value="8">Semestre 8</option>
+                        <option value="9">Semestre 9</option>
+                        <option value="10">Semestre 10</option>
+                      </select>
+                      <button style="margin-left:10px" type="submit" class="btn btn-primary input-group-text" key: >Rechercher</button>
+                      <a type='button' style="margin-left:10px" class="btn btn-secondary input-group-text" href="?abort=1" >Tous les fichiers</a>
                       </div>
                     </form>
                   </div>
                   <div class="card-body">
                     <div class="text-center">
                       <ul class="nav nav-tabs search-list" id="top-tab" role="tablist">
-                        <li class="nav-item"><a class="nav-link active" id="all-link" data-bs-toggle="tab" href="#all-links" role="tab" aria-selected="true"><i class="icon-target"></i>All</a></li>
+                        <li class="nav-item"><a class="nav-link active" id="all-link" data-bs-toggle="tab" href="#all-links" role="tab" aria-selected="true"><i class="icon-target"></i>Tous</a></li>
+                        <li class="nav-item"><a class="nav-link" id="book-link" data-bs-toggle="tab" href="#book-links" role="tab" aria-selected="false"><i class="icon-book"></i>eBooks</a></li>
                         <li class="nav-item"><a class="nav-link" id="image-link" data-bs-toggle="tab" href="#image-links" role="tab" aria-selected="false"><i class="icon-image"></i>Images</a></li>
-                        <li class="nav-item"><a class="nav-link" id="video-link" data-bs-toggle="tab" href="#video-links" role="tab" aria-selected="false"><i class="icon-video-clapper"></i>Videos</a></li>
-                        <li class="nav-item"><a class="nav-link" id="audios-link" data-bs-toggle="tab" href="#audios-links" role="tab" aria-selected="false"><i class="icon-map-alt"></i>Audios</a></li>
-                        <li class="nav-item bg-light-success"><a class="nav-link txt-success" id="setting-link" data-bs-toggle="tab" href="#setting-links" role="tab" aria-selected="false">Settings</a></li>
+                        <li class="nav-item"><a class="nav-link" id="video-link" data-bs-toggle="tab" href="#video-links" role="tab" aria-selected="false"><i class="icon-video-clapper"></i>Vidéos</a></li>
+                        <li class="nav-item"><a class="nav-link" id="audio-link" data-bs-toggle="tab" href="#audio-links" role="tab" aria-selected="false"><i class="icon-headphone"></i>Audios</a></li>
+                        <li class="nav-item bg-light-success"><a class="nav-link txt-success" id="favori-link" data-bs-toggle="tab" href="#favori-links" role="tab" aria-selected="false">Favoris</a></li>
                         <li class="nav-item bg-light-secondary"><a class="nav-link txt-secondary" id="tools-links" data-bs-toggle="tab" href="#tools-links" role="tab" aria-selected="false">Tools</a></li>
                       </ul>
                     </div>
                     <div class="tab-content" id="top-tabContent">
                       <div class="search-links tab-pane fade show active" id="all-links" role="tabpanel" aria-labelledby="all-link">
                         <div class="row">
-                                <div class="pt-3">
-                                    <div class="table-responsive theme-scrollbar">
-                                        <table class="display" id="data-source-files" style="width:100%">
-                                            <thead>
-                                            <tr>
-                                                <th>Titre</th>
-                                                <th>Auteur(s)</th>
-                                                <th>Langue</th>
-                                                <th>Type</th>
-                                                <th>Proposé par</th>
-                                                <th>Validé par</th>
-                                                <th>Note</th>
-                                                <th>Statut</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php if (!empty($files)): ?>
-                                                <?php foreach ($files as $donnees): ?>
-                                                    <tr>
-                                                    <td><?php echo htmlspecialchars($donnees['title']); ?></td>
-                                                    <td><?php echo htmlspecialchars($donnees['authors']); ?></td>
-                                                    <td><?php echo htmlspecialchars($donnees['language']); ?></td>
-                                                    <td><?php echo htmlspecialchars($donnees['type']); ?></td>
-                                                    <td><?php echo htmlspecialchars($donnees['proposed_by']); ?></td>
-                                                    <td><?php echo htmlspecialchars($donnees['validated_by']); ?></td>
-                                                    <td><?php echo $donnees['number_of_downloads']== 0 ? 0 : $donnees['number_of_likes']*100/$donnees['number_of_downloads']?></td>
-                                                    <td> <span class="badge rounded-pill badge-success"><?php echo $donnees['status']; ?></span></td>
-                                                    <td>
-                                                        <ul class="action">
-                                                        <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $donnees['id']?>"><i class="icon-pencil-alt"></i></a></li>
-                                                            <li><a href="../../controller/admin/download_file.php?file_id=<?php echo $donnees['id']?>" target="_blank" style="text-align:center; margin:0px;"><i class="icon-download"></i></a></li>
-                                                        </ul>
-                                                    </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                                <?php else: ?>
-                                                <tr>
-                                                    <td colspan="8">No data found</td>
-                                                </tr>
-                                                <?php endif; ?>
-                                            </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th>Titre</th>
-                                                <th>Auteur(s)</th>
-                                                <th>Langue</th>
-                                                <th>Type</th>
-                                                <th>Proposé par</th>
-                                                <th>Validé par</th>
-                                                <th>Note</th>
-                                                <th>Statut</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
+                          <div class="pt-3">
+                              <div class="table-responsive theme-scrollbar">
+                                  <table class="display" id="data-source-files" style="width:100%">
+                                      <thead>
+                                      <tr>
+                                          <th>Titre</th>
+                                          <th>Auteur(s)</th>
+                                          <th>Langue</th>
+                                          <th>Type</th>
+                                          <th>Proposé par</th>
+                                          <th>Validé par</th>
+                                          <th>Favoris</th>
+                                          <th>Statut</th>
+                                          <th>Actions</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                          <?php if (!empty($files)): ?>
+                                          <?php foreach ($files as $file): ?>
+                                              <tr>
+                                              <td><?php echo htmlspecialchars($file['title']); ?></td>
+                                              <td><?php echo htmlspecialchars($file['authors']); ?></td>
+                                              <td><?php echo htmlspecialchars($file['language']); ?></td>
+                                              <td><?php echo htmlspecialchars($file['type']); ?></td>
+                                              <td><?php echo htmlspecialchars($file['proposed_by']); ?></td>
+                                              <td><?php echo htmlspecialchars($file['validated_by']); ?></td>
+                                              <td><?php echo $file['number_of_downloads']== 0 ? 0 : $file['number_of_likes']*100/$file['number_of_downloads']?></td>
+                                              <td> <span class="badge rounded-pill badge-success"><?php echo $file['status']; ?></span></td>
+                                              <td>
+                                                  <ul class="action">
+                                                  <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $file['id']?>"><i class="icon-pencil-alt"></i></a></li>
+                                                      <li><a href="../../controller/admin/download_file.php?file_id=<?php echo $file['id']?>" target="_blank" style="text-align:center; margin:0px;"><i class="icon-download"></i></a></li>
+                                                  </ul>
+                                              </td>
+                                              </tr>
+                                          <?php endforeach; ?>
+                                          <?php else: ?>
+                                          <tr>
+                                              <td colspan="8">No data found</td>
+                                          </tr>
+                                          <?php endif; ?>
+                                      </tbody>
+                                      <tfoot>
+                                      <tr>
+                                          <th>Titre</th>
+                                          <th>Auteur(s)</th>
+                                          <th>Langue</th>
+                                          <th>Type</th>
+                                          <th>Proposé par</th>
+                                          <th>Validé par</th>
+                                          <th>Favoris</th>
+                                          <th>Statut</th>
+                                          <th>Actions</th>
+                                      </tr>
+                                      </tfoot>
+                                  </table>
+                              </div>
+                          </div>
                         </div>
                       </div>
-                      <div class="tab-pane fade" id="image-links" role="tabpanel" aria-labelledby="image-link">
+                      <!-- eBooks -->
+                      <div class="tab-pane fade" id="book-links" role="tabpanel" aria-labelledby="book-link">
                         <div>
-                          <h6 class="mb-2">About 12,120 results (0.50 seconds)</h6>
                           <div class="my-gallery row gallery-with-description" id="aniimated-thumbnials" itemscope="">
-                            <figure class="col-xl-3 col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/big-lightgallry/01.jpg" itemprop="contentUrl" data-size="1600x950"><img src="../assets/images/lightgallry/01.jpg" itemprop="thumbnail" alt="Image description">
-                                <div class="caption">
-                                  <h4>Portfolio Title</h4>
-                                  <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                                </div></a>
-                              <figcaption itemprop="caption description">
-                                <h4>Portfolio Title</h4>
-                                <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                              </figcaption>
-                            </figure>
-                            <figure class="col-xl-3 col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/big-lightgallry/02.jpg" itemprop="contentUrl" data-size="1600x950"><img src="../assets/images/lightgallry/02.jpg" itemprop="thumbnail" alt="Image description">
-                                <div class="caption">
-                                  <h4>Portfolio Title</h4>
-                                  <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                                </div></a>
-                              <figcaption itemprop="caption description">
-                                <h4>Portfolio Title</h4>
-                                <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                              </figcaption>
-                            </figure>
-                            <figure class="col-xl-3 col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/big-lightgallry/03.jpg" itemprop="contentUrl" data-size="1600x950"><img src="../assets/images/lightgallry/03.jpg" itemprop="thumbnail" alt="Image description">
-                                <div class="caption">
-                                  <h4>Portfolio Title</h4>
-                                  <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                                </div></a>
-                              <figcaption itemprop="caption description">
-                                <h4>Portfolio Title</h4>
-                                <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                              </figcaption>
-                            </figure>
-                            <figure class="col-xl-3 col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/big-lightgallry/04.jpg" itemprop="contentUrl" data-size="1600x950"><img src="../assets/images/lightgallry/04.jpg" itemprop="thumbnail" alt="Image description">
-                                <div class="caption">
-                                  <h4>Portfolio Title</h4>
-                                  <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                                </div></a>
-                              <figcaption itemprop="caption description">
-                                <h4>Portfolio Title</h4>
-                                <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                              </figcaption>
-                            </figure>
-                            <figure class="col-xl-3 col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/big-lightgallry/05.jpg" itemprop="contentUrl" data-size="1600x950"><img src="../assets/images/lightgallry/05.jpg" itemprop="thumbnail" alt="Image description">
-                                <div class="caption">
-                                  <h4>Portfolio Title</h4>
-                                  <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                                </div></a>
-                              <figcaption itemprop="caption description">
-                                <h4>Portfolio Title</h4>
-                                <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                              </figcaption>
-                            </figure>
-                            <figure class="col-xl-3 col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/big-lightgallry/011.jpg" itemprop="contentUrl" data-size="1600x950"><img src="../assets/images/lightgallry/011.jpg" itemprop="thumbnail" alt="Image description">
-                                <div class="caption">
-                                  <h4>Portfolio Title</h4>
-                                  <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                                </div></a>
-                              <figcaption itemprop="caption description">
-                                <h4>Portfolio Title</h4>
-                                <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                              </figcaption>
-                            </figure>
-                            <figure class="col-xl-3 col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/big-lightgallry/010.jpg" itemprop="contentUrl" data-size="1600x950"><img src="../assets/images/lightgallry/010.jpg" itemprop="thumbnail" alt="Image description">
-                                <div class="caption">
-                                  <h4>Portfolio Title</h4>
-                                  <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                                </div></a>
-                              <figcaption itemprop="caption description">
-                                <h4>Portfolio Title</h4>
-                                <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                              </figcaption>
-                            </figure>
-                            <figure class="col-xl-3 col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/big-lightgallry/08.jpg" itemprop="contentUrl" data-size="1600x950"><img src="../assets/images/lightgallry/08.jpg" itemprop="thumbnail" alt="Image description">
-                                <div class="caption">
-                                  <h4>Portfolio Title</h4>
-                                  <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                                </div></a>
-                              <figcaption itemprop="caption description">
-                                <h4>Portfolio Title</h4>
-                                <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                              </figcaption>
-                            </figure>
-                          </div>
-                          <!-- Root element of PhotoSwipe. Must have class pswp.-->
-                          <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-                            <!--
-                            Background of PhotoSwipe.
-                            It's a separate element, as animating opacity is faster than rgba().
-                            -->
-                            <div class="pswp__bg"></div>
-                            <!-- Slides wrapper with overflow:hidden.-->
-                            <div class="pswp__scroll-wrap">
-                              <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory.-->
-                              <!-- don't modify these 3 pswp__item elements, data is added later on.-->
-                              <div class="pswp__container">
-                                <div class="pswp__item"></div>
-                                <div class="pswp__item"></div>
-                                <div class="pswp__item"></div>
-                              </div>
-                              <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed.-->
-                              <div class="pswp__ui pswp__ui--hidden">
-                                <div class="pswp__top-bar">
-                                  <!-- Controls are self-explanatory. Order can be changed.-->
-                                  <div class="pswp__counter"></div>
-                                  <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                                  <button class="pswp__button pswp__button--share" title="Share"></button>
-                                  <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                                  <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                                  <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR-->
-                                  <!-- element will get class pswp__preloader--active when preloader is running-->
-                                  <div class="pswp__preloader">
-                                    <div class="pswp__preloader__icn">
-                                      <div class="pswp__preloader__cut">
-                                        <div class="pswp__preloader__donut"></div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                                  <div class="pswp__share-tooltip"></div>
-                                </div>
-                                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-                                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-                                <div class="pswp__caption">
-                                  <div class="pswp__caption__center"></div>
-                                </div>
-                              </div>
-                            </div>
+                            <?php 
+                              if (!empty($files)):
+                                foreach ($files as $book): 
+                                  if ($book['type'] != 'audio' && $book['type'] != 'video' && $book['type'] != 'image'): 
+                            ?>
+                                    <figure class="col-xl-3 col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/logo/icon_dl.png" itemprop="contentUrl" data-size="1600x950"><img src="../assets/images/logo/icon_dl.png" itemprop="thumbnail" alt="Image description">
+                                        <div class="caption">
+                                          <h4><?php echo $book['title']; ?></h4>
+                                          <p><?php echo $book['authors']; ?></p>
+                                          <p><?php echo $book['path']; ?></p>
+                                        </div></a>
+                                      <figcaption itemprop="caption description">
+                                        <p><?php echo $book['description']; ?></p>
+
+                                        <ul class="search-info">
+                                          <li><?php echo $book['number_of_likes']?> <i class="fa fa-heart" aria-hidden="true"></i></li>
+                                          <li><?php echo $book['number_of_downloads']?> <i class="fa fa-download" aria-hidden="true"></i></li>
+                                          <li><?php echo $book['language']?></li>
+                                        </ul>
+                                      </figcaption>
+                                    </figure>
+                            <?php
+                                  endif;
+                                endforeach;
+                              endif;
+                            ?>
+                            
                           </div>
                         </div>
                         <div class="m-t-30">
                           <nav aria-label="...">
                             <ul class="pagination pagination-primary">
                               <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
-                              <li class="page-item"><a class="page-link" href="#">1</a></li>
-                              <li class="page-item active"><a class="page-link" href="#">2 <span class="sr-only">(current)</span></a></li>
-                              <li class="page-item"><a class="page-link" href="#">3</a></li>
+                              <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
                               <li class="page-item"><a class="page-link" href="#">Next</a></li>
                             </ul>
                           </nav>
                         </div>
                       </div>
+                      <!-- Images -->
+                      <div class="tab-pane fade" id="image-links" role="tabpanel" aria-labelledby="image-link">
+                        <div>
+                          <div class="my-gallery row gallery-with-description" id="aniimated-thumbnials" itemscope="">
+                            <?php 
+                              if (!empty($files)):
+                                foreach ($files as $image): 
+                                  if ($image['type'] == 'image'): 
+                            ?>
+                                    <figure class="col-xl-3 col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../../storage_list/uploads/<?php echo $image['path']; ?>" itemprop="contentUrl" data-size="1600x950"><img src="../../storage_list/uploads/<?php echo $image['path']; ?>" itemprop="thumbnail" alt="Image description">
+                                        <div class="caption">
+                                          <h4><?php echo $image['title']; ?></h4>
+                                          <p><?php echo $image['authors']; ?></p>
+                                          <p><?php echo $image['path']; ?></p>
+                                        </div></a>
+                                      <figcaption itemprop="caption description">
+                                        <h4><?php echo $image['title']; ?></h4>
+                                        <p><?php echo $image['description']; ?></p>
+
+                                        <ul class="search-info">
+                                          <li><?php echo $image['number_of_likes']?> <i class="fa fa-heart" aria-hidden="true"></i></li>
+                                          <li><?php echo $image['number_of_downloads']?> <i class="fa fa-download" aria-hidden="true"></i></li>
+                                          <li><?php echo $image['language']?></li>
+                                        </ul>
+                                      </figcaption>
+                                    </figure>
+                            <?php
+                                  endif;
+                                endforeach;
+                              endif;
+                            ?>
+                            
+                          </div>
+                        </div>
+                        <div class="m-t-30">
+                          <nav aria-label="...">
+                            <ul class="pagination pagination-primary">
+                              <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+                              <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
+                              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                          </nav>
+                        </div>
+                      </div>
+                      <!-- Videos -->
                       <div class="tab-pane fade" id="video-links" role="tabpanel" aria-labelledby="video-link">
                         <div class="row">
-                          <div class="col-xxl-6">
-                            <h4 class="mb-2">About 6,000 results (0.60 seconds)</h4>
-                            <div class="d-flex info-block">
-                              <iframe class="me-3" width="200" height="100" src="https://www.youtube.com/embed/CJnfAXlBRTE"></iframe>
-                              <div class="flex-grow-1"><a href="">https://themeforest.net/user/pixelstrap/portfolio</a>
-                                <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
-                                <div class="star-ratings">
-                                  <ul class="search-info">
-                                    <li>3 stars</li>
-                                    <li>590 votes</li>
-                                    <li>Theme</li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="d-flex info-block">
-                              <iframe class="me-3" width="200" height="100" src="https://www.youtube.com/embed/wpmHZspl4EM"></iframe>
-                              <div class="flex-grow-1"><a href="">https://themeforest.net/user/pixelstrap/portfolio</a>
-                                <h5>Lorem Ipsum is simply dummy text of the printing.</h5>
-                                <div class="star-ratings">
-                                  <ul class="search-info">
-                                    <li>3 stars</li>
-                                    <li>590 votes</li>
-                                    <li>Theme</li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="d-flex info-block">
-                              <iframe class="me-3" width="200" height="100" src="https://www.youtube.com/embed/-L4gEk7cOfk"></iframe>
-                              <div class="flex-grow-1"><a href="">https://themeforest.net/user/pixelstrap/portfolio</a>
-                                <h5>Morbi eget quam et purus commodo dapibus.</h5>
-                                <div class="star-ratings">
-                                  <ul class="search-info">
-                                    <li>3 stars</li>
-                                    <li>590 votes</li>
-                                    <li>Theme</li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-xxl-6">
-                            <h4>About 6,000 results (0.60 seconds)</h4>
-                            <div class="d-flex info-block">
-                              <iframe class="me-3" width="200" height="100" src="https://www.youtube.com/embed/CJnfAXlBRTE"></iframe>
-                              <div class="flex-grow-1"><a href="">https://themeforest.net/user/pixelstrap/portfolio</a>
-                                <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
-                                <div class="star-ratings">
-                                  <ul class="search-info">
-                                    <li>3 stars</li>
-                                    <li>590 votes</li>
-                                    <li>Theme</li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="d-flex info-block">
-                              <iframe class="me-3" width="200" height="100" src="https://www.youtube.com/embed/-L4gEk7cOfk"></iframe>
-                              <div class="flex-grow-1"><a href="">https://themeforest.net/user/pixelstrap/portfolio</a>
-                                <h5>Morbi eget quam et purus commodo dapibus.</h5>
-                                <div class="star-ratings">
-                                  <ul class="search-info">
-                                    <li>3 stars</li>
-                                    <li>590 votes</li>
-                                    <li>Theme</li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="d-flex info-block">
-                              <iframe class="me-3" width="200" height="100" src="https://www.youtube.com/embed/wpmHZspl4EM"></iframe>
-                              <div class="flex-grow-1"><a href="">https://themeforest.net/user/pixelstrap/portfolio</a>
-                                <h5>Lorem Ipsum is simply dummy text of the printing.</h5>
-                                <div class="star-ratings">
-                                  <ul class="search-info">
-                                    <li>3 stars</li>
-                                    <li>590 votes</li>
-                                    <li>Theme</li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
+                          <div class="col-xxl-12">
+                            <!-- <h4 class="mb-2">About 6,000 results (0.60 seconds)</h4> -->
+                            <?php 
+                              if (!empty($files)):
+                                foreach ($files as $video): 
+                                  if ($video['type'] == 'video'): 
+                            ?>
+                                  <div class="d-flex info-block col-xxl-12">
+                                    <!-- <iframe class="me-3" width="200" height="100" src=""></iframe> -->
+                                    <video class="me-3" width="200" height="100" controls src="../../storage_list/uploads/<?php echo $video['path']; ?>"></video>
+                                    <div class="flex-grow-1"><a href=""><?php echo $video['url']?></a>
+                                    <h5 style="color:black;"><?php echo $video['authors']?></h5>
+                                    <h5 style="color:black;"><?php echo $video['title']?></h5>
+                                      <h5><?php echo $video['description']?></h5>
+                                      <div class="star-ratings">
+                                        <ul class="search-info">
+                                          <li><?php echo $video['number_of_likes']?> <i class="fa fa-heart" aria-hidden="true"></i></li>
+                                          <li><?php echo $video['number_of_downloads']?> <i class="fa fa-download" aria-hidden="true"></i></li>
+                                          <li><?php echo $video['language']?></li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </div>
+                            <?php
+                                  endif; 
+                                endforeach;
+                              endif; 
+                            ?>
                           </div>
                           <div class="col-xl-12 m-t-30">   
                             <div>
                               <nav aria-label="...">
                                 <ul class="pagination pagination-primary">
                                   <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
-                                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                  <li class="page-item active"><a class="page-link" href="#">2 <span class="sr-only">(current)</span></a></li>
-                                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                  <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
                                   <li class="page-item"><a class="page-link" href="#">Next</a></li>
                                 </ul>
                               </nav>
                             </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Audios -->
+                      <div class="tab-pane fade" id="audio-links" role="tabpanel" aria-labelledby="audio-link">
+                        <div class="my-gallery row gallery-with-description" id="aniimated-thumbnials" itemscope="">
+                          <?php 
+                            if (!empty($files)):
+                              foreach ($files as $audio): 
+                                if ($audio['type'] == 'audio'): 
+                          ?>
+                                  <div class="d-flex info-block col-xxl-12">
+                                  <audio class="me-3" controls src="../../storage_list/uploads/<?php echo $audio['path']; ?>"></audio>
+                                  <div class="flex-grow-1"><a href=""><?php echo $audio['url']?></a>
+                                  <h5 style="color:black;"><?php echo $audio['authors']?></h5>
+                                  <h5 style="color:black;"><?php echo $audio['title']?></h5>
+                                    <h5><?php echo $audio['description']?></h5>
+                                    <div class="star-ratings">
+                                      <ul class="search-info">
+                                        <li><?php echo $audio['number_of_likes']?> <i class="fa fa-heart" aria-hidden="true"></i></li>
+                                        <li><?php echo $audio['number_of_downloads']?> <i class="fa fa-download" aria-hidden="true"></i></li>
+                                        <li><?php echo $audio['language']?></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                          <?php
+                                endif;
+                              endforeach;
+                            endif;
+                          ?>
+                          
+                        </div>
+                        <div class="col-xl-12 m-t-30">   
+                          <div>
+                            <nav aria-label="...">
+                              <ul class="pagination pagination-primary">
+                                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+                                <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                              </ul>
+                            </nav>
                           </div>
                         </div>
                       </div>
@@ -452,7 +413,7 @@
                               <tbody>
                                 <tr><th style="width:30%;">Téléchargement(s)</th><th style="width:40%;"><svg class="footer-icon">
                                     <use href="../assets/svg/icon-sprite.svg#footer-heart"> </use>
-                                  </svg></th><th style="width:30%;">Note</th></tr>
+                                  </svg></th><th style="width:30%;">Favoris</th></tr>
                               </tbody>
                             </table>
                           </div>

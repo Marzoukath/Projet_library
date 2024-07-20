@@ -146,11 +146,11 @@
                   
                   <div class="card-body">
                     <ul class="simple-wrapper nav nav-tabs" id="myTab" role="tablist">
-                      <li class="nav-item"><a class="nav-link txt-primary" id="files-tab" data-bs-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="false">Tous les fichiers</a></li>
-                      <li class="nav-item"><a class="nav-link active txt-primary" id="favoris-tabs" data-bs-toggle="tab" href="#favoris" role="tab" aria-controls="favoris" aria-selected="false">Favoris</a></li>
+                      <li class="nav-item"><a class="nav-link txt-primary active" id="files-tab" data-bs-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="false">Tous les fichiers</a></li>
+                      <li class="nav-item"><a class="nav-link txt-primary" id="favoris-tabs" data-bs-toggle="tab" href="#favoris" role="tab" aria-controls="favoris" aria-selected="false">Favoris</a></li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade" id="files" role="tabpanel" aria-labelledby="files-tab">
+                        <div class="tab-pane fade show active" id="files" role="tabpanel" aria-labelledby="files-tab">
                             <div class="pt-3">
                                 <div class="table-responsive theme-scrollbar">
                                     <table class="display" id="data-source-files" style="width:100%">
@@ -215,7 +215,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade show active" id="favoris" role="tabpanel" aria-labelledby="favoris-tabs">
+                        <div class="tab-pane fade" id="favoris" role="tabpanel" aria-labelledby="favoris-tabs">
                             <div class="pt-3 mb-0">
                                 <div class="table-responsive theme-scrollbar">
                                     
