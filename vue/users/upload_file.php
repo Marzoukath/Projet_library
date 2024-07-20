@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -72,6 +73,7 @@
             </div>
             
             <?php include('profile.php');?>
+            
 
           </div>
         </div>

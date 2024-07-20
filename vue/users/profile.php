@@ -1,5 +1,4 @@
 <?php session_start(); ?>
-
 <div class="nav-right col-xxl-8 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
     <ul class="nav-menus">
     <li><span class="header-search">
@@ -8,8 +7,9 @@
         </svg></span></li>
     <li class="profile-nav onhover-dropdown px-0 py-0">
         <div class="d-flex profile-media align-items-center"><img class="img-30" src="../assets/images/dashboard/profile.png" alt="">
-        <div class="flex-grow-1"><span><?php echo $_SESSION['fullname']; ?></span>
+                 <div class="flex-grow-1"><span><?php echo $_SESSION['fullname']; ?></span>
             <p class="mb-0 font-outfit">Simple User<i class="fa fa-angle-down"></i></p>
+       
         </div>
         </div>
         <ul class="profile-dropdown onhover-show-div">

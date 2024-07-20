@@ -3,43 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ Section</title>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="faq.css">
+    <title>FAQ Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            margin-top: 5px;
+            color: #666;
+        }
+
+        .ask-question {
+            margin-top: 20px;
+        }
+
+        #question-input {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="image-section">
-            <img src="https://www.freepik.com/free-photo/white-modern-car-road_1152938.htm" alt="Car Image">
+    <div class="faq-container">
+        <h1>Foire Aux Questions</h1>
+        <div id="faq-list">
+            <!-- Les questions et réponses existantes seront insérées ici -->
         </div>
-        <div class="faq-section">
-            <h1>FAQ</h1>
-            <p class="sample-text">Sample text. Click to select the text box. Click again or double click to start editing the text. Image from <a href="https://www.freepik.com">Freepik</a></p>
-            <div class="faq-item">
-                <h2>What's included in the quoted daily rate?</h2>
-                <div class="answer">
-                    <p>Answer. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id suscipit ex. Suspendisse rhoncus laoreet purus quis elementum. Phasellus sed efficitur dolor, et ultricies sapien. Quisque fringilla sit amet dolor commodo efficitur. Aliquam et sem odio. In ullamcorper nisi nunc, et molestie ipsum iaculis sit amet.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <h2>What is the rental's mileage plan?</h2>
-                <div class="answer">
-                    <p>Answer. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id suscipit ex. Suspendisse rhoncus laoreet purus quis elementum.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <h2>What are your extra insurance options?</h2>
-                <div class="answer">
-                    <p>Answer. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id suscipit ex. Suspendisse rhoncus laoreet purus quis elementum.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <h2>Do I need to return the rental with a full tank?</h2>
-                <div class="answer">
-                    <p>Answer. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id suscipit ex. Suspendisse rhoncus laoreet purus quis elementum.</p>
-                </div>
-            </div>
+        <div class="ask-question">
+            <h2>Posez une question</h2>
+            <textarea id="question-input" placeholder="Tapez votre question ici..."></textarea>
+            <button onclick="submitQuestion()">Envoyer</button>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadQuestions();
+        });
+
+        function loadQuestions() {
+            const faqList = document.getElementById('faq-list');
+            const questions = [
+                { question: 'Comment créer un compte ?', answer: "Allez a la page d'accueil, et cliquer sur créer un compte. " },
+                { question: 'Dois-je avoir un compte avant de consulter un fichier ?', answer: 'Non' }
+            ];
+
+            questions.forEach(q => {
+                const faqItem = document.createElement('div');
+                faqItem.className = 'faq-item';
+                
+                const faqQuestion = document.createElement('div');
+                faqQuestion.className = 'faq-question';
+                faqQuestion.innerText = q.question;
+
+                const faqAnswer = document.createElement('div');
+                faqAnswer.className = 'faq-answer';
+                faqAnswer.innerText = q.answer;
+
+                faqItem.appendChild(faqQuestion);
+                faqItem.appendChild(faqAnswer);
+
+                faqList.appendChild(faqItem);
+            });
+        }
+
+        function submitQuestion() {
+            const questionInput = document.getElementById('question-input');
+            const questionText = questionInput.value.trim();
+
+            if (questionText !== '') {
+                const faqList = document.getElementById('faq-list');
+
+                const faqItem = document.createElement('div');
+                faqItem.className = 'faq-item';
+
+                const faqQuestion = document.createElement('div');
+                faqQuestion.className = 'faq-question';
+                faqQuestion.innerText = questionText + ' (En attente de réponse)';
+
+                faqItem.appendChild(faqQuestion);
+
+                faqList.appendChild(faqItem);
+
+                // Réinitialiser le champ de question
+                questionInput.value = '';
+
+                // Simuler l'enregistrement de la question dans la base de données
+                console.log('Nouvelle question:', questionText);
+            }
+        }
+    </script>
 </body>
 </html>

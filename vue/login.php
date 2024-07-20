@@ -60,7 +60,7 @@
                         exit();
                     }
                         else {
-                        echo '<div class="error-message">Créer un compte, le compte n\'existe pas</div>';
+                        // echo '<div class="error-message">Créer un compte, le compte n\'existe pas</div>';
                     }
                 } else {
                     echo "Erreur de préparation de la requête SQL : " . $conn->error;
