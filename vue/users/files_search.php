@@ -217,7 +217,8 @@
                                               <td>
                                                   <ul class="action">
                                                   <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $file['id']?>"><i class="icon-pencil-alt"></i></a></li>
-                                                      <li><a href="../../controller/admin/download_file.php?file_id=<?php echo $file['id']?>" target="_blank" style="text-align:center; margin:0px;"><i class="icon-download"></i></a></li>
+                                                  <li><a href="../../controller/admin/download_file.php?file_id=<?php echo $file['id']?>" target="_blank" style="text-align:center; margin:0px;"><i class="icon-download"></i></a></li>
+                                                  <li><a data-bs-toggle="modal" data-bs-target="#favorite_<?php echo $file['id']?>" style="text-align:center; margin:0px; color:red;"><i class="fa fa-heart-o"></i></a></li>
                                                   </ul>
                                               </td>
                                               </tr>
@@ -516,6 +517,23 @@
                           <!-- </form> -->
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Favourite -->
+              <div class="card-body">
+                <div class="modal fade" id="favorite_<?php echo $file['id']?>" tabindex="-1" role="dialog" aria-labelledby="favorite_<?php echo $file['id']?>" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <form class="form-container" id="requestForm" action="../../controller/ask_for_file.php" method="post">
+                        <h2>Ajouter aux favoris</h2>
+                        <label for="matricule">Titre:</label>
+                        <input type="text" id="title_<?php echo $file['id']?>" name="title_<?php echo $file['id']?>" value="<?php echo $file['title']?>" disabled>
+                        <label for="book">Auteur(s) :</label>
+                        <input type="text" id="authors_<?php echo $file['id']?>" name="authors_<?php echo $file['id']?>" value="<?php echo $file['authors']?>" disabled>
+                        <a class="btn btn-tertiary" type="button" href="../../controller/mark_favorite.php?file_id=<?php echo $file['id']?>" target="_blank">Ajouter</a>
+                      </form>
                     </div>
                   </div>
                 </div>
