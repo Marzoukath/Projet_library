@@ -146,11 +146,11 @@
                   
                   <div class="card-body">
                     <ul class="simple-wrapper nav nav-tabs" id="myTab" role="tablist">
-                      <li class="nav-item"><a class="nav-link txt-primary" id="files-tab" data-bs-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="false">Tous les fichiers</a></li>
-                      <li class="nav-item"><a class="nav-link active txt-primary" id="favoris-tabs" data-bs-toggle="tab" href="#favoris" role="tab" aria-controls="favoris" aria-selected="false">Favoris</a></li>
+                      <li class="nav-item"><a class="nav-link txt-primary active" id="files-tab" data-bs-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="false">Tous les fichiers</a></li>
+                      <li class="nav-item"><a class="nav-link txt-primary" id="favoris-tabs" data-bs-toggle="tab" href="#favoris" role="tab" aria-controls="favoris" aria-selected="false">Favoris</a></li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade" id="files" role="tabpanel" aria-labelledby="files-tab">
+                        <div class="tab-pane fade show active" id="files" role="tabpanel" aria-labelledby="files-tab">
                             <div class="pt-3">
                                 <div class="table-responsive theme-scrollbar">
                                     <table class="display" id="data-source-files" style="width:100%">
@@ -178,7 +178,11 @@
                                                 <td><?php echo htmlspecialchars($donnees['proposed_by']); ?></td>
                                                 <td><?php echo htmlspecialchars($donnees['validated_by']); ?></td>
                                                 <td><?php echo $donnees['number_of_downloads']== 0 ? 0 : $donnees['number_of_likes']*100/$donnees['number_of_downloads']?></td>
-                                                <td> <span class="badge rounded-pill badge-success"><?php echo $donnees['status']; ?></span></td>
+                                                <?php if ($donnees['status'] == 'disponible'): ?>
+                                                  <td> <span class="badge rounded-pill badge-primary" style="color:white"><?php echo $donnees['status']; ?></span></td>
+                                                <?php else: ?>
+                                                  <td> <span class="badge rounded-pill badge-light" style="color:black"><?php echo $donnees['status']; ?></span></td>
+                                                <?php endif ?>
                                                 <td>
                                                     <ul class="action">
                                                     <li class="edit"> <a data-bs-toggle="modal" data-bs-target="#edit_modal<?php echo $donnees['id']?>"><i class="icon-pencil-alt"></i></a></li>
@@ -211,7 +215,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade show active" id="favoris" role="tabpanel" aria-labelledby="favoris-tabs">
+                        <div class="tab-pane fade" id="favoris" role="tabpanel" aria-labelledby="favoris-tabs">
                             <div class="pt-3 mb-0">
                                 <div class="table-responsive theme-scrollbar">
                                     
@@ -261,9 +265,13 @@
                             <table style="text-align:center; width:100%;">
                               <tr><th>Proposé par:</th><th>Statut</th><th>Validé par:</th></tr>
                               <tr>
-                                <th style="width:30%; text-decoration: unset;"><?php echo $file['proposed_by']?></th>
-                                <th style="width:40%;"><span class="badge rounded-pill badge-success"><?php echo $file['status']?></span></th>
-                                <th style="width:30%;"><?php echo $file['validated_by']?></th>
+                                <td style="width:30%; text-decoration: unset;"><?php echo $file['proposed_by']?></td>
+                                  <?php if ($donnees['status'] == 'disponible'): ?>
+                                    <td> <span class="badge rounded-pill badge-primary" style="color:white"><?php echo $donnees['status']; ?></span></td>
+                                  <?php else: ?>
+                                    <td> <span class="badge rounded-pill badge-light" style="color:black"><?php echo $donnees['status']; ?></span></td>
+                                  <?php endif ?>
+                                <td style="width:30%;"><?php echo $file['validated_by']?></td>
                               </tr>
                             </table>
                           </div>

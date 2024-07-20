@@ -117,7 +117,13 @@
                             <td><?php echo $request['description']; ?></td>
                             <td><?php echo $request['asked_by']; ?></td>
                             <td><?php echo $request['processed_by']; ?></td>
-                            <td> <span class="badge rounded-pill badge-success"><?php echo $request['status']; ?></span></td>
+                            <?php if ($request['status'] == 'enregistrée'): ?>
+                              <td> <span class="badge rounded-pill badge-primary" style="color:white"><?php echo $request['status']; ?></span></td>
+                            <?php elseif ($request['status'] == 'en cours'): ?>
+                              <td> <span class="badge rounded-pill badge-warning" style="color:white"><?php echo $request['status']; ?></span></td>
+                              <?php else: ?>
+                                <td> <span class="badge rounded-pill badge-success" style="color:white"><?php echo $request['status']; ?></span></td>
+                            <?php endif ?>
                             <td><?php echo $request['observation']; ?></td>
                             <td>
                               <ul class="action">
